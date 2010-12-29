@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="3.5" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2BEFED4B-7362-4073-A6E6-4637B95434C4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>ZyrComponents</RootNamespace>
+    <AssemblyName>ZyrComponents</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Core" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="AppointmentItem.cs" />
+    <Compile Include="AppointmentList.Designer.cs" />
+    <Compile Include="AppointmentList.cs" />
+    <Compile Include="FormattedTextBox.cs" />
+    <Compile Include="ImageListBox.cs" />
+    <Compile Include="ImageListBoxItem.cs" />
+    <Compile Include="ImageTreeNode.cs" />
+    <Compile Include="ImageTreeView.Designer.cs" />
+    <Compile Include="ImageTreeView.cs" />
+    <Compile Include="Resources.Designer.cs" />
+    <Compile Include="ZoomPictureBox.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <None Include="AppointmentList.resx" />
+    <None Include="FormattedTextBox.resx" />
+    <None Include="ImageListBox.resx" />
+    <None Include="Resources.resx" />
+  </ItemGroup>
+</Project>
