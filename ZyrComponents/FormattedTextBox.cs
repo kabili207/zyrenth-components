@@ -6,7 +6,7 @@ using System.Data;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
 
-namespace HRScreening.Components
+namespace Zyrenth.Components
 {
 
 	public enum FormattedTextBoxType { None, CreditCard, Phone, SSN };
@@ -23,7 +23,7 @@ namespace HRScreening.Components
 
 		/// <summary>
 		/// Initializes a new instance of the
-		/// <see cref="HRScreening.Components.FormattedTextBox"/> class.
+		/// <see cref="Zyrenth.Components.FormattedTextBox"/> class.
 		/// </summary>
 		public FormattedTextBox() : base()
 		{

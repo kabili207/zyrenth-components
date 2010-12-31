@@ -5,11 +5,11 @@ using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
 
-namespace HRScreening.Components
+namespace Zyrenth.Components
 {
 
 	/// <summary>
-	/// Represents a node of a <see cref="HRScreening.Components.ImageTreeView"/> that contains
+	/// Represents a node of a <see cref="Zyrenth.Components.ImageTreeView"/> that contains
 	/// special information about a location.
 	/// </summary>
 	public partial class ImageTreeNode : TreeNode
@@ -57,7 +57,7 @@ namespace HRScreening.Components
 		// here just in case.
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="HRScreening.Components.ImageTreeNode"/> class.
+		/// Initializes a new instance of the <see cref="Zyrenth.Components.ImageTreeNode"/> class.
 		/// </summary>
 		public ImageTreeNode()
 			: base()
@@ -65,10 +65,10 @@ namespace HRScreening.Components
 		}
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="HRScreening.Components.ImageTreeNode"/>
+		/// Initializes a new instance of the <see cref="Zyrenth.Components.ImageTreeNode"/>
 		/// class with the specified label text.
 		/// </summary>
-		/// <param name="text">The label <see cref="HRScreening.Components.ImageTreeNode"/>.Text
+		/// <param name="text">The label <see cref="Zyrenth.Components.ImageTreeNode"/>.Text
 		/// of the new tree node.</param>
 		public ImageTreeNode(string text)
 			: base(text)
@@ -76,10 +76,10 @@ namespace HRScreening.Components
 		}
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="HRScreening.Components.ImageTreeNode"/>
+		/// Initializes a new instance of the <see cref="Zyrenth.Components.ImageTreeNode"/>
 		/// class with the specified label text and child tree nodes.
 		/// </summary>
-		/// <param name="text">The label <see cref="HRScreening.Components.ImageTreeNode"/>.Text
+		/// <param name="text">The label <see cref="Zyrenth.Components.ImageTreeNode"/>.Text
 		/// of the new tree node.</param>
 		/// <param name="children">An array of child <see cref="System.Windows.Forms.TreeNode"/> objects.</param>
 		public ImageTreeNode(string text, TreeNode[] children)
@@ -88,11 +88,11 @@ namespace HRScreening.Components
 		}
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="HRScreening.Components.ImageTreeNode"/>
+		/// Initializes a new instance of the <see cref="Zyrenth.Components.ImageTreeNode"/>
 		/// class with the specified label text and images to display when the tree node is in a
 		/// selected and unselected state.
 		/// </summary>
-		/// <param name="text">The label <see cref="HRScreening.Components.ImageTreeNode"/>.Text
+		/// <param name="text">The label <see cref="Zyrenth.Components.ImageTreeNode"/>.Text
 		/// of the new tree node.</param>
 		/// <param name="imageIndex">The index value of <see cref="System.Drawing.Image"/> to
 		/// display when the tree node is unselected.</param>
@@ -104,11 +104,11 @@ namespace HRScreening.Components
 		}
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="HRScreening.Components.ImageTreeNode"/>
+		/// Initializes a new instance of the <see cref="Zyrenth.Components.ImageTreeNode"/>
 		/// class with the specified label text, child tree nodes, and images to display when the
 		/// tree node is in a selected and unselected state.
 		/// </summary>
-		/// <param name="text">The label <see cref="HRScreening.Components.ImageTreeNode"/>.Text
+		/// <param name="text">The label <see cref="Zyrenth.Components.ImageTreeNode"/>.Text
 		/// of the new tree node.</param>
 		/// <param name="imageIndex">The index value of <see cref="System.Drawing.Image"/> to
 		/// display when the tree node is unselected.</param>

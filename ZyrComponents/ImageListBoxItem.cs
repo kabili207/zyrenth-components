@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 
-namespace HRScreening.Components
+namespace Zyrenth.Components
 {
 
 	[Serializable]

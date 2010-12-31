@@ -6,10 +6,10 @@ using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
 using System.IO;
-using HRScreening;
+using Zyrenth;
 using System.ComponentModel;
 
-namespace HRScreening.Components
+namespace Zyrenth.Components
 {
 
 	public partial class ImageTreeView : TreeView

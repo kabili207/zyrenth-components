@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Collections;
 using System;
 
-namespace HRScreening.Components
+namespace Zyrenth.Components
 {
 	/// <summary>
 	/// Represents the method that will handle converting a System.Windows.Forms.ListControl.
@@ -18,7 +18,7 @@ namespace HRScreening.Components
 
 	/// <summary>
 	/// Extends the <see cref="System.Windows.Forms.ListControlConvertEventArgs"/> class
-	/// to allow transparent access to an <see cref="HRScreening.Components.ImageListBoxItem"/>'s
+	/// to allow transparent access to an <see cref="Zyrenth.Components.ImageListBoxItem"/>'s
 	/// Item property.
 	/// </summary>
 	public class ImageListControlConvertEventArgs : ListControlConvertEventArgs
@@ -70,7 +70,7 @@ namespace HRScreening.Components
 		}
 
 		/// <summary>
-		/// Raises the <see cref="HRScreening.Components.ImageListBox.Format"/> event.
+		/// Raises the <see cref="Zyrenth.Components.ImageListBox.Format"/> event.
 		/// </summary>
 		protected override void OnFormat(ListControlConvertEventArgs e)
 		{

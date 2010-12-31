@@ -1,4 +1,4 @@
-﻿namespace HRScreening.Components
+﻿namespace Zyrenth.Components
 {
 	partial class AppointmentList
 	{
