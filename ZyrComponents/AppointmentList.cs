@@ -239,7 +239,7 @@ namespace Zyrenth.Components
 				Bounds.Width - Padding.Horizontal,
 				Bounds.Height - Padding.Vertical);
 				sysPen.DashStyle = DashStyle.Dash;
-				graphics.DrawRectangle(sysPen, size);
+				graphics.DrawRectangle(sysPen, limit);
 			}
 
 			// Keeps track of the current position
@@ -348,7 +348,7 @@ namespace Zyrenth.Components
 								Color.White, Color.Blue );
 							break;
 					}
-					Rectangle freeRect = new Rectangle(box.X, box.Y, 6, box.Width);
+					Rectangle freeRect = new Rectangle(box.X, box.Y, 5, box.Height);
 					if(freeBrush != null)
 					{
 						graphics.FillRectangle(freeBrush, freeRect);

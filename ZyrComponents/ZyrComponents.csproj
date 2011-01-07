@@ -53,6 +53,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Linq" />
@@ -106,6 +107,11 @@
     <Compile Include="ImageTreeView.Designer.cs">
       <DependentUpon>ImageTreeView.cs</DependentUpon>
     </Compile>
+    <Compile Include="TreeGridCell.cs" />
+    <Compile Include="TreeGridEvents.cs" />
+    <Compile Include="TreeGridNode.cs" />
+    <Compile Include="TreeGridNodeCollection.cs" />
+    <Compile Include="TreeGridView.cs" />
     <Compile Include="ZoomPictureBox.cs">
       <SubType>Component</SubType>
     </Compile>

@@ -9,7 +9,7 @@ using System.Text.RegularExpressions;
 namespace Zyrenth.Components
 {
 
-	public enum FormattedTextBoxType { None, CreditCard, Phone, SSN };
+	public enum FormattedTextBoxType { None, CreditCard, Phone, SSN, EIN };
 
 	/// <summary>
 	/// Represents a Windows text box control that allows for an input mask.
@@ -18,7 +18,9 @@ namespace Zyrenth.Components
 	{
 		private bool isFormatting;
 
-		[DefaultValue(FormattedTextBoxType.None)]
+		[DefaultValue(FormattedTextBoxType.None),
+		Description("Indicates the input mask that should be used to format the text box."),
+		Category("Behavior")]
 		public FormattedTextBoxType InputMask { get; set; }
 
 		/// <summary>
@@ -45,6 +47,9 @@ namespace Zyrenth.Components
 						break;
 					case FormattedTextBoxType.CreditCard:
 						MakeDashed(new int[] { 4, 8, 12 }, 16);
+						break;
+					case FormattedTextBoxType.EIN:
+						MakeDashed(new int[] { 2 }, 9);
 						break;
 						
 				}
