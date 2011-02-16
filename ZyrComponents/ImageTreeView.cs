@@ -6,8 +6,9 @@ using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
 using System.IO;
-using Zyrenth;
 using System.ComponentModel;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 
 namespace Zyrenth.Components
 {
@@ -76,21 +77,42 @@ namespace Zyrenth.Components
 			{
 				ImageTreeNode node = e.Node as ImageTreeNode;
 
+				// Make sure the images are drawn in the highest quality
+				e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
 				
-
 				// We have to white out the area otherwise images start to overlap.
 				e.Graphics.FillRectangle(SystemBrushes.Window, bounds.Right + 1, bounds.Top,
 						bounds.Height - 2, bounds.Height - 2);
 
 				if (((ImageTreeNode)e.Node).Image != null)
 				{
-					if(!TextOnly)
-						e.Graphics.DrawImage(node.Image, bounds.Right + 2, bounds.Top,
-							bounds.Height - 4, bounds.Height - 4);
-					else
-						e.Graphics.DrawString("M", nodeFont, Brushes.DarkBlue,
-							bounds.Right + 1, bounds.Top);
-					
+                    if (!TextOnly)
+                    {
+
+						if (Screen.PrimaryScreen.BitsPerPixel >= 32) // Check if primary screen supports alpha channels
+                        {
+                            e.Graphics.DrawImage(node.Image, bounds.Right + 2, bounds.Top,
+                                bounds.Height - 4, bounds.Height - 4);
+                        }
+                        else
+                        {
+							// Alpha blending is not supported by primary screen so we have to draw it
+							// off-screen to perform alpha blending then draw it to the screen
+                            Bitmap bmp = new Bitmap(bounds.Height - 4, bounds.Height - 4, PixelFormat.Format16bppRgb555);
+                            Graphics gBmp = Graphics.FromImage(bmp);
+
+                            gBmp.Clear(SystemColors.Window);
+                            gBmp.CompositingMode = CompositingMode.SourceOver;
+                            gBmp.DrawImage(node.Image, 0, 0, bounds.Height - 4, bounds.Height - 4);
+
+                            e.Graphics.DrawImage(bmp, bounds.Right , bounds.Top+1);
+                        }
+                    }
+                    else
+                    {
+                        e.Graphics.DrawString(node.FallbackText, nodeFont, new SolidBrush(node.FallbackTextColor),
+                            bounds.Right + 1, bounds.Top);
+                    }
 				}
 				
 			}

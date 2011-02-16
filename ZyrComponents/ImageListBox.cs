@@ -4,50 +4,16 @@ using System.ComponentModel;
 using System.Collections.Generic;
 using System.Collections;
 using System;
+using System.Drawing.Imaging;
+using System.Drawing.Drawing2D;
 
 namespace Zyrenth.Components
 {
 	/// <summary>
-	/// Represents the method that will handle converting a System.Windows.Forms.ListControl.
-	/// </summary>
-	/// <param name="sender">Represents the method that will handle converting
-	/// a <see cref="System.Windows.Forms.ListControl."/></param>
-	/// <param name="e">A <see cref="System.Windows.Forms.ListControlConvertEventArgs"/>
-	/// that contains the event data.</param>
-	public delegate void ImageListControlConvertEventHandler(object sender, ImageListControlConvertEventArgs e);
-
-	/// <summary>
-	/// Extends the <see cref="System.Windows.Forms.ListControlConvertEventArgs"/> class
-	/// to allow transparent access to an <see cref="Zyrenth.Components.ImageListBoxItem"/>'s
-	/// Item property.
-	/// </summary>
-	public class ImageListControlConvertEventArgs : ListControlConvertEventArgs
-	{
-		/// <summary>
-		/// Gets a data source item.
-		/// </summary>
-		public new object ListItem
-		{
-			
-			get {
-				ImageListBoxItem i = base.ListItem as ImageListBoxItem;
-				if (i != null)
-					return i.Item;
-				else
-					return base.ListItem;
-			}
-		}
-
-		public ImageListControlConvertEventArgs(object value, System.Type desiredType, object listItem)
-			:base(value, desiredType, listItem)
-		{
-		}
-	}
-
-	/// <summary>
 	/// Extends the <see cref="System.Windows.Forms.ListBox"/> control to display an image
 	/// to the left of the item.
-	/// </summary>
+    /// </summary>
+    [ToolboxBitmap(typeof(ImageListBox))]
 	public class ImageListBox : ListBox
 	{
 		[DefaultValue(false)]
@@ -76,7 +42,8 @@ namespace Zyrenth.Components
 		{
 			ImageListControlConvertEventArgs args =
 				new ImageListControlConvertEventArgs(e.Value, e.DesiredType, e.ListItem);
-			Format(this, args);
+			if(Format != null)
+				Format(this, args);
 			e.Value = args.Value;
 		}
 
@@ -119,6 +86,8 @@ namespace Zyrenth.Components
 			Brush back;
 			Brush front;
 
+			ImageListBoxItem ilist = this.Items[e.Index] as ImageListBoxItem;
+
 			if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
 			{
 				back = SystemBrushes.Highlight;
@@ -127,18 +96,76 @@ namespace Zyrenth.Components
 			else
 			{
 				back = SystemBrushes.Window;
-				front = SystemBrushes.WindowText;
+				if(ilist != null && !ilist.Active)
+					front = SystemBrushes.GrayText;
+				else
+					front = SystemBrushes.WindowText;
 			}
 
 			e.Graphics.FillRectangle(back, e.Bounds);
 			e.Graphics.DrawString(text, this.Font, front, stringLoc, StringFormat.GenericDefault);
 
-			ImageListBoxItem ilist = this.Items[e.Index] as ImageListBoxItem;
 			if (ilist == null || HideImage || ilist.Image == null)
 				return;
+			// Make sure the images are drawn in the highest quality
+			e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
 
-			e.Graphics.DrawImage(ilist.Image, e.Bounds.Left + 1, e.Bounds.Top + 1,
-				e.Bounds.Height - 2, e.Bounds.Height - 2);
+			if (Screen.PrimaryScreen.BitsPerPixel >= 32) // Check if primary screen supports alpha channels
+			{
+				e.Graphics.DrawImage(ilist.Image, e.Bounds.Left + 1, e.Bounds.Top + 1,
+					e.Bounds.Height - 2, e.Bounds.Height - 2);
+			}
+			else
+			{
+				// Alpha blending is not supported by primary screen so we have to draw it
+				// off-screen to perform alpha blending then draw it to the screen
+				Bitmap bmp = new Bitmap(e.Bounds.Height - 2, e.Bounds.Height - 2, PixelFormat.Format16bppRgb555);
+				Graphics gBmp = Graphics.FromImage(bmp);
+
+				gBmp.Clear(new Pen(back).Color);
+                gBmp.CompositingMode = CompositingMode.SourceOver;
+				gBmp.DrawImage(ilist.Image, 0, 0, e.Bounds.Height - 2, e.Bounds.Height - 2);
+
+				e.Graphics.DrawImage(bmp, e.Bounds.Left +1, e.Bounds.Top +1);
+			}
 		}
 	}
+
+    /// <summary>
+    /// Represents the method that will handle converting a System.Windows.Forms.ListControl.
+    /// </summary>
+    /// <param name="sender">Represents the method that will handle converting
+    /// a <see cref="System.Windows.Forms.ListControl."/></param>
+    /// <param name="e">A <see cref="System.Windows.Forms.ListControlConvertEventArgs"/>
+    /// that contains the event data.</param>
+    public delegate void ImageListControlConvertEventHandler(object sender, ImageListControlConvertEventArgs e);
+
+    /// <summary>
+    /// Extends the <see cref="System.Windows.Forms.ListControlConvertEventArgs"/> class
+    /// to allow transparent access to an <see cref="Zyrenth.Components.ImageListBoxItem"/>'s
+    /// Item property.
+    /// </summary>
+    public class ImageListControlConvertEventArgs : ListControlConvertEventArgs
+    {
+        /// <summary>
+        /// Gets a data source item.
+        /// </summary>
+        public new object ListItem
+        {
+
+            get
+            {
+                ImageListBoxItem i = base.ListItem as ImageListBoxItem;
+                if (i != null)
+                    return i.Item;
+                else
+                    return base.ListItem;
+            }
+        }
+
+        public ImageListControlConvertEventArgs(object value, System.Type desiredType, object listItem)
+            : base(value, desiredType, listItem)
+        {
+        }
+    }
 }

@@ -23,6 +23,24 @@ namespace Zyrenth.Components
 		Category("Behavior")]
 		public FormattedTextBoxType InputMask { get; set; }
 
+		public override string Text
+		{
+			get
+			{
+				string deformatted = base.Text;
+
+				if(InputMask == FormattedTextBoxType.CreditCard || InputMask == FormattedTextBoxType.EIN ||
+					InputMask == FormattedTextBoxType.Phone || InputMask == FormattedTextBoxType.SSN)
+					deformatted = Regex.Replace(deformatted, @"\D", string.Empty);
+
+				return deformatted;
+			}
+			set
+			{
+				base.Text = value;
+			}
+		}
+
 		/// <summary>
 		/// Initializes a new instance of the
 		/// <see cref="Zyrenth.Components.FormattedTextBox"/> class.
@@ -64,14 +82,14 @@ namespace Zyrenth.Components
 			string temp;
 
 			// Strips any non-digits and truncates the string
-			temp = Regex.Replace(Text, @"\D", string.Empty);
+			temp = Text;
 			if (temp.Length > length)
 			{
 				temp = temp.Substring(0, length);
 			}
 
 			// Move the insertion point to compensate for new or missing characters
-			if (Text.Length > 0 && caret > 0 && !char.IsDigit(Text[caret - 1]))
+			if (base.Text.Length > 0 && caret > 0 && !char.IsDigit(base.Text[caret - 1]))
 				caret--;
 			int count = 0;
 			foreach (int dash in dashes)

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Zyrenth.Components</RootNamespace>
     <AssemblyName>ZyrComponents</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <UpgradeBackupLocation>
@@ -115,6 +115,8 @@
     <Compile Include="ZoomPictureBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ExtendedDateTimePicker.cs" />
+    <Compile Include="Resources.Designer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="AppointmentList.resx">
@@ -126,5 +128,10 @@
     <None Include="ImageListBox.resx">
       <DependentUpon>ImageListBox.cs</DependentUpon>
     </None>
+    <None Include="Resources.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ImageListBox.bmp" />
+    <EmbeddedResource Include="AppointmentList.bmp" />
   </ItemGroup>
 </Project>

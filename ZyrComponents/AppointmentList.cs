@@ -1,22 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Data;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Windows.Forms;
-using System.Runtime.Serialization.Formatters.Binary;
 
 
 namespace Zyrenth.Components
 {
-
 	/// <summary>
-	/// Represents a Windows control that displays <see cref="AppointmentItem"/>s
+	/// Represents a Windows control that displays AppointmentItems
 	/// similar to Microsoft Outlook 2010
 	/// </summary>
+    [ToolboxBitmap(typeof(AppointmentList))]
 	public partial class AppointmentList : UserControl
 	{
 		public const int NoMatches = -1;
@@ -38,25 +38,26 @@ namespace Zyrenth.Components
 			}
 		}
 
-		int index = NoMatches;
-		KeyValuePair<int, AppointmentItem> _selectedItem;
-		
+		private int index = NoMatches;
+		private KeyValuePair<int, AppointmentItem> _selectedItem;
+
 		/// <summary>
 		/// Gets or sets the index of the currently selected item
 		/// </summary>
 		public int SelectedIndex
 		{
 			get { return index; }
-			set {
+			set
+			{
 				bool r = index == value;
 				index = value;
 				OnSelectedIndexChanged(EventArgs.Empty);
-				if(!r)
+				if (!r)
 					this.Refresh();
 			}
 		}
 
-		
+
 		/// <summary>
 		/// Gets or sets the currently selected item
 		/// </summary>
@@ -64,11 +65,13 @@ namespace Zyrenth.Components
 		{
 			get
 			{
-				if(_selectedItem.Key == index) {
+				if (_selectedItem.Key == index)
+				{
 					return _selectedItem.Value;
 				}
 
-				try {
+				try
+				{
 					AppointmentItem a = _appointments.ElementAt(index);
 					_selectedItem = new KeyValuePair<int, AppointmentItem>(index, a);
 					return a;
@@ -78,7 +81,8 @@ namespace Zyrenth.Components
 					return null;
 				}
 			}
-			set {
+			set
+			{
 				index = Array.IndexOf(_appointments.ToArray(), value);
 				// Helps reduce flicker caused by unneeded refreshing
 				if (_selectedItem.Key != index || _selectedItem.Value != value)
@@ -117,10 +121,47 @@ namespace Zyrenth.Components
 				ControlStyles.AllPaintingInWmPaint |
 				ControlStyles.UserPaint |
 				ControlStyles.DoubleBuffer, true);
-
-			
-			
 		}
+
+		#region Component Designer generated code
+
+		/// <summary> 
+		/// Required designer variable.
+		/// </summary>
+		private System.ComponentModel.IContainer components = null;
+
+		/// <summary> 
+		/// Clean up any resources being used.
+		/// </summary>
+		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+		protected override void Dispose(bool disposing)
+		{
+			if (disposing && (components != null))
+			{
+				components.Dispose();
+			}
+			base.Dispose(disposing);
+		}
+
+		/// <summary> 
+		/// Required method for Designer support - do not modify 
+		/// the contents of this method with the code editor.
+		/// </summary>
+		private void InitializeComponent()
+		{
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AppointmentList));
+			this.SuspendLayout();
+			// 
+			// AppointmentList
+			// 
+			this.AutoScroll = true;
+			this.Name = "AppointmentList";
+			this.Size = new System.Drawing.Size(177, 117);
+			this.ResumeLayout(false);
+
+		}
+
+		#endregion
 
 		// Used by Visual Studio designer
 		public void ResetAppointments()
@@ -159,7 +200,7 @@ namespace Zyrenth.Components
 		/// <param name="e"></param>
 		protected virtual void OnAppointmentChanged(EventArgs e)
 		{
-			if(AppointmentsChanged != null)
+			if (AppointmentsChanged != null)
 				AppointmentsChanged(this, EventArgs.Empty);
 			SelectedIndex = NoMatches;
 			_selectedItem = new KeyValuePair<int, AppointmentItem>(NoMatches, null);
@@ -186,7 +227,8 @@ namespace Zyrenth.Components
 		{
 			foreach (AppointmentItem a in _appointments)
 			{
-				if(a.Bounds.Contains(p)) {
+				if (a.Bounds.Contains(p))
+				{
 					return Array.IndexOf(_appointments.ToArray(), a);
 				}
 			}
@@ -197,11 +239,11 @@ namespace Zyrenth.Components
 		/// Returns the zero-based index from the item at the specified coordinates
 		/// </summary>
 		/// <param name="x">The x-coordinate of the location to search.</param>
-		/// <param name="y">The x-coordinate of the location to search.</param>
+		/// <param name="y">The y-coordinate of the location to search.</param>
 		/// <returns>The zero-based index of the item at the specified coordinates</returns>
 		public int IndexFromPoint(int x, int y)
 		{
-			return IndexFromPoint(new Point(x,y));
+			return IndexFromPoint(new Point(x, y));
 		}
 
 		protected override void OnLeave(EventArgs e)
@@ -221,14 +263,14 @@ namespace Zyrenth.Components
 
 			// Translate the coordinates to the currently scrolled position
 			Matrix m = new Matrix();
-			m.Translate(this.AutoScrollPosition.X,this.AutoScrollPosition.Y,MatrixOrder.Append);
-			graphics.Transform=m;
+			m.Translate(this.AutoScrollPosition.X, this.AutoScrollPosition.Y, MatrixOrder.Append);
+			graphics.Transform = m;
 
 			int rightPad = 0;
 			if (this.VerticalScroll.Visible)
 				rightPad = SystemInformation.VerticalScrollBarWidth;
 			// Creates a rectangle that represents the control's visible area
-			Rectangle limit = new Rectangle (Padding.Left , Padding.Top,
+			Rectangle limit = new Rectangle(Padding.Left, Padding.Top,
 				Bounds.Width - Padding.Horizontal - rightPad,
 				Bounds.Height - Padding.Vertical);
 
@@ -262,7 +304,7 @@ namespace Zyrenth.Components
 				if (DesignMode)
 					graphics.DrawString(this.Name, fontNorm, brush, new Point(X, Y + boxPad), sf);
 				else
-					graphics.DrawString("No appointments found", fontBold, brush, new Point(X,Y + boxPad), sf);
+					graphics.DrawString("No appointments found", fontBold, brush, new Point(X, Y + boxPad), sf);
 				return;
 			}
 
@@ -282,20 +324,20 @@ namespace Zyrenth.Components
 				graphics.DrawString(text, fontBold, brush, new Point(X, Y), sf);
 
 				Y += h;
-				
+
 				foreach (AppointmentItem a in group)
 				{
-					int sub = (int)graphics.MeasureString(a.Subject, fontBold, limit.Width,sf).Height;
-					
+					int sub = (int)graphics.MeasureString(a.Subject, fontBold, limit.Width, sf).Height;
+
 					string temp = a.Start.ToShortTimeString() + " - "
 						+ a.End.ToShortTimeString();
-					if (!String.IsNullOrEmpty(a.Location))
+					if (!String.IsNullOrWhiteSpace(a.Location))
 						temp += Environment.NewLine + a.Location;
 
-					int detail = (int)graphics.MeasureString(temp, fontNorm, limit.Width,sf).Height;
+					int detail = (int)graphics.MeasureString(temp, fontNorm, limit.Width, sf).Height;
 
 					Rectangle box = new Rectangle(X + boxPad, Y + boxPad,
-						limit.Width - (boxPad*2), sub + detail + (boxPad *2));
+						limit.Width - (boxPad * 2), sub + detail + (boxPad * 2));
 
 					a.Bounds = box;
 
@@ -332,31 +374,31 @@ namespace Zyrenth.Components
 					// Fill in the appointment's box and draw the appointment info
 					graphics.FillRectangle(gradBrush, box);
 					graphics.DrawRectangle(SystemPens.ControlDark, box);
-					
+
 					Brush freeBrush = null;
-					switch(a.Status)
+					switch (a.Status)
 					{
 						case AppointmentStatus.Busy:
-							freeBrush = new SolidBrush( Color.Blue );
+							freeBrush = new SolidBrush(Color.Blue);
 							break;
 						case AppointmentStatus.OutOfOffice:
-							freeBrush = new SolidBrush( Color.Red );
+							freeBrush = new SolidBrush(Color.Red);
 							break;
 						case AppointmentStatus.Tentative:
 							freeBrush = new HatchBrush(
 								HatchStyle.DarkUpwardDiagonal,
-								Color.White, Color.Blue );
+								Color.White, Color.Blue);
 							break;
 					}
 					Rectangle freeRect = new Rectangle(box.X, box.Y, 5, box.Height);
-					if(freeBrush != null)
+					if (freeBrush != null)
 					{
 						graphics.FillRectangle(freeBrush, freeRect);
 						graphics.DrawRectangle(SystemPens.ControlDark, box);
 					}
-					
-					Rectangle head = new Rectangle(box.Left + boxPad, box.Top + boxPad, box.Width - (boxPad *2), box.Height - (boxPad*2));
-					graphics.DrawString(a.Subject, fontBold,baseFont, head, sf);
+
+					Rectangle head = new Rectangle(box.Left + boxPad, box.Top + boxPad, box.Width - (boxPad * 2), box.Height - (boxPad * 2));
+					graphics.DrawString(a.Subject, fontBold, baseFont, head, sf);
 					head.Height -= sub;
 					head.Y += sub;
 					graphics.DrawString(temp, fontNorm, baseFont, head, sf);
@@ -365,7 +407,7 @@ namespace Zyrenth.Components
 
 				}
 			}
-			
+
 			AutoScrollMinSize = new Size(0, Y);
 			sf.Dispose();
 		}

@@ -39,8 +39,8 @@ namespace Zyrenth.Components
         private bool _showLines = true;
         private bool _virtualNodes = false;
 
-		internal VisualStyleRenderer rOpen = new VisualStyleRenderer(VisualStyleElement.TreeView.Glyph.Opened);
-		internal VisualStyleRenderer rClosed = new VisualStyleRenderer(VisualStyleElement.TreeView.Glyph.Closed);
+		internal VisualStyleRenderer rOpen;
+		internal VisualStyleRenderer rClosed;
 
         #region Constructor
         public TreeGridView()
@@ -53,6 +53,12 @@ namespace Zyrenth.Components
 			this.AllowUserToDeleteRows = false;
 			this._root = new TreeGridNode(this);
 			this._root.IsRoot = true;
+
+			if (Application.RenderWithVisualStyles)
+			{
+				rOpen = new VisualStyleRenderer(VisualStyleElement.TreeView.Glyph.Opened);
+				rClosed = new VisualStyleRenderer(VisualStyleElement.TreeView.Glyph.Closed);
+			}
 
 			// Ensures that all rows are added unshared by listening to the CollectionChanged event.
 			base.Rows.CollectionChanged += delegate(object sender, System.ComponentModel.CollectionChangeEventArgs e){};

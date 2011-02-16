@@ -31,7 +31,8 @@ namespace Zyrenth.Components
 
 		public TreeGridCell()
 		{			
-			glyphWidth = 15;
+			//glyphWidth = 15;
+			glyphWidth = 0;
 			calculatedLeftPadding = 0;
 			this.IsSited = false;
 
@@ -252,11 +253,26 @@ namespace Zyrenth.Components
 
             if (node.HasChildren || node._grid.VirtualNodes)
             {
-                // Paint node glyphs				
-                if (node.IsExpanded)
-                    node._grid.rOpen.DrawBackground(graphics, new Rectangle(glyphRect.X, glyphRect.Y + (glyphRect.Height / 2) - 4, 10, 10));
-                else
-                    node._grid.rClosed.DrawBackground(graphics, new Rectangle(glyphRect.X, glyphRect.Y + (glyphRect.Height / 2) - 4, 10, 10));
+				if (Application.RenderWithVisualStyles)
+				{
+					// Paint node glyphs				
+					if (node.IsExpanded)
+						node._grid.rOpen.DrawBackground(graphics, new Rectangle(glyphRect.X, glyphRect.Y + (glyphRect.Height / 2) - 4, 10, 10));
+					else
+						node._grid.rClosed.DrawBackground(graphics, new Rectangle(glyphRect.X, glyphRect.Y + (glyphRect.Height / 2) - 4, 10, 10));
+				}
+				else
+				{
+					Rectangle nodeRect = new Rectangle(glyphRect.X, cellBounds.Top + (cellBounds.Height / 2) - 4, 8, 8);
+
+					graphics.FillRectangle(SystemBrushes.Control, nodeRect);
+					graphics.DrawRectangle(SystemPens.ControlLightLight, nodeRect);
+					graphics.DrawLine(SystemPens.ControlText, nodeRect.X + 2, nodeRect.Top + 4, nodeRect.Right -2, nodeRect.Top + 4);
+
+					if(!node.IsExpanded)
+						graphics.DrawLine(SystemPens.ControlText, nodeRect.X + 4, nodeRect.Top + 2, glyphRect.X + 4, nodeRect.Bottom - 2);
+					
+				}
             }
 
 
