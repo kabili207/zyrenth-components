@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Drawing;
 using System.ComponentModel;
 using System.Windows.Forms;
 using System.Security.Permissions;
@@ -19,6 +20,7 @@ namespace Zyrenth.Components
 	[DefaultEvent("ValueChanged")]
 	[DefaultProperty("Value")]
 	[ToolboxItemFilter("System.Windows.Forms")]
+    [ToolboxBitmap(typeof(ExtendedDateTimePicker))]
 	public class ExtendedDateTimePicker : System.Windows.Forms.DateTimePicker
 	{
 		/// <summary>
@@ -28,7 +30,7 @@ namespace Zyrenth.Components
 		public ExtendedDateTimePicker()
 			: base()
 		{
-			// Show the check box because it is most of the raison d��tre for
+			// Show the check box because it is most of the reason for
 			// this class.
 			this.ShowCheckBox = true;
 		}
@@ -86,7 +88,7 @@ namespace Zyrenth.Components
 		/// <see cref="DateTime" /> nor a <see cref="DBNull" />
 		/// value.</exception>
 		[Category("Behavior")]
-		[Description("The date and/or time value (also can be DBNull).")]
+		[Description("The date and/or time value (also can be null).")]
 		[RefreshProperties(RefreshProperties.All)]
 		public new DateTime? Value
 		{

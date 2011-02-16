@@ -13,6 +13,7 @@ using System.Drawing.Imaging;
 namespace Zyrenth.Components
 {
 
+    [ToolboxBitmap(typeof(ImageTreeView))]
 	public partial class ImageTreeView : TreeView
 	{
 

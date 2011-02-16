@@ -10,12 +10,12 @@ namespace Zyrenth.Components
 {
 
 	/// <summary>
-	/// ZoomPicBox does what it says on the wrapper.
+	/// A picture box that allows you to specify a zoom level.
 	/// </summary>
 	/// <remarks>
 	/// PictureBox doesn't lend itself well to overriding. Why not start with something basic and do the job properly?
 	/// </remarks>
-
+    [ToolboxBitmap(typeof(ZoomPictureBox))]
 	public class ZoomPictureBox : ScrollableControl
 	{
 
@@ -45,7 +45,7 @@ namespace Zyrenth.Components
 			get { return _zoom; }
 			set
 			{
-				if (value < 0 || value < 0.00001)
+				if (value < 0 || value < 0.00001f)
 					value = 0.00001f;
 				_zoom = value;
 				UpdateScaleFactor();

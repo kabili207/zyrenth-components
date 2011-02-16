@@ -14,6 +14,7 @@ namespace Zyrenth.Components
 	/// <summary>
 	/// Represents a Windows text box control that allows for an input mask.
 	/// </summary>
+    [ToolboxBitmap(typeof(FormattedTextBox))]
 	public class FormattedTextBox : TextBox
 	{
 		private bool isFormatting;

@@ -25,7 +25,8 @@ namespace Zyrenth.Components
     [System.ComponentModel.DesignerCategory("code"),
     Designer(typeof(System.Windows.Forms.Design.ControlDesigner)),
 	ComplexBindingProperties(),
-    Docking(DockingBehavior.Ask)]
+    Docking(DockingBehavior.Ask),
+	ToolboxBitmap(typeof(TreeGridView))]
 	public class TreeGridView:DataGridView
 	{		
 		private int _indentWidth;
