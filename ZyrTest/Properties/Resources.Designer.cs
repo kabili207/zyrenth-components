@@ -59,5 +59,47 @@ namespace ZyrTest.Properties {
                 resourceCulture = value;
             }
         }
+        
+        internal static System.Drawing.Bitmap About {
+            get {
+                object obj = ResourceManager.GetObject("About", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Address_book {
+            get {
+                object obj = ResourceManager.GetObject("Address_book", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Alert {
+            get {
+                object obj = ResourceManager.GetObject("Alert", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Application {
+            get {
+                object obj = ResourceManager.GetObject("Application", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Blog {
+            get {
+                object obj = ResourceManager.GetObject("Blog", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Danger {
+            get {
+                object obj = ResourceManager.GetObject("Danger", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

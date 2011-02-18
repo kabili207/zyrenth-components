@@ -19,10 +19,23 @@ namespace Zyrenth.Components
 	{
 		private bool isFormatting;
 
+        private FormattedTextBoxType _inputMask = FormattedTextBoxType.None;
+
 		[DefaultValue(FormattedTextBoxType.None),
 		Description("Indicates the input mask that should be used to format the text box."),
 		Category("Behavior")]
-		public FormattedTextBoxType InputMask { get; set; }
+        public FormattedTextBoxType InputMask
+        {
+            get
+            {
+                return _inputMask;
+            }
+            set
+            {
+                _inputMask = value;
+                OnTextChanged(EventArgs.Empty);
+            }
+        }
 
 		public override string Text
 		{

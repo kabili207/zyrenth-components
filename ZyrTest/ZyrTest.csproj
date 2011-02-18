@@ -86,6 +86,24 @@
       <Name>ZyrComponents</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\About.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Address book.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Alert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Application.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Blog.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Danger.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
