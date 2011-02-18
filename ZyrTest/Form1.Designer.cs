@@ -41,8 +41,12 @@
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.tabPage6 = new System.Windows.Forms.TabPage();
-            this.formattedTextBox1 = new Zyrenth.Components.FormattedTextBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.formattedTextBox1 = new Zyrenth.Components.FormattedTextBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.extendedDateTimePicker1 = new Zyrenth.Components.ExtendedDateTimePicker();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.lblDateTime = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -50,6 +54,8 @@
             this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.treeGridView1)).BeginInit();
             this.tabPage6.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -188,8 +194,8 @@
             // 
             // tabPage6
             // 
-            this.tabPage6.Controls.Add(this.comboBox1);
-            this.tabPage6.Controls.Add(this.formattedTextBox1);
+            this.tabPage6.Controls.Add(this.groupBox2);
+            this.tabPage6.Controls.Add(this.groupBox1);
             this.tabPage6.Location = new System.Drawing.Point(4, 40);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Size = new System.Drawing.Size(279, 229);
@@ -197,22 +203,65 @@
             this.tabPage6.Text = "Misc";
             this.tabPage6.UseVisualStyleBackColor = true;
             // 
-            // formattedTextBox1
-            // 
-            this.formattedTextBox1.Location = new System.Drawing.Point(3, 30);
-            this.formattedTextBox1.Name = "formattedTextBox1";
-            this.formattedTextBox1.Size = new System.Drawing.Size(100, 20);
-            this.formattedTextBox1.TabIndex = 0;
-            // 
             // comboBox1
             // 
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(3, 3);
+            this.comboBox1.Location = new System.Drawing.Point(6, 45);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.Size = new System.Drawing.Size(115, 21);
             this.comboBox1.TabIndex = 1;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // formattedTextBox1
+            // 
+            this.formattedTextBox1.Location = new System.Drawing.Point(6, 19);
+            this.formattedTextBox1.Name = "formattedTextBox1";
+            this.formattedTextBox1.Size = new System.Drawing.Size(115, 20);
+            this.formattedTextBox1.TabIndex = 0;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.comboBox1);
+            this.groupBox1.Controls.Add(this.formattedTextBox1);
+            this.groupBox1.Location = new System.Drawing.Point(6, 3);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(127, 77);
+            this.groupBox1.TabIndex = 2;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Formatted Text Box";
+            // 
+            // extendedDateTimePicker1
+            // 
+            this.extendedDateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.extendedDateTimePicker1.Location = new System.Drawing.Point(6, 19);
+            this.extendedDateTimePicker1.Name = "extendedDateTimePicker1";
+            this.extendedDateTimePicker1.ShowCheckBox = true;
+            this.extendedDateTimePicker1.Size = new System.Drawing.Size(115, 20);
+            this.extendedDateTimePicker1.TabIndex = 3;
+            this.extendedDateTimePicker1.Value = new System.DateTime(2011, 2, 17, 19, 39, 1, 53);
+            this.extendedDateTimePicker1.CheckedChanged += new System.EventHandler(this.extendedDateTimePicker1_CheckedChanged);
+            this.extendedDateTimePicker1.ValueChanged += new System.EventHandler(this.extendedDateTimePicker1_ValueChanged);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.lblDateTime);
+            this.groupBox2.Controls.Add(this.extendedDateTimePicker1);
+            this.groupBox2.Location = new System.Drawing.Point(139, 3);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(127, 77);
+            this.groupBox2.TabIndex = 3;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "DateTime Picker";
+            // 
+            // lblDateTime
+            // 
+            this.lblDateTime.AutoSize = true;
+            this.lblDateTime.Location = new System.Drawing.Point(6, 48);
+            this.lblDateTime.Name = "lblDateTime";
+            this.lblDateTime.Size = new System.Drawing.Size(40, 13);
+            this.lblDateTime.TabIndex = 4;
+            this.lblDateTime.Text = "Value: ";
             // 
             // Form1
             // 
@@ -230,7 +279,10 @@
             this.tabPage4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.treeGridView1)).EndInit();
             this.tabPage6.ResumeLayout(false);
-            this.tabPage6.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
 		}
@@ -252,5 +304,9 @@
 		private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.ComboBox comboBox1;
         private Zyrenth.Components.FormattedTextBox formattedTextBox1;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label lblDateTime;
+        private Zyrenth.Components.ExtendedDateTimePicker extendedDateTimePicker1;
 	}
 }

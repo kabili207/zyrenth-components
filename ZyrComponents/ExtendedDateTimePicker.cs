@@ -73,6 +73,7 @@ namespace Zyrenth.Components
 
 				this.SetCheckBoxState(value);
 				this.OnCheckedChanged();
+                this.OnValueChanged();
 			}
 		}
 

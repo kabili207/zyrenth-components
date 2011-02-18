@@ -122,5 +122,15 @@ namespace ZyrTest
         {
             formattedTextBox1.InputMask = (FormattedTextBoxType)comboBox1.SelectedItem;
         }
+
+        private void extendedDateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+            lblDateTime.Text = "Value: " + (extendedDateTimePicker1.Value.HasValue ? extendedDateTimePicker1.Value.Value.ToShortDateString() : "");
+        }
+
+        private void extendedDateTimePicker1_CheckedChanged(object sender, EventArgs e)
+        {
+            
+        }
     }
 }
