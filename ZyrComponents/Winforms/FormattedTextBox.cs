@@ -6,7 +6,7 @@ using System.Data;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
 
-namespace Zyrenth.Components
+namespace Zyrenth.Winforms
 {
 
 	public enum FormattedTextBoxType { None, CreditCard, Phone, SSN, EIN };
@@ -56,8 +56,7 @@ namespace Zyrenth.Components
 		}
 
 		/// <summary>
-		/// Initializes a new instance of the
-		/// <see cref="Zyrenth.Components.FormattedTextBox"/> class.
+		/// Initializes a new instance of the Zyrenth.Winforms.FormattedTextBox class.
 		/// </summary>
 		public FormattedTextBox() : base()
 		{

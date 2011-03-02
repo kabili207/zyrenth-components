@@ -9,7 +9,7 @@ using System.Security.Permissions;
 using System.Diagnostics;
 using System.Windows.Forms.VisualStyles;
 
-namespace Zyrenth.Components
+namespace Zyrenth.Winforms
 {
 	// Author:     Nils Jonsson
 	// Originated: 10/03/2003

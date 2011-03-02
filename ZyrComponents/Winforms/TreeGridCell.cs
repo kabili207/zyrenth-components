@@ -13,7 +13,7 @@ using System.Drawing;
 using System.Windows.Forms.VisualStyles;
 using System.Diagnostics;
 
-namespace Zyrenth.Components
+namespace Zyrenth.Winforms
 {
 	/// <summary>
 	/// Summary description for TreeGridCell.

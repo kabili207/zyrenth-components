@@ -8,9 +8,10 @@ using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Windows.Forms;
+using Zyrenth;
 
 
-namespace Zyrenth.Components
+namespace Zyrenth.Winforms
 {
 	/// <summary>
 	/// Represents a Windows control that displays AppointmentItems
@@ -176,25 +177,6 @@ namespace Zyrenth.Components
 		}
 
 		/// <summary>
-		/// Restricts a value to a certain range
-		/// </summary>
-		/// <typeparam name="T"></typeparam>
-		/// <param name="value">The initial value</param>
-		/// <param name="min">The minimum value</param>
-		/// <param name="max">The maximum value</param>
-		/// <returns>A clamped value that lies between min and max</returns>
-		public static T Clamp<T>(T value, T min, T max)
-			where T : System.IComparable<T>
-		{
-			T result = value;
-			if (value.CompareTo(max) > 0)
-				result = max;
-			if (value.CompareTo(min) < 0)
-				result = min;
-			return result;
-		}
-
-		/// <summary>
 		/// Raises the AppointmentChanged event
 		/// </summary>
 		/// <param name="e"></param>
@@ -331,7 +313,7 @@ namespace Zyrenth.Components
 
 					string temp = a.Start.ToShortTimeString() + " - "
 						+ a.End.ToShortTimeString();
-					if (!String.IsNullOrWhiteSpace(a.Location))
+					if (!Common.IsNullOrWhiteSpace(a.Location))
 						temp += Environment.NewLine + a.Location;
 
 					int detail = (int)graphics.MeasureString(temp, fontNorm, limit.Width, sf).Height;
@@ -359,13 +341,13 @@ namespace Zyrenth.Components
 					// Create new colors that are slightly lighter and
 					// darker than the system base color
 					Color colorL = Color.FromArgb(
-						Clamp(baseColor.R + 35, 0, 255),
-						Clamp(baseColor.G + 35, 0, 255),
-						Clamp(baseColor.B + 35, 0, 255));
+						Common.Clamp(baseColor.R + 35, 0, 255),
+						Common.Clamp(baseColor.G + 35, 0, 255),
+						Common.Clamp(baseColor.B + 35, 0, 255));
 					Color colorD = Color.FromArgb(
-						Clamp(baseColor.R - 35, 0, 255),
-						Clamp(baseColor.G - 35, 0, 255),
-						Clamp(baseColor.B - 35, 0, 255));
+						Common.Clamp(baseColor.R - 35, 0, 255),
+						Common.Clamp(baseColor.G - 35, 0, 255),
+						Common.Clamp(baseColor.B - 35, 0, 255));
 
 					// And now use them to create a gradient brush
 					Brush gradBrush = new LinearGradientBrush(box, colorL,

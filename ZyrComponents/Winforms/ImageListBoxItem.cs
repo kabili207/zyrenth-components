@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 
-namespace Zyrenth.Components
+namespace Zyrenth.Winforms
 {
 
 	[Serializable]

@@ -10,7 +10,7 @@ using System.ComponentModel;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 
-namespace Zyrenth.Components
+namespace Zyrenth.Winforms
 {
 
     [ToolboxBitmap(typeof(ImageTreeView))]

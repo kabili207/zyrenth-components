@@ -18,7 +18,7 @@ using System.ComponentModel.Design.Serialization;
 using System.Drawing.Design;
 using System.Text;
 
-namespace Zyrenth.Components
+namespace Zyrenth.Winforms
 {
 	[
 		ToolboxItem(false),

@@ -6,7 +6,7 @@ using System.Drawing;
 using System.ComponentModel;
 using System.Drawing.Drawing2D;
 
-namespace Zyrenth.Components
+namespace Zyrenth.Winforms
 {
 
 	/// <summary>

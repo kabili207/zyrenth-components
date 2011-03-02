@@ -17,7 +17,7 @@ using System.ComponentModel.Design;
 using System.ComponentModel.Design.Serialization;
 using System.Drawing.Design;
 
-namespace Zyrenth.Components
+namespace Zyrenth.Winforms
 {
 	/// <summary>
 	/// Summary description for TreeGridView.

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -7,9 +7,9 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{2BEFED4B-7362-4073-A6E6-4637B95434C4}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Zyrenth.Components</RootNamespace>
+    <RootNamespace>Zyrenth</RootNamespace>
     <AssemblyName>ZyrComponents</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <UpgradeBackupLocation>
@@ -79,57 +79,61 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppointmentItem.cs">
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="Resources.Designer.cs" />
+    <Compile Include="Winforms\AppointmentItem.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="AppointmentList.cs">
+    <Compile Include="Winforms\AppointmentList.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="FormattedTextBox.cs">
+    <Compile Include="Winforms\ExtendedDateTimePicker.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="ImageListBox.cs">
+    <Compile Include="Winforms\FormattedTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="ImageListBoxItem.cs">
+    <Compile Include="Winforms\ImageListBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Winforms\ImageListBoxItem.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ImageTreeNode.cs">
+    <Compile Include="Winforms\ImageTreeNode.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ImageTreeView.cs">
+    <Compile Include="Winforms\ImageTreeView.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="ImageTreeView.Designer.cs">
+    <Compile Include="Winforms\ImageTreeView.Designer.cs">
       <DependentUpon>ImageTreeView.cs</DependentUpon>
     </Compile>
-    <Compile Include="TreeGridCell.cs" />
-    <Compile Include="TreeGridEvents.cs" />
-    <Compile Include="TreeGridNode.cs" />
-    <Compile Include="TreeGridNodeCollection.cs" />
-    <Compile Include="TreeGridView.cs" />
-    <Compile Include="ZoomPictureBox.cs">
+    <Compile Include="Winforms\TreeGridCell.cs" />
+    <Compile Include="Winforms\TreeGridEvents.cs" />
+    <Compile Include="Winforms\TreeGridNode.cs" />
+    <Compile Include="Winforms\TreeGridNodeCollection.cs" />
+    <Compile Include="Winforms\TreeGridView.cs" />
+    <Compile Include="Winforms\ZoomPictureBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="ExtendedDateTimePicker.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Resources.Designer.cs" />
+    <Compile Include="Common.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="FormattedTextBox.resx">
+    <None Include="Resources.resx" />
+    <None Include="Winforms\FormattedTextBox.resx">
       <DependentUpon>FormattedTextBox.cs</DependentUpon>
     </None>
-    <None Include="ImageListBox.resx">
+    <None Include="Winforms\ImageListBox.resx">
       <DependentUpon>ImageListBox.cs</DependentUpon>
     </None>
-    <None Include="Resources.resx" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ImageListBox.bmp" />
-    <EmbeddedResource Include="AppointmentList.bmp" />
-    <EmbeddedResource Include="ZoomPictureBox.bmp" />
-    <EmbeddedResource Include="ImageTreeView.bmp" />
+    <EmbeddedResource Include="Winforms\AppointmentList.bmp" />
+    <EmbeddedResource Include="Winforms\ImageListBox.bmp" />
+    <EmbeddedResource Include="Winforms\ImageTreeView.bmp" />
+    <EmbeddedResource Include="Winforms\ZoomPictureBox.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Winforms\" />
   </ItemGroup>
 </Project>

@@ -7,7 +7,7 @@ using System;
 using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
 
-namespace Zyrenth.Components
+namespace Zyrenth.Winforms
 {
 	/// <summary>
 	/// Extends the <see cref="System.Windows.Forms.ListBox"/> control to display an image
@@ -36,7 +36,7 @@ namespace Zyrenth.Components
 		}
 
 		/// <summary>
-		/// Raises the <see cref="Zyrenth.Components.ImageListBox.Format"/> event.
+		/// Raises the Zyrenth.Winforms.ImageListBox.Format event.
 		/// </summary>
 		protected override void OnFormat(ListControlConvertEventArgs e)
 		{
@@ -141,8 +141,8 @@ namespace Zyrenth.Components
     public delegate void ImageListControlConvertEventHandler(object sender, ImageListControlConvertEventArgs e);
 
     /// <summary>
-    /// Extends the <see cref="System.Windows.Forms.ListControlConvertEventArgs"/> class
-    /// to allow transparent access to an <see cref="Zyrenth.Components.ImageListBoxItem"/>'s
+    /// Extends the System.Windows.Forms.ListControlConvertEventArgs class
+    /// to allow transparent access to an Zyrenth.Winforms.ImageListBoxItem's
     /// Item property.
     /// </summary>
     public class ImageListControlConvertEventArgs : ListControlConvertEventArgs

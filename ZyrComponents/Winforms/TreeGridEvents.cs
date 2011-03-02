@@ -11,7 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Zyrenth.Components
+namespace Zyrenth.Winforms
 {
 	public class TreeGridNodeEventBase
 	{

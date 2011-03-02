@@ -5,11 +5,11 @@ using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
 
-namespace Zyrenth.Components
+namespace Zyrenth.Winforms
 {
 
 	/// <summary>
-	/// Represents a node of a <see cref="Zyrenth.Components.ImageTreeView"/> that contains
+	/// Represents a node of a Zyrenth.Winforms.ImageTreeView that contains
 	/// special information about a location.
 	/// </summary>
 	public partial class ImageTreeNode : TreeNode
@@ -57,7 +57,7 @@ namespace Zyrenth.Components
 		// here just in case.
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="Zyrenth.Components.ImageTreeNode"/> class.
+		/// Initializes a new instance of the Zyrenth.Winforms.ImageTreeNode class.
 		/// </summary>
 		public ImageTreeNode()
 			: base()
@@ -65,10 +65,10 @@ namespace Zyrenth.Components
 		}
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="Zyrenth.Components.ImageTreeNode"/>
+		/// Initializes a new instance of the Zyrenth.Winforms.ImageTreeNode
 		/// class with the specified label text.
 		/// </summary>
-		/// <param name="text">The label <see cref="Zyrenth.Components.ImageTreeNode"/>.Text
+		/// <param name="text">The label Zyrenth.Winforms.ImageTreeNode.Text
 		/// of the new tree node.</param>
 		public ImageTreeNode(string text)
 			: base(text)
@@ -76,27 +76,27 @@ namespace Zyrenth.Components
 		}
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="Zyrenth.Components.ImageTreeNode"/>
+		/// Initializes a new instance of the Zyrenth.Winforms.ImageTreeNode
 		/// class with the specified label text and child tree nodes.
 		/// </summary>
-		/// <param name="text">The label <see cref="Zyrenth.Components.ImageTreeNode"/>.Text
+		/// <param name="text">The label Zyrenth.Winforms.ImageTreeNode.Text
 		/// of the new tree node.</param>
-		/// <param name="children">An array of child <see cref="System.Windows.Forms.TreeNode"/> objects.</param>
+		/// <param name="children">An array of child System.Windows.Forms.TreeNode objects.</param>
 		public ImageTreeNode(string text, TreeNode[] children)
 			: base(text, children)
 		{
 		}
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="Zyrenth.Components.ImageTreeNode"/>
+		/// Initializes a new instance of the Zyrenth.Winforms.ImageTreeNode
 		/// class with the specified label text and images to display when the tree node is in a
 		/// selected and unselected state.
 		/// </summary>
-		/// <param name="text">The label <see cref="Zyrenth.Components.ImageTreeNode"/>.Text
+		/// <param name="text">The label Zyrenth.Winforms.ImageTreeNode.Text
 		/// of the new tree node.</param>
-		/// <param name="imageIndex">The index value of <see cref="System.Drawing.Image"/> to
+		/// <param name="imageIndex">The index value of System.Drawing.Image to
 		/// display when the tree node is unselected.</param>
-		/// <param name="selectedImageIndex">The index value of <see cref="System.Drawing.Image"/>
+		/// <param name="selectedImageIndex">The index value of System.Drawing.Image
 		/// to display when the tree node is selected.</param>
 		public ImageTreeNode(string text, int imageIndex, int selectedImageIndex)
 			: base(text, imageIndex, selectedImageIndex)
@@ -104,17 +104,17 @@ namespace Zyrenth.Components
 		}
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="Zyrenth.Components.ImageTreeNode"/>
+		/// Initializes a new instance of the Zyrenth.Winforms.ImageTreeNode
 		/// class with the specified label text, child tree nodes, and images to display when the
 		/// tree node is in a selected and unselected state.
 		/// </summary>
-		/// <param name="text">The label <see cref="Zyrenth.Components.ImageTreeNode"/>.Text
+		/// <param name="text">The label Zyrenth.Winforms.ImageTreeNode.Text
 		/// of the new tree node.</param>
-		/// <param name="imageIndex">The index value of <see cref="System.Drawing.Image"/> to
+		/// <param name="imageIndex">The index value of System.Drawing.Image to
 		/// display when the tree node is unselected.</param>
-		/// <param name="selectedImageIndex">The index value of <see cref="System.Drawing.Image"/>
+		/// <param name="selectedImageIndex">The index value of System.Drawing.Image
 		/// to display when the tree node is selected.</param>
-		/// <param name="children">An array of child <see cref="System.Windows.Forms.TreeNode"/>  objects.</param>
+		/// <param name="children">An array of child System.Windows.Forms.TreeNode objects.</param>
 		public ImageTreeNode(string text, int imageIndex, int selectedImageIndex, TreeNode[] children)
 			: base(text, imageIndex, selectedImageIndex, children)
 		{

@@ -5,7 +5,7 @@ using System.Text;
 using System.Drawing;
 using System.ComponentModel;
 
-namespace Zyrenth.Components
+namespace Zyrenth.Winforms
 {
 	/// <summary>Specifies identifiers to represent availibity for an <see cref="AppointmentItem"/></summary>
 	public enum AppointmentStatus {

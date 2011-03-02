@@ -1,4 +1,4 @@
-﻿namespace Zyrenth.Components
+﻿namespace Zyrenth.Winforms
 {
 	partial class ImageTreeView
 	{
