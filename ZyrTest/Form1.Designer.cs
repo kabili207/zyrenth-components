@@ -30,21 +30,21 @@
 		{
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.appointmentList1 = new Zyrenth.Components.AppointmentList();
+			this.appointmentList1 = new Zyrenth.Winforms.AppointmentList();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.imageTreeView1 = new Zyrenth.Components.ImageTreeView();
+			this.imageTreeView1 = new Zyrenth.Winforms.ImageTreeView();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.imageListBox1 = new Zyrenth.Components.ImageListBox();
+			this.imageListBox1 = new Zyrenth.Winforms.ImageListBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.treeGridView1 = new Zyrenth.Components.TreeGridView();
-            this.Column1 = new Zyrenth.Components.TreeGridColumn();
+			this.treeGridView1 = new Zyrenth.Winforms.TreeGridView();
+			this.Column1 = new Zyrenth.Winforms.TreeGridColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.formattedTextBox1 = new Zyrenth.Components.FormattedTextBox();
+			this.formattedTextBox1 = new Zyrenth.Winforms.FormattedTextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.extendedDateTimePicker1 = new Zyrenth.Components.ExtendedDateTimePicker();
+			this.extendedDateTimePicker1 = new Zyrenth.Winforms.ExtendedDateTimePicker();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.lblDateTime = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
@@ -291,22 +291,22 @@
 
 		private System.Windows.Forms.TabControl tabControl1;
 		private System.Windows.Forms.TabPage tabPage1;
-		private Zyrenth.Components.AppointmentList appointmentList1;
+		private Zyrenth.Winforms.AppointmentList appointmentList1;
 		private System.Windows.Forms.TabPage tabPage2;
-		private Zyrenth.Components.ImageTreeView imageTreeView1;
+		private Zyrenth.Winforms.ImageTreeView imageTreeView1;
 		private System.Windows.Forms.TabPage tabPage3;
-		private Zyrenth.Components.ImageListBox imageListBox1;
+		private Zyrenth.Winforms.ImageListBox imageListBox1;
 		private System.Windows.Forms.TabPage tabPage4;
 		private System.Windows.Forms.TabPage tabPage5;
 		private System.Windows.Forms.TabPage tabPage6;
-		private Zyrenth.Components.TreeGridView treeGridView1;
-		private Zyrenth.Components.TreeGridColumn Column1;
+		private Zyrenth.Winforms.TreeGridView treeGridView1;
+		private Zyrenth.Winforms.TreeGridColumn Column1;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.ComboBox comboBox1;
-        private Zyrenth.Components.FormattedTextBox formattedTextBox1;
+		private Zyrenth.Winforms.FormattedTextBox formattedTextBox1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label lblDateTime;
-        private Zyrenth.Components.ExtendedDateTimePicker extendedDateTimePicker1;
+		private Zyrenth.Winforms.ExtendedDateTimePicker extendedDateTimePicker1;
 	}
 }
