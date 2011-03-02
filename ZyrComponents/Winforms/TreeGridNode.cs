@@ -538,14 +538,14 @@ namespace Zyrenth.Winforms
 		//            {
 		//                this.site.Container.Remove(this);
 		//            }
-
+		//
 		//            if (this.disposed != null)
 		//            {
 		//                this.disposed(this, EventArgs.Empty);
 		//            }
 		//        }
 		//    }
-
+		//
 		//    base.Dispose(disposing);
 		//}
 	}

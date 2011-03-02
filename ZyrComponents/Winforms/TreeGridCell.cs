@@ -18,7 +18,7 @@ namespace Zyrenth.Winforms
 	/// <summary>
 	/// Summary description for TreeGridCell.
 	/// </summary>
-	public class TreeGridCell:DataGridViewTextBoxCell
+	public class TreeGridCell:ZyrenthTextBoxCell
 	{
 		private const int INDENT_WIDTH = 20;
 		private const int INDENT_MARGIN = 5;
