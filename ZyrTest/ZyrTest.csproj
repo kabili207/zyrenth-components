@@ -79,9 +79,9 @@
     <None Include="ZyrTest.pidb" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ZyrComponents\ZyrComponents.csproj">
+    <ProjectReference Include="..\ZyrComponents\LibZyrenth.csproj">
       <Project>{2BEFED4B-7362-4073-A6E6-4637B95434C4}</Project>
-      <Name>ZyrComponents</Name>
+      <Name>LibZyrenth</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
