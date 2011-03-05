@@ -4,7 +4,7 @@ using System.Drawing.Drawing2D;
 
 namespace Zyrenth
 {
-	public static class Common
+	public static partial class Common
 	{
 		
 		/// <summary>

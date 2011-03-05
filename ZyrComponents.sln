@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibZyrenth", "ZyrComponents\LibZyrenth.csproj", "{2BEFED4B-7362-4073-A6E6-4637B95434C4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zyrenth Windows", "Zyrenth Windows\Zyrenth Windows.csproj", "{2BEFED4B-7362-4073-A6E6-4637B95434C4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZyrTest", "ZyrTest\ZyrTest.csproj", "{BF530193-5BDE-46A5-8225-3E839430A72F}"
 EndProject
