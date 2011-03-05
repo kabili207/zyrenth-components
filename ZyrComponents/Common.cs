@@ -1,4 +1,6 @@
 using System;
+using System.Drawing;
+using System.Drawing.Drawing2D;
 
 namespace Zyrenth
 {
@@ -48,6 +50,21 @@ namespace Zyrenth
 				}
 			}
 			return false;
+		}
+		
+		public static LinearGradientBrush CreateGradient(Rectangle box, Color baseColor, LinearGradientMode mode) {
+			
+			// Create new colors that are slightly lighter and
+			// darker than the system base color
+			Color colorL = Color.FromArgb(
+				Common.Clamp(baseColor.R + 35, 0, 255),
+				Common.Clamp(baseColor.G + 35, 0, 255),
+				Common.Clamp(baseColor.B + 35, 0, 255));
+			Color colorD = Color.FromArgb(
+				Common.Clamp(baseColor.R - 35, 0, 255),
+				Common.Clamp(baseColor.G - 35, 0, 255),
+				Common.Clamp(baseColor.B - 35, 0, 255));
+			return new LinearGradientBrush(box, colorL, colorD, mode);	
 		}
 	}
 }

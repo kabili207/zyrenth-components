@@ -3,7 +3,9 @@
 
 public partial class MainWindow
 {
-	private global::Stetic.Custom custom1;
+	private global::Gtk.Fixed fixed1;
+
+	private global::Zyrenth.AppointmentListFrame appointmentlistframe2;
 
 	protected virtual void Build ()
 	{
@@ -13,11 +15,18 @@ public partial class MainWindow
 		this.Title = global::Mono.Unix.Catalog.GetString ("MainWindow");
 		this.WindowPosition = ((global::Gtk.WindowPosition)(4));
 		// Container child MainWindow.Gtk.Container+ContainerChild
-		this.custom1 = new global::Stetic.Custom ();
-		this.custom1.Name = "custom1";
-		this.custom1.Int1 = 0;
-		this.custom1.Int2 = 0;
-		this.Add (this.custom1);
+		this.fixed1 = new global::Gtk.Fixed ();
+		this.fixed1.Name = "fixed1";
+		this.fixed1.HasWindow = false;
+		// Container child fixed1.Gtk.Fixed+FixedChild
+		this.appointmentlistframe2 = new global::Zyrenth.AppointmentListFrame ();
+		this.appointmentlistframe2.Events = ((global::Gdk.EventMask)(256));
+		this.appointmentlistframe2.Name = "appointmentlistframe2";
+		this.fixed1.Add (this.appointmentlistframe2);
+		global::Gtk.Fixed.FixedChild w1 = ((global::Gtk.Fixed.FixedChild)(this.fixed1[this.appointmentlistframe2]));
+		w1.X = 129;
+		w1.Y = 108;
+		this.Add (this.fixed1);
 		if ((this.Child != null)) {
 			this.Child.ShowAll ();
 		}

@@ -338,48 +338,37 @@ namespace Zyrenth.Winforms
 						baseColor = SystemColors.Control;
 					}
 
-					// Create new colors that are slightly lighter and
-					// darker than the system base color
-					Color colorL = Color.FromArgb(
-						Common.Clamp(baseColor.R + 35, 0, 255),
-						Common.Clamp(baseColor.G + 35, 0, 255),
-						Common.Clamp(baseColor.B + 35, 0, 255));
-					Color colorD = Color.FromArgb(
-						Common.Clamp(baseColor.R - 35, 0, 255),
-						Common.Clamp(baseColor.G - 35, 0, 255),
-						Common.Clamp(baseColor.B - 35, 0, 255));
-
 					// And now use them to create a gradient brush
-					Brush gradBrush = new LinearGradientBrush(box, colorL,
-						colorD, LinearGradientMode.Vertical);
+					Brush gradBrush = Common.CreateGradient(box, baseColor, LinearGradientMode.Vertical);
 
 					// Fill in the appointment's box and draw the appointment info
 					graphics.FillRectangle(gradBrush, box);
 					graphics.DrawRectangle(SystemPens.ControlDark, box);
 
 					Brush freeBrush = null;
+					Rectangle freeRect = new Rectangle(box.X, box.Y, 8, box.Height);
 					switch (a.Status)
 					{
+						case AppointmentStatus.Free:
+							freeBrush = Common.CreateGradient(freeRect, Color.Green, LinearGradientMode.Vertical);
+							break;
 						case AppointmentStatus.Busy:
-							freeBrush = new SolidBrush(Color.Blue);
+							freeBrush = Common.CreateGradient(freeRect, Color.Blue, LinearGradientMode.Vertical);
 							break;
 						case AppointmentStatus.OutOfOffice:
-							freeBrush = new SolidBrush(Color.Red);
+							freeBrush = Common.CreateGradient(freeRect, Color.Red, LinearGradientMode.Vertical);
 							break;
 						case AppointmentStatus.Tentative:
-							freeBrush = new HatchBrush(
-								HatchStyle.DarkUpwardDiagonal,
-								Color.White, Color.Blue);
+							freeBrush = Common.CreateGradient(freeRect, Color.Purple, LinearGradientMode.Vertical);
 							break;
 					}
-					Rectangle freeRect = new Rectangle(box.X, box.Y, 5, box.Height);
 					if (freeBrush != null)
 					{
 						graphics.FillRectangle(freeBrush, freeRect);
 						graphics.DrawRectangle(SystemPens.ControlDark, box);
 					}
 
-					Rectangle head = new Rectangle(box.Left + boxPad, box.Top + boxPad, box.Width - (boxPad * 2), box.Height - (boxPad * 2));
+					Rectangle head = new Rectangle(box.Left + boxPad+ 8, box.Top + boxPad, box.Width - (boxPad * 2) - 8, box.Height - (boxPad * 2));
 					graphics.DrawString(a.Subject, fontBold, baseFont, head, sf);
 					head.Height -= sub;
 					head.Y += sub;
