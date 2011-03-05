@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<stetic-interface>
+  <configuration>
+    <images-root-path>..</images-root-path>
+    <target-gtk-version>2.12</target-gtk-version>
+  </configuration>
+  <import>
+    <widget-library name="../bin/Release/ZyrComponents.dll" internal="true" />
+  </import>
+  <widget class="Gtk.Bin" id="Zyrenth.AppointmentListFrame" design-size="300 300">
+    <property name="MemberName" />
+    <property name="Visible">False</property>
+    <child>
+      <widget class="Zyrenth.Gtksharp.AppointmentList" id="appointmentlist1">
+        <property name="MemberName" />
+        <property name="WidthRequest">100</property>
+        <property name="HeightRequest">100</property>
+        <property name="SelectedIndex">0</property>
+      </widget>
+    </child>
+  </widget>
+</stetic-interface>
