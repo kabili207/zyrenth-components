@@ -7,7 +7,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{FA6A306D-F3EC-49B1-8828-97C44DCCCB52}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>ZyrenthGTK</RootNamespace>
+    <RootNamespace>Zyrenth</RootNamespace>
     <AssemblyName>Zyrenth GTK</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
   </PropertyGroup>
@@ -38,14 +38,21 @@
       <Package>gdk-sharp-2.0</Package>
     </Reference>
     <Reference Include="Mono.Posix" />
+    <Reference Include="gtk-dotnet, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <Package>gtk-dotnet-2.0</Package>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MyClass.cs" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Gtksharp\AppointmentList.cs" />
     <Compile Include="Gtksharp\AppointmentListFrame.cs" />
     <Compile Include="gtk-gui\generated.cs" />
     <Compile Include="gtk-gui\Zyrenth.AppointmentListFrame.cs" />
+    <Compile Include="Common.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -55,5 +62,11 @@
     <EmbeddedResource Include="gtk-gui\gui.stetic">
       <LogicalName>gui.stetic</LogicalName>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Zyrenth Windows\Zyrenth Windows.csproj">
+      <Project>{2BEFED4B-7362-4073-A6E6-4637B95434C4}</Project>
+      <Name>Zyrenth Windows</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>
