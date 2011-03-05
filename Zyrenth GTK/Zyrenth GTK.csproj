@@ -50,7 +50,6 @@
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Gtksharp\AppointmentList.cs" />
     <Compile Include="gtk-gui\generated.cs" />
-    <Compile Include="gtk-gui\Zyrenth.AppointmentListFrame.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -60,6 +59,7 @@
     <EmbeddedResource Include="gtk-gui\gui.stetic">
       <LogicalName>gui.stetic</LogicalName>
     </EmbeddedResource>
+    <EmbeddedResource Include="Gtksharp\AppointmentList.bmp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Zyrenth Windows\Zyrenth Windows.csproj">

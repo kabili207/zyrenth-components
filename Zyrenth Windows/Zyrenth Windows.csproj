@@ -137,7 +137,6 @@
     <EmbeddedResource Include="Winforms\ImageListBox.bmp" />
     <EmbeddedResource Include="Winforms\ImageTreeView.bmp" />
     <EmbeddedResource Include="Winforms\ZoomPictureBox.bmp" />
-    <EmbeddedResource Include="AppointmentList.bmp" />
   </ItemGroup>
   <ItemGroup />
 </Project>
