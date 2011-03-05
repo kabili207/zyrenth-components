@@ -116,6 +116,7 @@
             this.imageTreeView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+			this.imageTreeView1.DoubleClickExpand = false;
             this.imageTreeView1.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
             this.imageTreeView1.Location = new System.Drawing.Point(0, 0);
             this.imageTreeView1.Name = "imageTreeView1";

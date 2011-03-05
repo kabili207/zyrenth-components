@@ -17,6 +17,9 @@ namespace Zyrenth.Winforms
 	public partial class ImageTreeView : TreeView
 	{
 
+		const int WM_LBUTTONDBLCLK = 0x0203;//client area
+        const int WM_NCLBUTTONDBLCLK = 0x00A3;//non-client area
+		
 		bool _textOnly = false;
 
 		/// <summary>
@@ -29,6 +32,20 @@ namespace Zyrenth.Winforms
 		public bool TextOnly {
 			get { return _textOnly; }
 			set { _textOnly = value; }
+		}
+		
+		bool _doubleClickExpand = true;
+
+		/// <summary>
+		/// Gets or sets a value that determines if an <see cref="ImageTreeNode"/> will
+		/// expand or collapse when double clicked on.
+		/// </summary>
+		[Description("Sets if failsafe text should be used if an image is not found"),
+		Category("Behavior"),
+		DefaultValue(true)]
+		public bool DoubleClickExpand {
+			get { return _doubleClickExpand; }
+			set { _doubleClickExpand = value; }
 		}
 
 
@@ -125,5 +142,17 @@ namespace Zyrenth.Winforms
 			return false;
 		}
 
+		protected override void DefWndProc(ref Message m) {
+	        if ((m.Msg == WM_LBUTTONDBLCLK || m.Msg == WM_NCLBUTTONDBLCLK) && !DoubleClickExpand) /*  */
+	        	return;
+	        base.DefWndProc(ref m);
+	    }
+
+		protected override void WndProc(ref Message m) {
+			if ((m.Msg == WM_LBUTTONDBLCLK || m.Msg == WM_NCLBUTTONDBLCLK) && !DoubleClickExpand)
+				return;
+			base.WndProc (ref m);
+		}
+		
 	}
 }
