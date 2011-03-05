@@ -3,9 +3,11 @@
 
 public partial class MainWindow
 {
-	private global::Gtk.Fixed fixed1;
+	private global::Gtk.Notebook notebook1;
 
-	private global::Zyrenth.AppointmentListFrame appointmentlistframe2;
+	private global::Zyrenth.Gtksharp.AppointmentList appointmentlist2;
+
+	private global::Gtk.Label label1;
 
 	protected virtual void Build ()
 	{
@@ -15,18 +17,23 @@ public partial class MainWindow
 		this.Title = global::Mono.Unix.Catalog.GetString ("MainWindow");
 		this.WindowPosition = ((global::Gtk.WindowPosition)(4));
 		// Container child MainWindow.Gtk.Container+ContainerChild
-		this.fixed1 = new global::Gtk.Fixed ();
-		this.fixed1.Name = "fixed1";
-		this.fixed1.HasWindow = false;
-		// Container child fixed1.Gtk.Fixed+FixedChild
-		this.appointmentlistframe2 = new global::Zyrenth.AppointmentListFrame ();
-		this.appointmentlistframe2.Events = ((global::Gdk.EventMask)(256));
-		this.appointmentlistframe2.Name = "appointmentlistframe2";
-		this.fixed1.Add (this.appointmentlistframe2);
-		global::Gtk.Fixed.FixedChild w1 = ((global::Gtk.Fixed.FixedChild)(this.fixed1[this.appointmentlistframe2]));
-		w1.X = 129;
-		w1.Y = 108;
-		this.Add (this.fixed1);
+		this.notebook1 = new global::Gtk.Notebook ();
+		this.notebook1.CanFocus = true;
+		this.notebook1.Name = "notebook1";
+		this.notebook1.CurrentPage = 0;
+		// Container child notebook1.Gtk.Notebook+NotebookChild
+		this.appointmentlist2 = new global::Zyrenth.Gtksharp.AppointmentList ();
+		this.appointmentlist2.Events = ((global::Gdk.EventMask)(256));
+		this.appointmentlist2.Name = "appointmentlist2";
+		this.appointmentlist2.SelectedIndex = 0;
+		this.notebook1.Add (this.appointmentlist2);
+		// Notebook tab
+		this.label1 = new global::Gtk.Label ();
+		this.label1.Name = "label1";
+		this.label1.LabelProp = global::Mono.Unix.Catalog.GetString ("page1");
+		this.notebook1.SetTabLabel (this.appointmentlist2, this.label1);
+		this.label1.ShowAll ();
+		this.Add (this.notebook1);
 		if ((this.Child != null)) {
 			this.Child.ShowAll ();
 		}

@@ -9,7 +9,7 @@ using Zyrenth.Winforms;
 namespace Zyrenth.Gtksharp
 {
 	[System.ComponentModel.ToolboxItem(true)]
-	public class AppointmentList : global::Gtk.DrawingArea
+	public class AppointmentList : global::Gtk.Bin
 	{
 		
 		public AppointmentList ()
@@ -18,8 +18,21 @@ namespace Zyrenth.Gtksharp
 			
 			this.Appointments = new List<AppointmentItem>();
 			_selectedItem = new KeyValuePair<int, AppointmentItem>(NoMatches, null);
-			SetSizeRequest(200, 200);
+			//SetSizeRequest(200, 200);
 			
+		}
+		
+		protected override void OnSizeRequested (ref Requisition requisition)
+		{
+			requisition.Width = 200;
+			requisition.Height = 200;
+			//base.OnSizeRequested (ref requisition);
+		}
+		
+		protected override void OnSizeAllocated (Gdk.Rectangle allocation)
+		{
+			
+			base.OnSizeAllocated (allocation);
 		}
 		
 		protected override bool OnExposeEvent (Gdk.EventExpose ev)
@@ -37,9 +50,10 @@ namespace Zyrenth.Gtksharp
 			/*if (this.VerticalScroll.Visible)
 				rightPad = SystemInformation.VerticalScrollBarWidth;*/
 			// Creates a rectangle that represents the control's visible area
-			Rectangle limit = new Rectangle(0, 0,
-				200 - 0 - rightPad,
-				200 - 0);
+			
+			Rectangle limit = new Rectangle(ev.Region.Clipbox.X, ev.Region.Clipbox.Y,
+				ev.Region.Clipbox.Width - 0 - rightPad,
+				ev.Region.Clipbox.Height - 0);
 
 			/*if (this.DesignMode)
 			{

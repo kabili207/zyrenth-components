@@ -13,7 +13,11 @@ namespace Zyrenth
 			global::Stetic.BinContainer.Attach (this);
 			this.Name = "Zyrenth.AppointmentListFrame";
 			// Container child Zyrenth.AppointmentListFrame.Gtk.Container+ContainerChild
-			this.appointmentlist1 = null;
+			this.appointmentlist1 = new global::Zyrenth.Gtksharp.AppointmentList ();
+			this.appointmentlist1.WidthRequest = 100;
+			this.appointmentlist1.HeightRequest = 100;
+			this.appointmentlist1.Name = "appointmentlist1";
+			this.appointmentlist1.SelectedIndex = 0;
 			this.Add (this.appointmentlist1);
 			if ((this.Child != null)) {
 				this.Child.ShowAll ();

@@ -69,9 +69,13 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\ZyrComponents\LibZyrenth.csproj">
+    <ProjectReference Include="..\Zyrenth GTK\Zyrenth GTK.csproj">
+      <Project>{FA6A306D-F3EC-49B1-8828-97C44DCCCB52}</Project>
+      <Name>Zyrenth GTK</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Zyrenth Windows\Zyrenth Windows.csproj">
       <Project>{2BEFED4B-7362-4073-A6E6-4637B95434C4}</Project>
-      <Name>LibZyrenth</Name>
+      <Name>Zyrenth Windows</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>
