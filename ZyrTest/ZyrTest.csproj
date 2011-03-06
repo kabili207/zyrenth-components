@@ -79,12 +79,6 @@
     <None Include="ZyrTest.pidb" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ZyrComponents\LibZyrenth.csproj">
-      <Project>{2BEFED4B-7362-4073-A6E6-4637B95434C4}</Project>
-      <Name>LibZyrenth</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\About.png" />
   </ItemGroup>
   <ItemGroup>
@@ -111,4 +105,10 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <ItemGroup>
+    <ProjectReference Include="..\Zyrenth Windows\Zyrenth Windows.csproj">
+      <Project>{2BEFED4B-7362-4073-A6E6-4637B95434C4}</Project>
+      <Name>Zyrenth Windows</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>

@@ -31,7 +31,6 @@ namespace Zyrenth.Gtksharp
 		
 		protected override void OnSizeAllocated (Gdk.Rectangle allocation)
 		{
-			
 			base.OnSizeAllocated (allocation);
 		}
 		
@@ -51,9 +50,9 @@ namespace Zyrenth.Gtksharp
 				rightPad = SystemInformation.VerticalScrollBarWidth;*/
 			// Creates a rectangle that represents the control's visible area
 			
-			Rectangle limit = new Rectangle(ev.Region.Clipbox.X, ev.Region.Clipbox.Y,
-				ev.Region.Clipbox.Width - 0 - rightPad,
-				ev.Region.Clipbox.Height - 0);
+			Rectangle limit = new Rectangle(Allocation.X, Allocation.Y,
+				Allocation.Width - 0 - rightPad,
+				Allocation.Height - 0);
 
 			/*if (this.DesignMode)
 			{
@@ -66,8 +65,8 @@ namespace Zyrenth.Gtksharp
 			}*/
 
 			// Keeps track of the current position
-			int X = 0;
-			int Y = 0;
+			int X = Allocation.X;
+			int Y = Allocation.Y;
 			int boxPad = 3;
 
 			// Use system brushes and fonts to maintain a uniform look and feel
@@ -195,6 +194,20 @@ namespace Zyrenth.Gtksharp
             return true;
 		}
 		
+		protected override bool OnButtonPressEvent (Gdk.EventButton evnt)
+		{
+			// single click
+	        if (evnt.Type == Gdk.EventType.ButtonPress) {
+	            int i = IndexFromPoint((int)evnt.X, (int)evnt.Y);
+				if(i != NoMatches)
+					SelectedIndex = i;
+	        }
+	        // double click
+	        if (evnt.Type == Gdk.EventType.TwoButtonPress) {
+	            //
+	        }
+			return base.OnButtonPressEvent (evnt);
+		}
 
 		/// <summary>
 		/// Occurs whenever the Appointments are changed.
@@ -301,6 +314,36 @@ namespace Zyrenth.Gtksharp
 					//this.Refresh();
 				}
 			}
+		}
+		
+		
+		/// <summary>
+		/// Returns the zero-based index from the item at the specified coordinates
+		/// </summary>
+		/// <param name="p">A <see cref="System.Drawing.Point"/> object containing the
+		/// coordinates used to obtain the item index.</param>
+		/// <returns>The zero-based index of the item at the specified coordinates</returns>
+		public int IndexFromPoint(Point p)
+		{
+			foreach (AppointmentItem a in _appointments)
+			{
+				if (a.Bounds.Contains(p))
+				{
+					return Array.IndexOf(_appointments.ToArray(), a);
+				}
+			}
+			return NoMatches;
+		}
+
+		/// <summary>
+		/// Returns the zero-based index from the item at the specified coordinates
+		/// </summary>
+		/// <param name="x">The x-coordinate of the location to search.</param>
+		/// <param name="y">The y-coordinate of the location to search.</param>
+		/// <returns>The zero-based index of the item at the specified coordinates</returns>
+		public int IndexFromPoint(int x, int y)
+		{
+			return IndexFromPoint(new Point(x, y));
 		}
 	}
 }
