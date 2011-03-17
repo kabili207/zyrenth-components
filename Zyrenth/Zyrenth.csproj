@@ -31,6 +31,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
@@ -38,6 +41,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Zyrenth.cs" />
+    <Compile Include="Collections\RedBlackTree.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="Collections\" />
+  </ItemGroup>
 </Project>

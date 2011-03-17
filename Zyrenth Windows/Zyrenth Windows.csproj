@@ -118,6 +118,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Winforms\ZyrenthTextBoxCell.cs" />
+    <Compile Include="Common.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources.resx" />
