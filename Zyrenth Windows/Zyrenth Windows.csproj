@@ -85,9 +85,6 @@
     <Compile Include="Resources.Designer.cs" />
     <Compile Include="Web\ResourceFinder.cs" />
     <Compile Include="Web\WelcomeLabel.cs" />
-    <Compile Include="Winforms\AppointmentItem.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Winforms\AppointmentList.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -120,7 +117,6 @@
     <Compile Include="Winforms\ZoomPictureBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Common.cs" />
     <Compile Include="Winforms\ZyrenthTextBoxCell.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -139,4 +135,13 @@
     <EmbeddedResource Include="Winforms\ZoomPictureBox.bmp" />
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Zyrenth\Zyrenth.csproj">
+      <Project>{D7D13BCB-1316-4798-9406-5A1859E93532}</Project>
+      <Name>Zyrenth</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Winforms\" />
+  </ItemGroup>
 </Project>

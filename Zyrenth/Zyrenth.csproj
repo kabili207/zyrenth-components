@@ -5,10 +5,10 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.0</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{FA6A306D-F3EC-49B1-8828-97C44DCCCB52}</ProjectGuid>
+    <ProjectGuid>{D7D13BCB-1316-4798-9406-5A1859E93532}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>Zyrenth</RootNamespace>
-    <AssemblyName>Zyrenth GTK</AssemblyName>
+    <AssemblyName>Zyrenth</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -31,40 +31,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
-      <Package>gtk-sharp-2.0</Package>
-    </Reference>
-    <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
-      <Package>gdk-sharp-2.0</Package>
-    </Reference>
-    <Reference Include="Mono.Posix" />
-    <Reference Include="gtk-dotnet, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
-      <Package>gtk-dotnet-2.0</Package>
-    </Reference>
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Data.Linq" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="Gtksharp\AppointmentList.cs" />
-    <Compile Include="gtk-gui\generated.cs" />
+    <Compile Include="Common.cs" />
+    <Compile Include="AppointmentItem.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ItemGroup>
-    <Folder Include="Gtksharp\" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="gtk-gui\gui.stetic">
-      <LogicalName>gui.stetic</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Gtksharp\AppointmentList.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Zyrenth\Zyrenth.csproj">
-      <Project>{D7D13BCB-1316-4798-9406-5A1859E93532}</Project>
-      <Name>Zyrenth</Name>
-    </ProjectReference>
-  </ItemGroup>
 </Project>
