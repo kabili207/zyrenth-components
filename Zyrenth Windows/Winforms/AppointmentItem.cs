@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-/*using System.Drawing;*/
+using System.Drawing;
 using System.ComponentModel;
 
-namespace Zyrenth
+namespace Zyrenth.Winforms
 {
 	/// <summary>Specifies identifiers to represent availibity for an <see cref="AppointmentItem"/></summary>
 	public enum AppointmentStatus {
@@ -30,7 +30,7 @@ namespace Zyrenth
 		public String Location { get; set; }
 		public DateTime Start { get; set; }
 		public DateTime End { get; set; }
-		/*public Rectangle Bounds { get; set; }*/
+		public Rectangle Bounds { get; set; }
 		public object Tag { get; set; }
 
 		private AppointmentStatus _status = AppointmentStatus.Free;

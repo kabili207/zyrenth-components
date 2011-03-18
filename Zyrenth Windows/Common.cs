@@ -22,13 +22,13 @@ namespace Zyrenth
 			// Create new colors that are slightly lighter and
 			// darker than the system base color
 			Color colorL = Color.FromArgb(
-				Clamp(baseColor.R + 35, 0, 255),
-				Clamp(baseColor.G + 35, 0, 255),
-				Clamp(baseColor.B + 35, 0, 255));
+				Zyrenth.Clamp(baseColor.R + 35, 0, 255),
+				Zyrenth.Clamp(baseColor.G + 35, 0, 255),
+				Zyrenth.Clamp(baseColor.B + 35, 0, 255));
 			Color colorD = Color.FromArgb(
-				Clamp(baseColor.R - 35, 0, 255),
-				Clamp(baseColor.G - 35, 0, 255),
-				Clamp(baseColor.B - 35, 0, 255));
+				Zyrenth.Clamp(baseColor.R - 35, 0, 255),
+				Zyrenth.Clamp(baseColor.G - 35, 0, 255),
+				Zyrenth.Clamp(baseColor.B - 35, 0, 255));
 			return new LinearGradientBrush(box, colorL, colorD, mode);	
 		}
 	}

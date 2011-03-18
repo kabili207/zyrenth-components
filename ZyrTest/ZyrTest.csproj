@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -109,6 +109,10 @@
     <ProjectReference Include="..\Zyrenth Windows\Zyrenth Windows.csproj">
       <Project>{2BEFED4B-7362-4073-A6E6-4637B95434C4}</Project>
       <Name>Zyrenth Windows</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Zyrenth\Zyrenth.csproj">
+      <Project>{D7D13BCB-1316-4798-9406-5A1859E93532}</Project>
+      <Name>Zyrenth</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

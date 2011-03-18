@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Zyrenth.Winforms;
+using Zyrenth.Collections;
 
 namespace ZyrTest
 {
@@ -19,6 +20,22 @@ namespace ZyrTest
 
         private void Form1_Load(object sender, EventArgs e)
         {
+			RedBlackTree<int> t = new RedBlackTree<int>();
+			int NUMS = 400000;
+			int GAP = 35461;
+
+			//Console.WriteLine("Checking... (no more output means success)");
+
+			for (int i = GAP; i != 0; i = (i + GAP) % NUMS)
+				t.Add(i);
+
+			if (t.findMin() != 1 || t.findMax() != NUMS - 1)
+				MessageBox.Show("FindMin or FindMax error!");
+
+			for (int i = 1; i < NUMS; i++)
+				if (t.find(i) != i)
+					MessageBox.Show("Find error1!");
+
             initializeAppointmentList();
             initializeTreeGrid();
             initializeTreeView();
