@@ -273,6 +273,7 @@ namespace Zyrenth.Winforms
 
 			// Use system brushes and fonts to maintain a uniform look and feel
 			Brush brush = SystemBrushes.WindowText;
+			Color brushColor = SystemColors.WindowText;
 			Font fontNorm = this.Parent.Font;
 			if (fontNorm == null)
 				fontNorm = SystemFonts.DefaultFont;
@@ -284,9 +285,11 @@ namespace Zyrenth.Winforms
 			if (_appointments.Count == 0)
 			{
 				if (DesignMode)
-					graphics.DrawString(this.Name, fontNorm, brush, new Point(X, Y + boxPad), sf);
+					TextRenderer.DrawText(graphics, this.Name, fontNorm,new Point(X, Y + boxPad),brushColor);
+					//graphics.DrawString(this.Name, fontNorm, brush, new Point(X, Y + boxPad), sf);
 				else
-					graphics.DrawString("No appointments found", fontBold, brush, new Point(X, Y + boxPad), sf);
+					TextRenderer.DrawText(graphics, "No appointments found", fontBold, new Point(X, Y + boxPad), brushColor);
+					//graphics.DrawString("No appointments found", fontBold, brush, new Point(X, Y + boxPad), sf);
 				return;
 			}
 
@@ -369,10 +372,12 @@ namespace Zyrenth.Winforms
 					}
 
 					Rectangle head = new Rectangle(box.Left + boxPad+ 8, box.Top + boxPad, box.Width - (boxPad * 2) - 8, box.Height - (boxPad * 2));
-					graphics.DrawString(a.Subject, fontBold, baseFont, head, sf);
+					//graphics.DrawString(a.Subject, fontBold, baseFont, head, sf);
+					TextRenderer.DrawText(graphics, a.Subject, fontBold, head, Color.Black, TextFormatFlags.Left | TextFormatFlags.Top);
 					head.Height -= sub;
 					head.Y += sub;
-					graphics.DrawString(temp, fontNorm, baseFont, head, sf);
+					//graphics.DrawString(temp, fontNorm, baseFont, head, sf);
+					TextRenderer.DrawText(graphics, temp, fontNorm, head, Color.Black, TextFormatFlags.Left | TextFormatFlags.Top | TextFormatFlags.WordBreak);
 
 					Y = box.Bottom + boxPad;
 

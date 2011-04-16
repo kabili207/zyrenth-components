@@ -19,6 +19,10 @@ namespace Zyrenth.Winforms
 		[DefaultValue(false)]
 		public bool HideImage { get; set; }
 
+		public bool UseCompatibleTextRendering { get; set; }
+		internal bool CanUseTextRenderer { get { return true; } }
+		internal bool SupportsUseCompatibleTextRendering { get { return true; } }
+		internal bool UseCompatibleTextRenderingInt { get; set; }
 
 		private List<Bitmap> _images;
 
@@ -58,15 +62,19 @@ namespace Zyrenth.Winforms
 		/// </remarks>
 		protected override void OnDrawItem(DrawItemEventArgs e)
 		{
-			
+
+			AppDomain domain = AppDomain.CurrentDomain;
+
 			// Make sure we're not trying to draw something that isn't there.
 			if (e.Index >= this.Items.Count || e.Index <= -1)
 			{
 				// The designer draws a single 'fake' item
 				// We'll use this to draw the name of the control
 				if (this.DesignMode)
+					
 					e.Graphics.DrawString(this.Name, this.Font, SystemBrushes.WindowText,
 						new PointF(e.Bounds.X, e.Bounds.Y));
+				
 				return;
 			}
 
@@ -84,26 +92,27 @@ namespace Zyrenth.Winforms
 				stringLoc = new Point(e.Bounds.X + e.Bounds.Height + 1, e.Bounds.Y);
 
 			Brush back;
-			Brush front;
-
+			//Brush front;
+			Color front;
 			ImageListBoxItem ilist = this.Items[e.Index] as ImageListBoxItem;
 
 			if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
 			{
 				back = SystemBrushes.Highlight;
-				front = SystemBrushes.HighlightText;
+				front = SystemColors.HighlightText;
 			}
 			else
 			{
 				back = SystemBrushes.Window;
 				if(ilist != null && !ilist.Active)
-					front = SystemBrushes.GrayText;
+					front = SystemColors.GrayText;
 				else
-					front = SystemBrushes.WindowText;
+					front = SystemColors.WindowText;
 			}
 
 			e.Graphics.FillRectangle(back, e.Bounds);
-			e.Graphics.DrawString(text, this.Font, front, stringLoc, StringFormat.GenericDefault);
+			TextRenderer.DrawText(e.Graphics, text, this.Font, stringLoc, front);
+			//e.Graphics.DrawString(text, this.Font, front, stringLoc, StringFormat.GenericDefault);
 
 			if (ilist == null || HideImage || ilist.Image == null)
 				return;

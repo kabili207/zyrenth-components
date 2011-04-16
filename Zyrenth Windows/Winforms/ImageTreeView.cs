@@ -65,8 +65,9 @@ namespace Zyrenth.Winforms
 
 			Font nodeFont = e.Node.NodeFont;
 			if (nodeFont == null) nodeFont = this.Font;
-			
-			SizeF size = e.Graphics.MeasureString(e.Node.Text, nodeFont);
+
+			//SizeF size = e.Graphics.MeasureString(e.Node.Text, nodeFont);
+			SizeF size = TextRenderer.MeasureText(e.Graphics,e.Node.Text, nodeFont);
 			Rectangle bounds = new Rectangle(e.Bounds.Location.X, e.Bounds.Location.Y,
 				(int)size.Width, e.Bounds.Height);
 
@@ -75,20 +76,23 @@ namespace Zyrenth.Winforms
 				e.Graphics.FillRectangle(SystemBrushes.Window, bounds);
 				if (e.Node is ImageTreeNode && !((ImageTreeNode)e.Node).Active)
 				{
-					e.Graphics.DrawString(e.Node.Text, nodeFont, SystemBrushes.GrayText,
-						bounds.Left + 1, bounds.Top + 1);
+					TextRenderer.DrawText(e.Graphics, e.Node.Text, nodeFont, new Point(bounds.Left + 1, bounds.Top + 1), SystemColors.GrayText);
+					//e.Graphics.DrawString(e.Node.Text, nodeFont, SystemBrushes.GrayText,
+					//	bounds.Left + 1, bounds.Top + 1);
 				}
 				else
 				{
-					e.Graphics.DrawString(e.Node.Text, nodeFont, SystemBrushes.WindowText,
-						bounds.Left + 1, bounds.Top + 1);
+					TextRenderer.DrawText(e.Graphics, e.Node.Text, nodeFont, new Point(bounds.Left + 1, bounds.Top + 1), SystemColors.WindowText);
+					//e.Graphics.DrawString(e.Node.Text, nodeFont, SystemBrushes.WindowText,
+					//	bounds.Left + 1, bounds.Top + 1);
 				}
 			}
 			else
 			{
 				e.Graphics.FillRectangle(SystemBrushes.Highlight, bounds);
-				e.Graphics.DrawString(e.Node.Text, nodeFont, SystemBrushes.HighlightText,
-						bounds.Left + 1, bounds.Top + 1);
+				TextRenderer.DrawText(e.Graphics, e.Node.Text, nodeFont, new Point(bounds.Left + 1, bounds.Top + 1), SystemColors.HighlightText);
+				//e.Graphics.DrawString(e.Node.Text, nodeFont, SystemBrushes.HighlightText,
+				//        bounds.Left + 1, bounds.Top + 1);
 			}
 
 			if (e.Node is ImageTreeNode)
@@ -127,9 +131,10 @@ namespace Zyrenth.Winforms
                         }
                     }
                     else
-                    {
-                        e.Graphics.DrawString(node.FallbackText, nodeFont, new SolidBrush(node.FallbackTextColor),
-                            bounds.Right + 1, bounds.Top);
+					{
+						TextRenderer.DrawText(e.Graphics, node.FallbackText, nodeFont, new Point(bounds.Right + 1, bounds.Top), node.FallbackTextColor);
+						//e.Graphics.DrawString(node.FallbackText, nodeFont, new SolidBrush(node.FallbackTextColor),
+						//    bounds.Right + 1, bounds.Top);
                     }
 				}
 				
