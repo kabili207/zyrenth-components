@@ -111,7 +111,7 @@ namespace Zyrenth.Gtksharp
 
 					string temp = a.Start.ToShortTimeString() + " - "
 						+ a.End.ToShortTimeString();
-					if (!Common.IsNullOrWhiteSpace(a.Location))
+					if (!Zyrenth.IsNullOrWhiteSpace(a.Location))
 						temp += Environment.NewLine + a.Location;
 
 					int detail = (int)graphics.MeasureString(temp, fontNorm, limit.Width, sf).Height;
@@ -139,13 +139,13 @@ namespace Zyrenth.Gtksharp
 					// Create new colors that are slightly lighter and
 					// darker than the system base color
 					Color colorL = Color.FromArgb(
-						Common.Clamp(baseColor.R + 35, 0, 255),
-						Common.Clamp(baseColor.G + 35, 0, 255),
-						Common.Clamp(baseColor.B + 35, 0, 255));
+						Zyrenth.Clamp(baseColor.R + 35, 0, 255),
+						Zyrenth.Clamp(baseColor.G + 35, 0, 255),
+						Zyrenth.Clamp(baseColor.B + 35, 0, 255));
 					Color colorD = Color.FromArgb(
-						Common.Clamp(baseColor.R - 35, 0, 255),
-						Common.Clamp(baseColor.G - 35, 0, 255),
-						Common.Clamp(baseColor.B - 35, 0, 255));
+						Zyrenth.Clamp(baseColor.R - 35, 0, 255),
+						Zyrenth.Clamp(baseColor.G - 35, 0, 255),
+						Zyrenth.Clamp(baseColor.B - 35, 0, 255));
 
 					// And now use them to create a gradient brush
 					Brush gradBrush = new LinearGradientBrush(box, colorL,

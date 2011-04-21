@@ -34,7 +34,7 @@ namespace Zyrenth.Winforms
 
 		public ImageListBox()
 		{
-			this.DrawMode = DrawMode.OwnerDrawFixed; // We're using custom drawing.
+			//this.DrawMode = DrawMode.OwnerDrawFixed; // We're using custom drawing.
 			_images = new List<Bitmap>();
 			
 		}
@@ -50,7 +50,9 @@ namespace Zyrenth.Winforms
 				Format(this, args);
 			e.Value = args.Value;
 		}
-
+		
+		
+		
 		/// <summary>
 		/// Overrides the ListBox DrawItem event handler to custom draw each
 		/// item in the Items collection.
@@ -63,7 +65,7 @@ namespace Zyrenth.Winforms
 		protected override void OnDrawItem(DrawItemEventArgs e)
 		{
 
-			AppDomain domain = AppDomain.CurrentDomain;
+			base.OnDrawItem(e);
 
 			// Make sure we're not trying to draw something that isn't there.
 			if (e.Index >= this.Items.Count || e.Index <= -1)
@@ -71,20 +73,21 @@ namespace Zyrenth.Winforms
 				// The designer draws a single 'fake' item
 				// We'll use this to draw the name of the control
 				if (this.DesignMode)
-					
-					e.Graphics.DrawString(this.Name, this.Font, SystemBrushes.WindowText,
-						new PointF(e.Bounds.X, e.Bounds.Y));
+					TextRenderer.DrawText(e.Graphics, this.Name, this.Font,
+					    new Point(e.Bounds.X, e.Bounds.Y), SystemColors.WindowText);
+					//e.Graphics.DrawString(this.Name, this.Font, SystemBrushes.WindowText,
+					//	new PointF(e.Bounds.X, e.Bounds.Y));
 				
 				return;
 			}
-
+			
 			// Get the item object.
 			object item = this.Items[e.Index];
 			if (item == null)
 				return;
 
 			string text = GetItemText(item);
-
+			
 			Point stringLoc;
 			if (HideImage)
 				stringLoc = new Point(e.Bounds.X, e.Bounds.Y);

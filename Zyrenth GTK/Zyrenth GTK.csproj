@@ -50,6 +50,8 @@
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Gtksharp\AppointmentList.cs" />
     <Compile Include="gtk-gui\generated.cs" />
+    <Compile Include="Gtksharp\AppointmentItem.cs" />
+    <Compile Include="Common.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

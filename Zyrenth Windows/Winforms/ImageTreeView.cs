@@ -57,7 +57,9 @@ namespace Zyrenth.Winforms
 			DrawNode += new DrawTreeNodeEventHandler(DrawNodeHandler);
 
 		}
-
+		
+		
+		
 		private void DrawNodeHandler(object sender, DrawTreeNodeEventArgs e)
 		{
 			if (e.Bounds.Height == 0)
@@ -73,7 +75,7 @@ namespace Zyrenth.Winforms
 
 			if ((e.State & TreeNodeStates.Selected) == 0)
 			{
-				e.Graphics.FillRectangle(SystemBrushes.Window, bounds);
+				//e.Graphics.FillRectangle(SystemBrushes.Window, bounds);
 				if (e.Node is ImageTreeNode && !((ImageTreeNode)e.Node).Active)
 				{
 					TextRenderer.DrawText(e.Graphics, e.Node.Text, nodeFont, new Point(bounds.Left + 1, bounds.Top + 1), SystemColors.GrayText);
@@ -100,7 +102,7 @@ namespace Zyrenth.Winforms
 				ImageTreeNode node = e.Node as ImageTreeNode;
 
 				// Make sure the images are drawn in the highest quality
-				e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+				e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.Bilinear;
 				
 				// We have to white out the area otherwise images start to overlap.
 				e.Graphics.FillRectangle(SystemBrushes.Window, bounds.Right + 1, bounds.Top,

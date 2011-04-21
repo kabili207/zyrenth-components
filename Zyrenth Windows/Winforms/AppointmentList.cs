@@ -327,17 +327,17 @@ namespace Zyrenth.Winforms
 					a.Bounds = box;
 
 					Color baseColor;
-					Brush baseFont;
+					Color baseFont;
 
 					// Sets the "button's" font and color to match the system
 					if (SelectedItem == a)
 					{
-						baseFont = SystemBrushes.HighlightText;
+						baseFont = SystemColors.HighlightText;
 						baseColor = SystemColors.Highlight;
 					}
 					else
 					{
-						baseFont = SystemBrushes.ControlText;
+						baseFont = SystemColors.ControlText;
 						baseColor = SystemColors.Control;
 					}
 
@@ -373,11 +373,11 @@ namespace Zyrenth.Winforms
 
 					Rectangle head = new Rectangle(box.Left + boxPad+ 8, box.Top + boxPad, box.Width - (boxPad * 2) - 8, box.Height - (boxPad * 2));
 					//graphics.DrawString(a.Subject, fontBold, baseFont, head, sf);
-					TextRenderer.DrawText(graphics, a.Subject, fontBold, head, Color.Black, TextFormatFlags.Left | TextFormatFlags.Top);
+					TextRenderer.DrawText(graphics, a.Subject, fontBold, head, baseFont, TextFormatFlags.Left | TextFormatFlags.Top);
 					head.Height -= sub;
 					head.Y += sub;
 					//graphics.DrawString(temp, fontNorm, baseFont, head, sf);
-					TextRenderer.DrawText(graphics, temp, fontNorm, head, Color.Black, TextFormatFlags.Left | TextFormatFlags.Top | TextFormatFlags.WordBreak);
+					TextRenderer.DrawText(graphics, temp, fontNorm, head, baseFont, TextFormatFlags.Left | TextFormatFlags.Top | TextFormatFlags.WordBreak);
 
 					Y = box.Bottom + boxPad;
 
