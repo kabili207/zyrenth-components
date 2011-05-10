@@ -18,7 +18,7 @@ namespace Zyrenth.Winforms
 	/// similar to Microsoft Outlook 2010
 	/// </summary>
     [ToolboxBitmap(typeof(AppointmentList))]
-	public partial class AppointmentList : UserControl
+	public partial class AppointmentList : ScrollableControl
 	{
 		public const int NoMatches = -1;
 
