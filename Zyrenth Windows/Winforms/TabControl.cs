@@ -18,7 +18,23 @@ namespace Zyrenth.Winforms
 			SetStyle(System.Windows.Forms.ControlStyles.DoubleBuffer, true);
 			this.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
 			this.SizeMode = TabSizeMode.Fixed;
+			
 			//this.ItemSize = new Size(
+		}
+
+		public void AddForm(Form form)
+		{
+			Form parent = this.FindForm();
+			if (parent != null)
+			{
+				//if (!parent.IsMdiContainer)
+				//	parent.IsMdiContainer = true;
+				TabPage tp = new TabPage(form);
+				form.WindowState = FormWindowState.Maximized;
+				this.TabPages.Add(tp);
+				form.Show();
+			}
+				
 		}
 
 		protected override void OnDrawItem(System.Windows.Forms.DrawItemEventArgs e)

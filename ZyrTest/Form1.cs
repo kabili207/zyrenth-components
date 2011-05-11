@@ -41,6 +41,10 @@ namespace ZyrTest
             initializeTreeView();
             initializeMisc();
             initializeListBox();
+
+			zyrTabControl1.AddForm(new MdiTestForm() { Text = "Test stuff" });
+			zyrTabControl1.AddForm(new MdiTestForm() { Text = "More stuff" });
+			
         }
 
         private void initializeAppointmentList()
