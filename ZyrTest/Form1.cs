@@ -42,8 +42,10 @@ namespace ZyrTest
             initializeMisc();
             initializeListBox();
 
-			zyrTabControl1.AddForm(new MdiTestForm() { Text = "Test stuff" });
-			zyrTabControl1.AddForm(new MdiTestForm() { Text = "More stuff" });
+			//zyrTabControl1.AddForm(new MdiTestForm() { Text = "Test stuff" });
+			//zyrTabControl1.AddForm(new MdiTestForm() { Text = "More stuff" });
+			//zyrTabControl1.AddForm(new MdiTestForm() { Text = "Testing you" });
+			//zyrTabControl1.AddForm(new MdiTestForm() { Text = "Your momther!" });
 			
         }
 
@@ -151,7 +153,7 @@ namespace ZyrTest
 
         private void extendedDateTimePicker1_CheckedChanged(object sender, EventArgs e)
         {
-            
-        }
+
+		}
     }
 }

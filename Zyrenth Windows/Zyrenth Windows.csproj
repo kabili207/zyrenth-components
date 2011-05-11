@@ -83,8 +83,6 @@
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Resources.Designer.cs" />
-    <Compile Include="Web\ResourceFinder.cs" />
-    <Compile Include="Web\WelcomeLabel.cs" />
     <Compile Include="Winforms\AppointmentItem.cs" />
     <Compile Include="Winforms\AppointmentList.cs">
       <SubType>Component</SubType>
@@ -109,6 +107,9 @@
     </Compile>
     <Compile Include="Winforms\ImageTreeView.Designer.cs">
       <DependentUpon>ImageTreeView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Winforms\MdiPanel.cs">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Winforms\TabControl.cs">
       <SubType>Component</SubType>
@@ -140,6 +141,9 @@
     <EmbeddedResource Include="Winforms\AppointmentList.bmp" />
     <EmbeddedResource Include="Winforms\ImageListBox.bmp" />
     <EmbeddedResource Include="Winforms\ImageTreeView.bmp" />
+    <EmbeddedResource Include="Winforms\TabControl.resx">
+      <DependentUpon>TabControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Winforms\ZoomPictureBox.bmp" />
   </ItemGroup>
   <ItemGroup />

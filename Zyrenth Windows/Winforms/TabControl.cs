@@ -13,28 +13,100 @@ namespace Zyrenth.Winforms
 {
 	public partial class TabControl : System.Windows.Forms.TabControl
 	{
+		ContextMenuStrip menu;
+		ToolStripMenuItem closeToolStripMenuItem;
+		ToolStripMenuItem closeAllToolStripMenuItem;
+		ToolStripMenuItem closeOtherToolStripMenuItem;
+
 		public TabControl()
 		{
 			SetStyle(System.Windows.Forms.ControlStyles.DoubleBuffer, true);
 			this.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
 			this.SizeMode = TabSizeMode.Fixed;
-			
+			menu = new ContextMenuStrip();
+			menu.AllowMerge = true;
+			closeOtherToolStripMenuItem = new ToolStripMenuItem();
+			closeAllToolStripMenuItem = new ToolStripMenuItem();
+			closeToolStripMenuItem = new ToolStripMenuItem();
+
+			this.menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.closeToolStripMenuItem,
+            this.closeAllToolStripMenuItem,
+            this.closeOtherToolStripMenuItem});
+			this.closeToolStripMenuItem.Text = "Close Tab";
+			this.closeAllToolStripMenuItem.Text = "Close All Tabs";
+			this.closeOtherToolStripMenuItem.Text = "Close Other Tabs";
+			this.closeToolStripMenuItem.Click += new EventHandler(OnCloseToolStrip_Click);
+			this.closeAllToolStripMenuItem.Click += new EventHandler(OnCloseAllToolStrip_Click);
+			this.closeOtherToolStripMenuItem.Click += new EventHandler(OnCloseOtherToolStrip_Click);
+
+			//this.Controls.Add(ctlClient);
 			//this.ItemSize = new Size(
 		}
 
-		public void AddForm(Form form)
+		private void OnCloseToolStrip_Click(object sender, EventArgs e)
 		{
-			Form parent = this.FindForm();
-			if (parent != null)
+			System.Windows.Forms.TabPage tp = menu.Tag as System.Windows.Forms.TabPage;
+			if (tp != null)
 			{
-				//if (!parent.IsMdiContainer)
-				//	parent.IsMdiContainer = true;
-				TabPage tp = new TabPage(form);
-				form.WindowState = FormWindowState.Maximized;
-				this.TabPages.Add(tp);
-				form.Show();
+				this.TabPages.Remove(tp);
 			}
-				
+		}
+
+		private void OnCloseAllToolStrip_Click(object sender, EventArgs e)
+		{
+			this.TabPages.Clear();
+		}
+
+		private void OnCloseOtherToolStrip_Click(object sender, EventArgs e)
+		{
+			System.Windows.Forms.TabPage tp = menu.Tag as System.Windows.Forms.TabPage;
+			TabPageCollection tc = this.TabPages;
+			if (tp != null)
+			{
+				foreach (System.Windows.Forms.TabPage tcp in tc)
+				{
+					if (tcp != tp)
+						this.TabPages.Remove(tcp);
+				}
+			}
+		}
+
+		protected override void OnSelectedIndexChanged(EventArgs e)
+		{
+			base.OnSelectedIndexChanged(e);
+			/*foreach(TabPage tp in TabPages)
+			{
+				//if(tp.IsMdiContainer)
+				//	tp.Controls.Remove(ctlClient);
+			}
+			if (this.SelectedTab is TabPage && ((TabPage)this.SelectedTab).IsMdiContainer)
+			{
+				//((TabPage)this.SelectedTab).Controls.Add(ctlClient);
+				((TabPage)this.SelectedTab).LinkedForm.Select();
+			}*/
+		}
+
+		protected override void OnMouseClick(MouseEventArgs e)
+		{
+			if (e.Button == System.Windows.Forms.MouseButtons.Right)
+			{
+				menu.Show(this, e.Location);
+				int i = 0;
+				for (; i<  this.TabPages.Count; i++)
+				{
+					if (GetTabRect(i).Contains(e.Location))
+						break;
+				}
+				if (i < TabPages.Count)
+					menu.Tag = TabPages[i];
+				else
+					menu.Tag = null;
+			}
+			else
+			{
+				base.OnMouseClick(e);
+			}
 		}
 
 		protected override void OnDrawItem(System.Windows.Forms.DrawItemEventArgs e)
@@ -115,6 +187,13 @@ namespace Zyrenth.Winforms
 
 				}
 			}
+		}
+
+		private void InitializeComponent()
+		{
+			this.SuspendLayout();
+			this.ResumeLayout(false);
+
 		}
 
 	}
