@@ -46,6 +46,10 @@ namespace ZyrTest
 			//zyrTabControl1.AddForm(new MdiTestForm() { Text = "More stuff" });
 			//zyrTabControl1.AddForm(new MdiTestForm() { Text = "Testing you" });
 			//zyrTabControl1.AddForm(new MdiTestForm() { Text = "Your momther!" });
+			zyrTabControl1.TabPages.Add("Test stuff");
+			zyrTabControl1.TabPages.Add("More stuff");
+			zyrTabControl1.TabPages.Add("Testing you");
+			zyrTabControl1.TabPages.Add("Your momther!");
 			
         }
 
@@ -155,5 +159,13 @@ namespace ZyrTest
         {
 
 		}
+
+		private void btnAddMdiForm_Click(object sender, EventArgs e)
+		{
+			Form form = new MdiTestForm() { Text = "Child " + mdiPanel1.MdiChildren.Count() };
+			mdiPanel1.AddForm(form);
+			form.Show();
+		}
+
     }
 }

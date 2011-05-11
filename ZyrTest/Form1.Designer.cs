@@ -49,11 +49,9 @@
 			this.formattedTextBox1 = new Zyrenth.Winforms.FormattedTextBox();
 			this.tabPage7 = new System.Windows.Forms.TabPage();
 			this.zyrTabControl1 = new Zyrenth.Winforms.TabControl();
-			this.tabPage8 = new System.Windows.Forms.TabPage();
-			this.tabPage9 = new System.Windows.Forms.TabPage();
-			this.tabPage10 = new System.Windows.Forms.TabPage();
-			this.tabPage11 = new System.Windows.Forms.TabPage();
+			this.tabPage12 = new System.Windows.Forms.TabPage();
 			this.mdiPanel1 = new Zyrenth.Winforms.MdiPanel();
+			this.btnAddMdiForm = new System.Windows.Forms.Button();
 			this.tabControl1.SuspendLayout();
 			this.tabPage1.SuspendLayout();
 			this.tabPage2.SuspendLayout();
@@ -64,8 +62,7 @@
 			this.groupBox2.SuspendLayout();
 			this.groupBox1.SuspendLayout();
 			this.tabPage7.SuspendLayout();
-			this.zyrTabControl1.SuspendLayout();
-			this.tabPage8.SuspendLayout();
+			this.tabPage12.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// tabControl1
@@ -77,6 +74,7 @@
 			this.tabControl1.Controls.Add(this.tabPage5);
 			this.tabControl1.Controls.Add(this.tabPage6);
 			this.tabControl1.Controls.Add(this.tabPage7);
+			this.tabControl1.Controls.Add(this.tabPage12);
 			this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.tabControl1.Location = new System.Drawing.Point(0, 0);
 			this.tabControl1.Multiline = true;
@@ -125,7 +123,7 @@
 			this.imageTreeView1.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
 			this.imageTreeView1.Location = new System.Drawing.Point(3, 3);
 			this.imageTreeView1.Name = "imageTreeView1";
-			this.imageTreeView1.Size = new System.Drawing.Size(312, 245);
+			this.imageTreeView1.Size = new System.Drawing.Size(401, 297);
 			this.imageTreeView1.TabIndex = 0;
 			// 
 			// tabPage3
@@ -173,7 +171,7 @@
 			this.treeGridView1.Location = new System.Drawing.Point(0, 0);
 			this.treeGridView1.Name = "treeGridView1";
 			this.treeGridView1.RowHeadersVisible = false;
-			this.treeGridView1.Size = new System.Drawing.Size(318, 251);
+			this.treeGridView1.Size = new System.Drawing.Size(407, 285);
 			this.treeGridView1.TabIndex = 0;
 			// 
 			// Column1
@@ -281,66 +279,46 @@
 			// 
 			// zyrTabControl1
 			// 
-			this.zyrTabControl1.Controls.Add(this.tabPage8);
-			this.zyrTabControl1.Controls.Add(this.tabPage9);
-			this.zyrTabControl1.Controls.Add(this.tabPage10);
-			this.zyrTabControl1.Controls.Add(this.tabPage11);
-			this.zyrTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.zyrTabControl1.Dock = System.Windows.Forms.DockStyle.Top;
 			this.zyrTabControl1.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
+			this.zyrTabControl1.ItemSize = new System.Drawing.Size(85, 24);
 			this.zyrTabControl1.Location = new System.Drawing.Point(0, 0);
 			this.zyrTabControl1.Name = "zyrTabControl1";
 			this.zyrTabControl1.SelectedIndex = 0;
-			this.zyrTabControl1.Size = new System.Drawing.Size(407, 285);
+			this.zyrTabControl1.Size = new System.Drawing.Size(407, 195);
 			this.zyrTabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
 			this.zyrTabControl1.TabIndex = 0;
 			// 
-			// tabPage8
+			// tabPage12
 			// 
-			this.tabPage8.Controls.Add(this.mdiPanel1);
-			this.tabPage8.Location = new System.Drawing.Point(4, 22);
-			this.tabPage8.Name = "tabPage8";
-			this.tabPage8.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPage8.Size = new System.Drawing.Size(399, 259);
-			this.tabPage8.TabIndex = 0;
-			this.tabPage8.Text = "tabPage8";
-			this.tabPage8.UseVisualStyleBackColor = true;
-			// 
-			// tabPage9
-			// 
-			this.tabPage9.Location = new System.Drawing.Point(4, 22);
-			this.tabPage9.Name = "tabPage9";
-			this.tabPage9.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPage9.Size = new System.Drawing.Size(399, 259);
-			this.tabPage9.TabIndex = 1;
-			this.tabPage9.Text = "tabPage9";
-			this.tabPage9.UseVisualStyleBackColor = true;
-			// 
-			// tabPage10
-			// 
-			this.tabPage10.Location = new System.Drawing.Point(4, 22);
-			this.tabPage10.Name = "tabPage10";
-			this.tabPage10.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPage10.Size = new System.Drawing.Size(399, 259);
-			this.tabPage10.TabIndex = 2;
-			this.tabPage10.Text = "tabPage10";
-			this.tabPage10.UseVisualStyleBackColor = true;
-			// 
-			// tabPage11
-			// 
-			this.tabPage11.Location = new System.Drawing.Point(4, 22);
-			this.tabPage11.Name = "tabPage11";
-			this.tabPage11.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPage11.Size = new System.Drawing.Size(399, 259);
-			this.tabPage11.TabIndex = 3;
-			this.tabPage11.Text = "tabPage11";
-			this.tabPage11.UseVisualStyleBackColor = true;
+			this.tabPage12.Controls.Add(this.mdiPanel1);
+			this.tabPage12.Controls.Add(this.btnAddMdiForm);
+			this.tabPage12.Location = new System.Drawing.Point(4, 40);
+			this.tabPage12.Name = "tabPage12";
+			this.tabPage12.Size = new System.Drawing.Size(407, 285);
+			this.tabPage12.TabIndex = 7;
+			this.tabPage12.Text = "MDI Panel";
+			this.tabPage12.UseVisualStyleBackColor = true;
 			// 
 			// mdiPanel1
 			// 
-			this.mdiPanel1.Location = new System.Drawing.Point(91, 83);
+			this.mdiPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.mdiPanel1.Location = new System.Drawing.Point(8, 33);
 			this.mdiPanel1.Name = "mdiPanel1";
-			this.mdiPanel1.Size = new System.Drawing.Size(200, 100);
-			this.mdiPanel1.TabIndex = 0;
+			this.mdiPanel1.Size = new System.Drawing.Size(391, 244);
+			this.mdiPanel1.TabIndex = 3;
+			// 
+			// btnAddMdiForm
+			// 
+			this.btnAddMdiForm.Location = new System.Drawing.Point(9, 4);
+			this.btnAddMdiForm.Name = "btnAddMdiForm";
+			this.btnAddMdiForm.Size = new System.Drawing.Size(75, 23);
+			this.btnAddMdiForm.TabIndex = 2;
+			this.btnAddMdiForm.Text = "Add Form";
+			this.btnAddMdiForm.UseVisualStyleBackColor = true;
+			this.btnAddMdiForm.Click += new System.EventHandler(this.btnAddMdiForm_Click);
 			// 
 			// Form1
 			// 
@@ -363,8 +341,7 @@
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();
 			this.tabPage7.ResumeLayout(false);
-			this.zyrTabControl1.ResumeLayout(false);
-			this.tabPage8.ResumeLayout(false);
+			this.tabPage12.ResumeLayout(false);
 			this.ResumeLayout(false);
 
 		}
@@ -392,10 +369,8 @@
 		private Zyrenth.Winforms.ExtendedDateTimePicker extendedDateTimePicker1;
 		private System.Windows.Forms.TabPage tabPage7;
 		private Zyrenth.Winforms.TabControl zyrTabControl1;
-		private System.Windows.Forms.TabPage tabPage8;
-		private System.Windows.Forms.TabPage tabPage9;
-		private System.Windows.Forms.TabPage tabPage10;
-		private System.Windows.Forms.TabPage tabPage11;
+		private System.Windows.Forms.TabPage tabPage12;
+		private System.Windows.Forms.Button btnAddMdiForm;
 		private Zyrenth.Winforms.MdiPanel mdiPanel1;
 	}
 }

@@ -13,6 +13,9 @@ namespace Zyrenth.Winforms
 {
 	public partial class TabControl : System.Windows.Forms.TabControl
 	{
+		private Form mdiForm;
+		private MdiClient ctlClient;
+
 		ContextMenuStrip menu;
 		ToolStripMenuItem closeToolStripMenuItem;
 		ToolStripMenuItem closeAllToolStripMenuItem;
@@ -23,6 +26,7 @@ namespace Zyrenth.Winforms
 			SetStyle(System.Windows.Forms.ControlStyles.DoubleBuffer, true);
 			this.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
 			this.SizeMode = TabSizeMode.Fixed;
+			this.ItemSize = new Size(85, 24);
 			menu = new ContextMenuStrip();
 			menu.AllowMerge = true;
 			closeOtherToolStripMenuItem = new ToolStripMenuItem();
@@ -109,7 +113,8 @@ namespace Zyrenth.Winforms
 			}
 		}
 
-		protected override void OnDrawItem(System.Windows.Forms.DrawItemEventArgs e)
+
+		protected override void OnDrawItem(DrawItemEventArgs e)
 		{
 			//base.OnDrawItem(e);
 			e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
@@ -149,7 +154,7 @@ namespace Zyrenth.Winforms
 					{
 						VisualStyleRenderer renderer =
 							 new VisualStyleRenderer(VisualStyleElement.Tab.TopTabItem.Pressed);
-						tabTextArea.Inflate(1, 1);
+						//tabTextArea.Inflate(2, 2);
 						renderer.DrawBackground(e.Graphics, tabTextArea);
 					}
 
@@ -162,16 +167,40 @@ namespace Zyrenth.Winforms
 					}*/
 					br.Dispose();
 				}
-
-				if (VisualStyleRenderer.IsElementDefined(VisualStyleElement.ToolTip.Close.Normal))
+				if (true)
 				{
-					VisualStyleRenderer renderer =
-						 new VisualStyleRenderer(VisualStyleElement.ToolTip.Close.Normal);
-					Rectangle rectangle1 = new Rectangle((int)tabTextArea.Right - 15, (int)tabTextArea.Top + 1,
+					VisualStyleRenderer renderer = new VisualStyleRenderer(VisualStyleElement.ToolTip.Close.Normal);
+					Size trueSize = renderer.GetPartSize(e.Graphics, ThemeSizeType.True);
+					Rectangle rectangle1 = new Rectangle((int)tabTextArea.Right - trueSize.Width - 2,
+						(int)tabTextArea.Top + (tabTextArea.Height - trueSize.Height) / 2,
+						trueSize.Width, trueSize.Height);
+
+					if (rectangle1.Contains(this.PointToClient(Control.MousePosition)))
+					{
+						if (VisualStyleRenderer.IsElementDefined(VisualStyleElement.ToolTip.Close.Hot))
+						{
+							renderer =
+								 new VisualStyleRenderer(VisualStyleElement.ToolTip.Close.Hot);
+							renderer.DrawBackground(e.Graphics, rectangle1);
+							tabTextArea.Width -= (trueSize.Width + 4);
+
+						}
+					}
+					else
+					{
+						if (VisualStyleRenderer.IsElementDefined(VisualStyleElement.ToolTip.Close.Normal))
+						{
+							renderer.DrawBackground(e.Graphics, rectangle1);
+							tabTextArea.Width -= (trueSize.Width + 4);
+
+						}
+					}
+				}
+				if (this.TabPages[nIndex] is TabPage)
+				{
+					Rectangle rectangle1 = new Rectangle((int)tabTextArea.Left, (int)tabTextArea.Top + 1,
 						(int)tabTextArea.Height - 2, (int)tabTextArea.Height - 2);
-					renderer.DrawBackground(e.Graphics, rectangle1);
-					tabTextArea.Width += 15;
-					
+					e.Graphics.DrawIcon(((TabPage)this.TabPages[nIndex]).TabIcon, rectangle1);
 				}
 
 				string str = this.TabPages[nIndex].Text;
@@ -181,10 +210,11 @@ namespace Zyrenth.Winforms
 					this.TabPages[nIndex].ForeColor))
 				{
 					//Draw the tab header text
-					TextRenderer.DrawText(e.Graphics, str, this.Font,
-						new Rectangle(tabTextArea.X, tabTextArea.Y, tabTextArea.Width - 15, tabTextArea.Height),
-						this.TabPages[nIndex].ForeColor, TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
-
+					Rectangle textRect = tabTextArea;
+					textRect.Inflate(-2, 0);
+					TextRenderer.DrawText(e.Graphics, str, this.Font, textRect,
+						this.TabPages[nIndex].ForeColor, TextFormatFlags.VerticalCenter | TextFormatFlags.EndEllipsis);
+					
 				}
 			}
 		}
