@@ -7,6 +7,7 @@ using System.Drawing;
 
 namespace Zyrenth.Winforms
 {
+	[ToolboxBitmap(typeof(TabPage))]
 	class TabPage : System.Windows.Forms.TabPage
 	{
 		public Icon TabIcon { get; set; }

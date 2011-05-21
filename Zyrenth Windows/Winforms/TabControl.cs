@@ -11,6 +11,7 @@ using System.Windows.Forms;
 
 namespace Zyrenth.Winforms
 {
+	[ToolboxBitmap(typeof(TabControl))]
 	public partial class TabControl : System.Windows.Forms.TabControl
 	{
 		private Form mdiForm;

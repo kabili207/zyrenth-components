@@ -8,6 +8,9 @@ namespace Zyrenth
 {
 	public static class Common
 	{
+		private static bool? _useCompatibleTextRendering = null;
+		private static bool? _visualStylesEnabled = null;
+
 		/// <summary>
 		/// 
 		/// </summary>
@@ -17,13 +20,18 @@ namespace Zyrenth
 			{
 				try
 				{
-					FieldInfo info = typeof(Application).GetField("use_compatible_text_rendering", BindingFlags.Static | BindingFlags.NonPublic);
-					object o = info.GetValue(null);
-					if(o is bool)
-						return (bool)o;
+					FieldInfo info = typeof(Control).GetField("UseCompatibleTextRenderingDefault", BindingFlags.Static | BindingFlags.NonPublic);
+					if (info == null) // Not using .Net, try Mono
+						info = typeof(Application).GetField("use_compatible_text_rendering", BindingFlags.Static | BindingFlags.NonPublic);
+					object o = null;
+					if (info != null)
+						o = info.GetValue(null); // Parameter is ignored on static fields, just pass null.
+					return o.Equals(true);
 				}
-				finally { }
-				return true;
+				catch
+				{
+					return false;
+				}
 			}
 		}
 		
@@ -36,13 +44,18 @@ namespace Zyrenth
 			{
 				try
 				{
-					FieldInfo info = typeof(Application).GetField("visual_styles_enabled", BindingFlags.Static | BindingFlags.NonPublic);
-					object o = info.GetValue(null);
-					if(o is bool)
-						return (bool)o;
+					FieldInfo info = typeof(Application).GetField("useVisualStyles", BindingFlags.Static | BindingFlags.NonPublic);
+					if (info == null) // Not using .Net, try Mono
+						info = typeof(Application).GetField("visual_styles_enabled", BindingFlags.Static | BindingFlags.NonPublic);
+					object o = null;
+					if (info != null)
+						o = info.GetValue(null); // Parameter is ignored on static fields, just pass null.
+					return o.Equals(true);
 				}
-				finally { }
-				return true;
+				catch
+				{
+					return true;
+				}
 			}
 		}
 		

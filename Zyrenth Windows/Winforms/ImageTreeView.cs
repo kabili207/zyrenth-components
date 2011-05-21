@@ -13,13 +13,13 @@ using System.Drawing.Imaging;
 namespace Zyrenth.Winforms
 {
 
-    [ToolboxBitmap(typeof(ImageTreeView))]
+	[ToolboxBitmap(typeof(ImageTreeView))]
 	public partial class ImageTreeView : TreeView
 	{
 
 		const int WM_LBUTTONDBLCLK = 0x0203;//client area
-        const int WM_NCLBUTTONDBLCLK = 0x00A3;//non-client area
-		
+		const int WM_NCLBUTTONDBLCLK = 0x00A3;//non-client area
+
 		bool _textOnly = false;
 
 		/// <summary>
@@ -29,11 +29,12 @@ namespace Zyrenth.Winforms
 		[Description("Sets if failsafe text should be used if an image is not found"),
 		Category("Images"),
 		DefaultValue(false)]
-		public bool TextOnly {
+		public bool TextOnly
+		{
 			get { return _textOnly; }
 			set { _textOnly = value; }
 		}
-		
+
 		bool _doubleClickExpand = true;
 
 		/// <summary>
@@ -43,7 +44,8 @@ namespace Zyrenth.Winforms
 		[Description("Sets if failsafe text should be used if an image is not found"),
 		Category("Behavior"),
 		DefaultValue(true)]
-		public bool DoubleClickExpand {
+		public bool DoubleClickExpand
+		{
 			get { return _doubleClickExpand; }
 			set { _doubleClickExpand = value; }
 		}
@@ -52,14 +54,12 @@ namespace Zyrenth.Winforms
 		public ImageTreeView()
 			: base()
 		{
-			
+
 			DrawMode = TreeViewDrawMode.OwnerDrawText;
 			DrawNode += new DrawTreeNodeEventHandler(DrawNodeHandler);
 
 		}
-		
-		
-		
+
 		private void DrawNodeHandler(object sender, DrawTreeNodeEventArgs e)
 		{
 			if (e.Bounds.Height == 0)
@@ -69,7 +69,7 @@ namespace Zyrenth.Winforms
 			if (nodeFont == null) nodeFont = this.Font;
 
 			//SizeF size = e.Graphics.MeasureString(e.Node.Text, nodeFont);
-			SizeF size = TextRenderer.MeasureText(e.Graphics,e.Node.Text, nodeFont);
+			SizeF size = TextRenderer.MeasureText(e.Graphics, e.Node.Text, nodeFont);
 			Rectangle bounds = new Rectangle(e.Bounds.Location.X, e.Bounds.Location.Y,
 				(int)size.Width, e.Bounds.Height);
 
@@ -78,23 +78,29 @@ namespace Zyrenth.Winforms
 				//e.Graphics.FillRectangle(SystemBrushes.Window, bounds);
 				if (e.Node is ImageTreeNode && !((ImageTreeNode)e.Node).Active)
 				{
-					TextRenderer.DrawText(e.Graphics, e.Node.Text, nodeFont, new Point(bounds.Left + 1, bounds.Top + 1), SystemColors.GrayText);
-					//e.Graphics.DrawString(e.Node.Text, nodeFont, SystemBrushes.GrayText,
-					//	bounds.Left + 1, bounds.Top + 1);
+					if (!Common.UseCompatibleTextRendering)
+						TextRenderer.DrawText(e.Graphics, e.Node.Text, nodeFont, new Point(bounds.Left + 1, bounds.Top + 1), SystemColors.GrayText);
+					else
+						e.Graphics.DrawString(e.Node.Text, nodeFont, SystemBrushes.GrayText,
+							bounds.Left + 1, bounds.Top + 1);
 				}
 				else
 				{
-					TextRenderer.DrawText(e.Graphics, e.Node.Text, nodeFont, new Point(bounds.Left + 1, bounds.Top + 1), SystemColors.WindowText);
-					//e.Graphics.DrawString(e.Node.Text, nodeFont, SystemBrushes.WindowText,
-					//	bounds.Left + 1, bounds.Top + 1);
+					if (!Common.UseCompatibleTextRendering)
+						TextRenderer.DrawText(e.Graphics, e.Node.Text, nodeFont, new Point(bounds.Left + 1, bounds.Top + 1), SystemColors.WindowText);
+					else
+						e.Graphics.DrawString(e.Node.Text, nodeFont, SystemBrushes.WindowText,
+							bounds.Left + 1, bounds.Top + 1);
 				}
 			}
 			else
 			{
 				e.Graphics.FillRectangle(SystemBrushes.Highlight, bounds);
-				TextRenderer.DrawText(e.Graphics, e.Node.Text, nodeFont, new Point(bounds.Left + 1, bounds.Top + 1), SystemColors.HighlightText);
-				//e.Graphics.DrawString(e.Node.Text, nodeFont, SystemBrushes.HighlightText,
-				//        bounds.Left + 1, bounds.Top + 1);
+				if (!Common.UseCompatibleTextRendering)
+					TextRenderer.DrawText(e.Graphics, e.Node.Text, nodeFont, new Point(bounds.Left + 1, bounds.Top + 1), SystemColors.HighlightText);
+				else
+					e.Graphics.DrawString(e.Node.Text, nodeFont, SystemBrushes.HighlightText,
+							bounds.Left + 1, bounds.Top + 1);
 			}
 
 			if (e.Node is ImageTreeNode)
@@ -103,43 +109,45 @@ namespace Zyrenth.Winforms
 
 				// Make sure the images are drawn in the highest quality
 				e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.Bilinear;
-				
+
 				// We have to white out the area otherwise images start to overlap.
 				e.Graphics.FillRectangle(SystemBrushes.Window, bounds.Right + 1, bounds.Top,
 						bounds.Height - 2, bounds.Height - 2);
 
 				if (((ImageTreeNode)e.Node).Image != null)
 				{
-                    if (!TextOnly)
-                    {
+					if (!TextOnly)
+					{
 
 						if (Screen.PrimaryScreen.BitsPerPixel >= 32) // Check if primary screen supports alpha channels
-                        {
-                            e.Graphics.DrawImage(node.Image, bounds.Right + 2, bounds.Top,
-                                bounds.Height - 4, bounds.Height - 4);
-                        }
-                        else
-                        {
+						{
+							e.Graphics.DrawImage(node.Image, bounds.Right + 2, bounds.Top,
+								bounds.Height - 4, bounds.Height - 4);
+						}
+						else
+						{
 							// Alpha blending is not supported by primary screen so we have to draw it
 							// off-screen to perform alpha blending then draw it to the screen
-                            Bitmap bmp = new Bitmap(bounds.Height - 4, bounds.Height - 4, PixelFormat.Format16bppRgb555);
-                            Graphics gBmp = Graphics.FromImage(bmp);
+							Bitmap bmp = new Bitmap(bounds.Height - 4, bounds.Height - 4, PixelFormat.Format16bppRgb555);
+							Graphics gBmp = Graphics.FromImage(bmp);
 
-                            gBmp.Clear(SystemColors.Window);
-                            gBmp.CompositingMode = CompositingMode.SourceOver;
-                            gBmp.DrawImage(node.Image, 0, 0, bounds.Height - 4, bounds.Height - 4);
+							gBmp.Clear(SystemColors.Window);
+							gBmp.CompositingMode = CompositingMode.SourceOver;
+							gBmp.DrawImage(node.Image, 0, 0, bounds.Height - 4, bounds.Height - 4);
 
-                            e.Graphics.DrawImage(bmp, bounds.Right , bounds.Top+1);
-                        }
-                    }
-                    else
+							e.Graphics.DrawImage(bmp, bounds.Right, bounds.Top + 1);
+						}
+					}
+					else
 					{
-						TextRenderer.DrawText(e.Graphics, node.FallbackText, nodeFont, new Point(bounds.Right + 1, bounds.Top), node.FallbackTextColor);
-						//e.Graphics.DrawString(node.FallbackText, nodeFont, new SolidBrush(node.FallbackTextColor),
-						//    bounds.Right + 1, bounds.Top);
-                    }
+						if (!Common.UseCompatibleTextRendering)
+							TextRenderer.DrawText(e.Graphics, node.FallbackText, nodeFont, new Point(bounds.Right + 1, bounds.Top), node.FallbackTextColor);
+						else
+							e.Graphics.DrawString(node.FallbackText, nodeFont, new SolidBrush(node.FallbackTextColor),
+								bounds.Right + 1, bounds.Top);
+					}
 				}
-				
+
 			}
 		}
 
@@ -149,17 +157,21 @@ namespace Zyrenth.Winforms
 			return false;
 		}
 
-		protected override void DefWndProc(ref Message m) {
-	        if ((m.Msg == WM_LBUTTONDBLCLK || m.Msg == WM_NCLBUTTONDBLCLK) && !DoubleClickExpand) /*  */
-	        	return;
-	        base.DefWndProc(ref m);
-	    }
+		protected override void DefWndProc(ref Message m)
+		{
+			// Allows us to prevent the expand on double-click action
+			if ((m.Msg == WM_LBUTTONDBLCLK || m.Msg == WM_NCLBUTTONDBLCLK) && !DoubleClickExpand) /*  */
+				return;
+			base.DefWndProc(ref m);
+		}
 
-		protected override void WndProc(ref Message m) {
+		protected override void WndProc(ref Message m)
+		{
+			// Allows us to prevent the expand on double-click action
 			if ((m.Msg == WM_LBUTTONDBLCLK || m.Msg == WM_NCLBUTTONDBLCLK) && !DoubleClickExpand)
 				return;
-			base.WndProc (ref m);
+			base.WndProc(ref m);
 		}
-		
+
 	}
 }

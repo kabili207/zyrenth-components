@@ -102,6 +102,7 @@
     <Compile Include="Winforms\ImageTreeNode.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Winforms\ImageTreeNodeCollection.cs" />
     <Compile Include="Winforms\ImageTreeView.cs">
       <SubType>Component</SubType>
     </Compile>

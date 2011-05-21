@@ -129,15 +129,18 @@ namespace ZyrTest
             imageTreeView1.Nodes.Add(node);
         }
         private void initializeListBox()
-        {
-            imageListBox1.Items.AddRange(new ImageListBoxItem[] {
-                new ImageListBoxItem("Item 1", Properties.Resources.About),
-                new ImageListBoxItem("Item 2", Properties.Resources.Address_book),
-                new ImageListBoxItem("Item 3", Properties.Resources.Alert),
-                new ImageListBoxItem("Item 4", Properties.Resources.Application),
-                new ImageListBoxItem("Item 5", Properties.Resources.Blog),
-                new ImageListBoxItem("Item 6", Properties.Resources.Danger)
-            });
+		{
+			for (int i = 0; i < 15; i++)
+			{
+				imageListBox1.Items.AddRange(new ImageListBoxItem[] {
+					new ImageListBoxItem("Item 1", Properties.Resources.About),
+					new ImageListBoxItem("Item 2", Properties.Resources.Address_book),
+					new ImageListBoxItem("Item 3", Properties.Resources.Alert),
+					new ImageListBoxItem("Item 4", Properties.Resources.Application),
+					new ImageListBoxItem("Item 5", Properties.Resources.Blog),
+					new ImageListBoxItem("Item 6", Properties.Resources.Danger)
+				});
+			}
         }
 
         private void initializeMisc()

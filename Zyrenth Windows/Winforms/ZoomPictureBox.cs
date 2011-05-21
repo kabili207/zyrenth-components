@@ -83,10 +83,8 @@ namespace Zyrenth.Winforms
 		}
 
 		InterpolationMode _interpolationMode = InterpolationMode.High;
-		[
-		Category("Appearance"),
-		Description("The interpolation mode used to smooth the drawing")
-		]
+		[Category("Appearance")]
+		[Description("The interpolation mode used to smooth the drawing")]
 		public InterpolationMode InterpolationMode
 		{
 			get { return _interpolationMode; }

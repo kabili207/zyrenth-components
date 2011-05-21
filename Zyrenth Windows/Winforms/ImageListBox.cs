@@ -19,11 +19,6 @@ namespace Zyrenth.Winforms
 		[DefaultValue(false)]
 		public bool HideImage { get; set; }
 
-		public bool UseCompatibleTextRendering { get; set; }
-		internal bool CanUseTextRenderer { get { return true; } }
-		internal bool SupportsUseCompatibleTextRendering { get { return true; } }
-		internal bool UseCompatibleTextRenderingInt { get; set; }
-
 		private List<Bitmap> _images;
 
 		/// <summary>
@@ -73,10 +68,14 @@ namespace Zyrenth.Winforms
 				// The designer draws a single 'fake' item
 				// We'll use this to draw the name of the control
 				if (this.DesignMode)
-					TextRenderer.DrawText(e.Graphics, this.Name, this.Font,
-					    new Point(e.Bounds.X, e.Bounds.Y), SystemColors.WindowText);
-					//e.Graphics.DrawString(this.Name, this.Font, SystemBrushes.WindowText,
-					//	new PointF(e.Bounds.X, e.Bounds.Y));
+				{
+					if (!Common.UseCompatibleTextRendering)
+						TextRenderer.DrawText(e.Graphics, this.Name, this.Font,
+							new Point(e.Bounds.X, e.Bounds.Y), SystemColors.WindowText);
+					else
+						e.Graphics.DrawString(this.Name, this.Font, SystemBrushes.WindowText,
+							new PointF(e.Bounds.X, e.Bounds.Y));
+				}
 				
 				return;
 			}
@@ -114,8 +113,10 @@ namespace Zyrenth.Winforms
 			}
 
 			e.Graphics.FillRectangle(back, e.Bounds);
-			TextRenderer.DrawText(e.Graphics, text, this.Font, stringLoc, front);
-			//e.Graphics.DrawString(text, this.Font, front, stringLoc, StringFormat.GenericDefault);
+			if (!Common.UseCompatibleTextRendering)
+				TextRenderer.DrawText(e.Graphics, text, this.Font, stringLoc, front);
+			else
+				e.Graphics.DrawString(text, this.Font, new SolidBrush(front), stringLoc, StringFormat.GenericDefault);
 
 			if (ilist == null || HideImage || ilist.Image == null)
 				return;
