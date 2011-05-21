@@ -39,13 +39,13 @@ public partial class MainWindow : Gtk.Window
         apmt2.Status = AppointmentStatus.Busy;
         apmt3.Status = AppointmentStatus.Tentative;
 
-        appointmentlist2.Appointments.Add(apmt1);
-        appointmentlist2.Appointments.Add(apmt2);
-        appointmentlist2.Appointments.Add(apmt3);
-        appointmentlist2.Appointments.Add(apmt4);
-        appointmentlist2.Appointments.Add(apmt5);
-        appointmentlist2.Appointments.Add(apmt6);
-        appointmentlist2.Appointments.Add(apmt7);
+        //appointmentlist2.Appointments.Add(apmt1);
+        //appointmentlist2.Appointments.Add(apmt2);
+        //appointmentlist2.Appointments.Add(apmt3);
+        //appointmentlist2.Appointments.Add(apmt4);
+        //appointmentlist2.Appointments.Add(apmt5);
+        //appointmentlist2.Appointments.Add(apmt6);
+        //appointmentlist2.Appointments.Add(apmt7);
 	}
 
 	protected void OnDeleteEvent (object sender, DeleteEventArgs a)

@@ -16,6 +16,7 @@ namespace ZyrTest
         public Form1()
         {
             InitializeComponent();
+			bool b = Zyrenth.Common.UseCompatibleTextRendering;
         }
 
         private void Form1_Load(object sender, EventArgs e)
