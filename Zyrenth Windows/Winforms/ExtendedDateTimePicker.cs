@@ -216,6 +216,7 @@ namespace Zyrenth.Winforms
 		/// <exception cref="ArgumentNullException"><paramref name="m" /> is a
 		/// null reference (<c>Nothing</c> in Visual Basic).</exception>
 		[SecurityPermission(SecurityAction.Demand)]
+		[DebuggerHidden]
 		protected override void WndProc(ref Message m)
 		{
 			switch (m.Msg)
