@@ -7,8 +7,8 @@
   <import>
     <widget-library name="glade-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <widget-library name="../../../../../../../usr/lib/monodevelop/AddIns/MonoDevelop.GtkCore/libstetic.dll" />
-    <widget-library name="../../Zyrenth GTK/bin/Release/Zyrenth GTK.dll" />
-    <widget-library name="../bin/Release/GtkTest.exe" internal="true" />
+    <widget-library name="../../Zyrenth GTK/bin/Debug/Zyrenth GTK.dll" />
+    <widget-library name="../bin/Debug/GtkTest.exe" internal="true" />
   </import>
   <widget class="Gtk.Window" id="MainWindow" design-size="400 300">
     <property name="MemberName" />

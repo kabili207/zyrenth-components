@@ -43,6 +43,7 @@
 			this.tabPage6 = new System.Windows.Forms.TabPage();
 			this.groupBox2 = new System.Windows.Forms.GroupBox();
 			this.lblDateTime = new System.Windows.Forms.Label();
+			this.chkZyrenth1 = new Zyrenth.Winforms.CheckBox();
 			this.extendedDateTimePicker1 = new Zyrenth.Winforms.ExtendedDateTimePicker();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.comboBox1 = new System.Windows.Forms.ComboBox();
@@ -54,6 +55,7 @@
 			this.btnAddMdiForm = new System.Windows.Forms.Button();
 			this.button1 = new System.Windows.Forms.Button();
 			this.button2 = new System.Windows.Forms.Button();
+			this.tabPage8 = new System.Windows.Forms.TabPage();
 			this.tabControl1.SuspendLayout();
 			this.tabPage1.SuspendLayout();
 			this.tabPage2.SuspendLayout();
@@ -65,6 +67,7 @@
 			this.groupBox1.SuspendLayout();
 			this.tabPage7.SuspendLayout();
 			this.tabPage12.SuspendLayout();
+			this.tabPage8.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// tabControl1
@@ -76,6 +79,7 @@
 			this.tabControl1.Controls.Add(this.tabPage5);
 			this.tabControl1.Controls.Add(this.tabPage6);
 			this.tabControl1.Controls.Add(this.tabPage7);
+			this.tabControl1.Controls.Add(this.tabPage8);
 			this.tabControl1.Controls.Add(this.tabPage12);
 			this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.tabControl1.Location = new System.Drawing.Point(0, 0);
@@ -229,6 +233,9 @@
 			this.lblDateTime.Size = new System.Drawing.Size(40, 13);
 			this.lblDateTime.TabIndex = 4;
 			this.lblDateTime.Text = "Value: ";
+			
+			this.chkZyrenth1.Name = "chkZyrenth1";
+			this.chkZyrenth1.Text = "Value 1";
 			// 
 			// extendedDateTimePicker1
 			// 
@@ -302,6 +309,14 @@
 			this.tabPage12.TabIndex = 7;
 			this.tabPage12.Text = "MDI Panel";
 			this.tabPage12.UseVisualStyleBackColor = true;
+			
+			this.tabPage8.Location = new System.Drawing.Point(4, 40);
+			this.tabPage8.Name = "tabPage8";
+			this.tabPage8.Size = new System.Drawing.Size(407, 285);
+			this.tabPage8.TabIndex = 8;
+			this.tabPage8.Text = "Panel";
+			this.tabPage8.UseVisualStyleBackColor = true;
+			
 			// 
 			// mdiPanel1
 			// 
@@ -363,6 +378,7 @@
 			this.groupBox1.PerformLayout();
 			this.tabPage7.ResumeLayout(false);
 			this.tabPage12.ResumeLayout(false);
+			this.tabPage8.ResumeLayout(false);
 			this.ResumeLayout(false);
 
 		}
@@ -395,5 +411,18 @@
 		private Zyrenth.Winforms.MdiPanel mdiPanel1;
 		private System.Windows.Forms.Button button2;
 		private System.Windows.Forms.Button button1;
+		private System.Windows.Forms.TabPage tabPage8;
+		private Zyrenth.Winforms.CheckBox chkZyrenth1;
+		private Zyrenth.Winforms.CheckBox chkZyrenth2;
+		private Zyrenth.Winforms.CheckBox chkZyrenth3;
+		private Zyrenth.Winforms.CheckBox chkZyrenth2;
+		private Zyrenth.Winforms.CheckBox chkZyrenth3;
+		private Zyrenth.Winforms.CheckBox chkZyrenth4;
+		private Zyrenth.Winforms.CheckBox chkZyrenth5;
+		private Zyrenth.Winforms.CheckBox chkZyrenth6;
+		private Zyrenth.Winforms.CheckBox chkZyrenth7;
+		private Zyrenth.Winforms.Panel pnlBoundPanel1;
+		private Zyrenth.Winforms.Panel pnlBoundPanel2;
+		
 	}
 }
