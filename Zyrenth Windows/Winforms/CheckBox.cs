@@ -5,10 +5,10 @@ namespace Zyrenth.Winforms
 {
 	public class CheckBox : System.Windows.Forms.CheckBox
 	{
-		public CheckBox ()
+		public CheckBox()
 		{
 		}
-		
+
 		private bool _exclusive = false;
 
 		[DefaultValue(false)]
@@ -17,23 +17,23 @@ namespace Zyrenth.Winforms
 			get { return _exclusive; }
 			set { _exclusive = value; }
 		}
-	
+
 		public String StringValue
 		{
-			get { return Checked ? "Y": "N"; }
+			get { return Checked ? "Y" : "N"; }
 			set { Checked = value == "Y"; }
 		}
-	
-		public string Value;
-	
+
+		public string Value { get; set; }
+
 		protected override void OnCheckedChanged(System.EventArgs e)
 		{
 			base.OnCheckedChanged(e);
-		
+
 			if (DesignMode)
 				return;
-		
-			if (Exclusive && this.Checked && !(Parent is System.Windows.Forms.Panel))
+
+			if (Exclusive && this.Checked /*&& !(Parent is Panel)*/)
 			{
 				foreach (System.Windows.Forms.Control box in Parent.Controls)
 				{
@@ -57,7 +57,7 @@ namespace Zyrenth.Winforms
 					}
 				}
 			}
-		
+
 		}
 	}
 }

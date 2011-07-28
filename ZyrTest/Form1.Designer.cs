@@ -41,21 +41,27 @@
 			this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.tabPage5 = new System.Windows.Forms.TabPage();
 			this.tabPage6 = new System.Windows.Forms.TabPage();
+			this.button2 = new System.Windows.Forms.Button();
+			this.button1 = new System.Windows.Forms.Button();
 			this.groupBox2 = new System.Windows.Forms.GroupBox();
 			this.lblDateTime = new System.Windows.Forms.Label();
-			this.chkZyrenth1 = new Zyrenth.Winforms.CheckBox();
 			this.extendedDateTimePicker1 = new Zyrenth.Winforms.ExtendedDateTimePicker();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.comboBox1 = new System.Windows.Forms.ComboBox();
 			this.formattedTextBox1 = new Zyrenth.Winforms.FormattedTextBox();
 			this.tabPage7 = new System.Windows.Forms.TabPage();
 			this.zyrTabControl1 = new Zyrenth.Winforms.TabControl();
+			this.tabPage8 = new System.Windows.Forms.TabPage();
 			this.tabPage12 = new System.Windows.Forms.TabPage();
 			this.mdiPanel1 = new Zyrenth.Winforms.MdiPanel();
 			this.btnAddMdiForm = new System.Windows.Forms.Button();
-			this.button1 = new System.Windows.Forms.Button();
-			this.button2 = new System.Windows.Forms.Button();
-			this.tabPage8 = new System.Windows.Forms.TabPage();
+			this.panel1 = new Zyrenth.Winforms.Panel();
+			this.checkBox1 = new Zyrenth.Winforms.CheckBox();
+			this.checkBox2 = new Zyrenth.Winforms.CheckBox();
+			this.checkBox3 = new Zyrenth.Winforms.CheckBox();
+			this.checkBox4 = new Zyrenth.Winforms.CheckBox();
+			this.checkBox5 = new Zyrenth.Winforms.CheckBox();
+			this.checkBox6 = new Zyrenth.Winforms.CheckBox();
 			this.tabControl1.SuspendLayout();
 			this.tabPage1.SuspendLayout();
 			this.tabPage2.SuspendLayout();
@@ -66,8 +72,9 @@
 			this.groupBox2.SuspendLayout();
 			this.groupBox1.SuspendLayout();
 			this.tabPage7.SuspendLayout();
-			this.tabPage12.SuspendLayout();
 			this.tabPage8.SuspendLayout();
+			this.tabPage12.SuspendLayout();
+			this.panel1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// tabControl1
@@ -214,6 +221,24 @@
 			this.tabPage6.Text = "Misc";
 			this.tabPage6.UseVisualStyleBackColor = true;
 			// 
+			// button2
+			// 
+			this.button2.Location = new System.Drawing.Point(230, 127);
+			this.button2.Name = "button2";
+			this.button2.Size = new System.Drawing.Size(75, 23);
+			this.button2.TabIndex = 5;
+			this.button2.Text = "button2";
+			this.button2.UseVisualStyleBackColor = true;
+			// 
+			// button1
+			// 
+			this.button1.Location = new System.Drawing.Point(148, 128);
+			this.button1.Name = "button1";
+			this.button1.Size = new System.Drawing.Size(75, 23);
+			this.button1.TabIndex = 4;
+			this.button1.Text = "button1";
+			this.button1.UseVisualStyleBackColor = true;
+			// 
 			// groupBox2
 			// 
 			this.groupBox2.Controls.Add(this.lblDateTime);
@@ -233,9 +258,6 @@
 			this.lblDateTime.Size = new System.Drawing.Size(40, 13);
 			this.lblDateTime.TabIndex = 4;
 			this.lblDateTime.Text = "Value: ";
-			
-			this.chkZyrenth1.Name = "chkZyrenth1";
-			this.chkZyrenth1.Text = "Value 1";
 			// 
 			// extendedDateTimePicker1
 			// 
@@ -299,6 +321,16 @@
 			this.zyrTabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
 			this.zyrTabControl1.TabIndex = 0;
 			// 
+			// tabPage8
+			// 
+			this.tabPage8.Controls.Add(this.panel1);
+			this.tabPage8.Location = new System.Drawing.Point(4, 40);
+			this.tabPage8.Name = "tabPage8";
+			this.tabPage8.Size = new System.Drawing.Size(407, 285);
+			this.tabPage8.TabIndex = 8;
+			this.tabPage8.Text = "Panel";
+			this.tabPage8.UseVisualStyleBackColor = true;
+			// 
 			// tabPage12
 			// 
 			this.tabPage12.Controls.Add(this.mdiPanel1);
@@ -309,14 +341,6 @@
 			this.tabPage12.TabIndex = 7;
 			this.tabPage12.Text = "MDI Panel";
 			this.tabPage12.UseVisualStyleBackColor = true;
-			
-			this.tabPage8.Location = new System.Drawing.Point(4, 40);
-			this.tabPage8.Name = "tabPage8";
-			this.tabPage8.Size = new System.Drawing.Size(407, 285);
-			this.tabPage8.TabIndex = 8;
-			this.tabPage8.Text = "Panel";
-			this.tabPage8.UseVisualStyleBackColor = true;
-			
 			// 
 			// mdiPanel1
 			// 
@@ -338,23 +362,87 @@
 			this.btnAddMdiForm.UseVisualStyleBackColor = true;
 			this.btnAddMdiForm.Click += new System.EventHandler(this.btnAddMdiForm_Click);
 			// 
-			// button1
+			// panel1
 			// 
-			this.button1.Location = new System.Drawing.Point(148, 128);
-			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(75, 23);
-			this.button1.TabIndex = 4;
-			this.button1.Text = "button1";
-			this.button1.UseVisualStyleBackColor = true;
+			this.panel1.Controls.Add(this.checkBox6);
+			this.panel1.Controls.Add(this.checkBox5);
+			this.panel1.Controls.Add(this.checkBox4);
+			this.panel1.Controls.Add(this.checkBox3);
+			this.panel1.Controls.Add(this.checkBox2);
+			this.panel1.Controls.Add(this.checkBox1);
+			this.panel1.Location = new System.Drawing.Point(19, 33);
+			this.panel1.Name = "panel1";
+			this.panel1.SelectedValue = null;
+			this.panel1.Size = new System.Drawing.Size(175, 77);
+			this.panel1.TabIndex = 0;
 			// 
-			// button2
+			// checkBox1
 			// 
-			this.button2.Location = new System.Drawing.Point(230, 127);
-			this.button2.Name = "button2";
-			this.button2.Size = new System.Drawing.Size(75, 23);
-			this.button2.TabIndex = 5;
-			this.button2.Text = "button2";
-			this.button2.UseVisualStyleBackColor = true;
+			this.checkBox1.AutoSize = true;
+			this.checkBox1.Location = new System.Drawing.Point(4, 4);
+			this.checkBox1.Name = "checkBox1";
+			this.checkBox1.Size = new System.Drawing.Size(80, 17);
+			this.checkBox1.StringValue = "N";
+			this.checkBox1.TabIndex = 0;
+			this.checkBox1.Text = "checkBox1";
+			this.checkBox1.UseVisualStyleBackColor = true;
+			// 
+			// checkBox2
+			// 
+			this.checkBox2.AutoSize = true;
+			this.checkBox2.Exclusive = true;
+			this.checkBox2.Location = new System.Drawing.Point(4, 28);
+			this.checkBox2.Name = "checkBox2";
+			this.checkBox2.Size = new System.Drawing.Size(80, 17);
+			this.checkBox2.StringValue = "N";
+			this.checkBox2.TabIndex = 1;
+			this.checkBox2.Text = "checkBox2";
+			this.checkBox2.UseVisualStyleBackColor = true;
+			// 
+			// checkBox3
+			// 
+			this.checkBox3.AutoSize = true;
+			this.checkBox3.Location = new System.Drawing.Point(4, 51);
+			this.checkBox3.Name = "checkBox3";
+			this.checkBox3.Size = new System.Drawing.Size(80, 17);
+			this.checkBox3.StringValue = "N";
+			this.checkBox3.TabIndex = 2;
+			this.checkBox3.Text = "checkBox3";
+			this.checkBox3.UseVisualStyleBackColor = true;
+			// 
+			// checkBox4
+			// 
+			this.checkBox4.AutoSize = true;
+			this.checkBox4.Location = new System.Drawing.Point(90, 4);
+			this.checkBox4.Name = "checkBox4";
+			this.checkBox4.Size = new System.Drawing.Size(80, 17);
+			this.checkBox4.StringValue = "N";
+			this.checkBox4.TabIndex = 3;
+			this.checkBox4.Text = "checkBox4";
+			this.checkBox4.UseVisualStyleBackColor = true;
+			// 
+			// checkBox5
+			// 
+			this.checkBox5.AutoSize = true;
+			this.checkBox5.Exclusive = true;
+			this.checkBox5.Location = new System.Drawing.Point(90, 28);
+			this.checkBox5.Name = "checkBox5";
+			this.checkBox5.Size = new System.Drawing.Size(80, 17);
+			this.checkBox5.StringValue = "N";
+			this.checkBox5.TabIndex = 4;
+			this.checkBox5.Text = "checkBox5";
+			this.checkBox5.UseVisualStyleBackColor = true;
+			// 
+			// checkBox6
+			// 
+			this.checkBox6.AutoSize = true;
+			this.checkBox6.Location = new System.Drawing.Point(90, 51);
+			this.checkBox6.Name = "checkBox6";
+			this.checkBox6.Size = new System.Drawing.Size(80, 17);
+			this.checkBox6.StringValue = "N";
+			this.checkBox6.TabIndex = 5;
+			this.checkBox6.Text = "checkBox6";
+			this.checkBox6.UseVisualStyleBackColor = true;
 			// 
 			// Form1
 			// 
@@ -377,8 +465,10 @@
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();
 			this.tabPage7.ResumeLayout(false);
-			this.tabPage12.ResumeLayout(false);
 			this.tabPage8.ResumeLayout(false);
+			this.tabPage12.ResumeLayout(false);
+			this.panel1.ResumeLayout(false);
+			this.panel1.PerformLayout();
 			this.ResumeLayout(false);
 
 		}
@@ -412,17 +502,13 @@
 		private System.Windows.Forms.Button button2;
 		private System.Windows.Forms.Button button1;
 		private System.Windows.Forms.TabPage tabPage8;
-		private Zyrenth.Winforms.CheckBox chkZyrenth1;
-		private Zyrenth.Winforms.CheckBox chkZyrenth2;
-		private Zyrenth.Winforms.CheckBox chkZyrenth3;
-		private Zyrenth.Winforms.CheckBox chkZyrenth2;
-		private Zyrenth.Winforms.CheckBox chkZyrenth3;
-		private Zyrenth.Winforms.CheckBox chkZyrenth4;
-		private Zyrenth.Winforms.CheckBox chkZyrenth5;
-		private Zyrenth.Winforms.CheckBox chkZyrenth6;
-		private Zyrenth.Winforms.CheckBox chkZyrenth7;
-		private Zyrenth.Winforms.Panel pnlBoundPanel1;
-		private Zyrenth.Winforms.Panel pnlBoundPanel2;
+		private Zyrenth.Winforms.Panel panel1;
+		private Zyrenth.Winforms.CheckBox checkBox6;
+		private Zyrenth.Winforms.CheckBox checkBox5;
+		private Zyrenth.Winforms.CheckBox checkBox4;
+		private Zyrenth.Winforms.CheckBox checkBox3;
+		private Zyrenth.Winforms.CheckBox checkBox2;
+		private Zyrenth.Winforms.CheckBox checkBox1;
 		
 	}
 }
