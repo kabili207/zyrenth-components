@@ -65,6 +65,28 @@ namespace Zyrenth
 		}
 		
 		/// <summary>
+		/// Indicates whether a specified string is null, empty, or consists only of white-space characters.
+		/// </summary>
+		/// <param name="text">The string to test.</param>
+		/// <returns>
+		/// true if the value parameter is null or String.Empty, or if value consists exclusively of white-space characters.
+		/// </returns>
+		/// <remarks>This method is comparable in speed to the Mono 2.8 implementation. It does not, however, even
+		/// come close to Microsoft's implementation. I'll figure out how they did it...</remarks>
+		public static bool IsNullOrWhiteSpace2(string text)
+		{
+			if (text != null)
+			{
+				for (int i = 0; i < text.Length; i++)
+				{
+					if (!char.IsWhiteSpace(text[i]))
+						return false;
+				}
+			}
+			return true;
+		}
+		
+		/// <summary>
 		/// Replaces any variation on line endings (CRLF, CR, LF) and 
 		/// replaces them with the operating system's line ending.
 		/// </summary>
