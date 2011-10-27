@@ -5,10 +5,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zyrenth Windows", "Zyrenth 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZyrTest", "ZyrTest\ZyrTest.csproj", "{BF530193-5BDE-46A5-8225-3E839430A72F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GtkTest", "GtkTest\GtkTest.csproj", "{6B47F50F-9AFB-4236-865B-7F486A33DC8E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zyrenth GTK", "Zyrenth GTK\Zyrenth GTK.csproj", "{FA6A306D-F3EC-49B1-8828-97C44DCCCB52}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zyrenth", "Zyrenth\Zyrenth.csproj", "{D7D13BCB-1316-4798-9406-5A1859E93532}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zyrenth Web", "Zyrenth Web\Zyrenth Web.csproj", "{119CCBD6-2469-4233-8555-43637978ADD8}"
