@@ -8,7 +8,7 @@
     <ProjectGuid>{2BEFED4B-7362-4073-A6E6-4637B95434C4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>Zyrenth</RootNamespace>
-    <AssemblyName>ZyrComponents</AssemblyName>
+    <AssemblyName>ZyrenthWindows</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -41,6 +41,7 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>bin\Debug\ZyrenthWindows.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
