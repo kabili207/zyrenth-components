@@ -1,17 +1,16 @@
 ﻿using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Web.UI;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Zyrenth Web")]
+[assembly: AssemblyTitle("WebTest")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Andrew Nagle")]
-[assembly: AssemblyProduct("Zyrenth Web")]
-[assembly: AssemblyCopyright("Copyright © Andrew Nagle 2011")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("WebTest")]
+[assembly: AssemblyCopyright("Copyright ©  2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -21,7 +20,7 @@ using System.Web.UI;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("c25b1f4b-225f-4854-96d8-866547d56515")]
+[assembly: Guid("860c38db-74d3-4574-8681-2450e4b4b7d8")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -30,10 +29,7 @@ using System.Web.UI;
 //      Build Number
 //      Revision
 //
-// You can specify all the values or you can default the Build and Revision Numbers 
+// You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
-// [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
-
-[assembly: TagPrefix("Zyrenth.Web", "zyrenth")]

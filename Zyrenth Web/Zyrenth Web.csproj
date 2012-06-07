@@ -8,7 +8,7 @@
     <ProjectGuid>{119CCBD6-2469-4233-8555-43637978ADD8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Zyrenth_Web</RootNamespace>
+    <RootNamespace>Zyrenth.Web</RootNamespace>
     <AssemblyName>Zyrenth Web</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -43,15 +43,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ColorSwatch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Web\ResourceFinder.cs" />
-    <Compile Include="Web\WelcomeLabel.cs" />
+    <Compile Include="ScriptHelper.cs" />
+    <Compile Include="WelcomeLabel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Zyrenth\Zyrenth.csproj">
       <Project>{D7D13BCB-1316-4798-9406-5A1859E93532}</Project>
       <Name>Zyrenth</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CSS\ColorSwatch.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="JS\ColorSwatch.js" />
+    <EmbeddedResource Include="JS\jquery-1.4.1.min.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Icons\" />
+    <Folder Include="Web\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

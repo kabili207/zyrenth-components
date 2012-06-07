@@ -72,7 +72,7 @@ namespace Zyrenth
 		/// true if the value parameter is null or String.Empty, or if value consists exclusively of white-space characters.
 		/// </returns>
 		/// <remarks>This method is comparable in speed to the Mono 2.8 implementation. It does not, however, even
-		/// come close to Microsoft's implementation. I'll figure out how they did it...</remarks>
+		/// come close to Microsoft's implementation, mostly due to the use of NGen.</remarks>
 		public static bool IsNullOrWhiteSpace2(string text)
 		{
 			if (text != null)

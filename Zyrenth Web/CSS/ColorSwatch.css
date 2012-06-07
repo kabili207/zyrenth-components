@@ -1,0 +1,41 @@
+﻿.color_swatch
+{ 
+	border: 1px solid #888888;
+	display: inline-block;
+	/*float: left;*/
+	font-family: "verdana" !important;
+	font-size: 11px !important;
+	text-align: center !important;
+	font-variant: normal !important;
+	font-weight: normal !important;
+	height: 21px;
+	margin: 1px;
+	position: relative;
+	width: 21px;
+	overflow: visible;
+	vertical-align: middle;
+}
+
+.swatch_hover
+{ 
+	background: inherit;
+	border: 1px solid #888888;
+	display: none;
+	/*height: 15px;*/
+	left: -1px;
+	padding: 3px;
+	position: absolute;
+	top: -1px;
+	bottom: -1px;
+	white-space: nowrap;
+	z-index: 50000;
+	min-width: 15px;
+}
+
+.color_secondary
+{
+	display: block;
+	float: right;
+	height: 100%;
+	width: 5px;
+}
