@@ -19,5 +19,20 @@ namespace Zyrenth.Web
 		{
 			cs.RegisterClientScriptResource(typeof(ScriptHelper), "Zyrenth.Web.JS.jquery-1.4.1.min.js");
 		}
+
+		internal static void RegisterCss(ClientScriptManager cs, Type type, string key, string cssName)
+		{
+			string css = "<link href=\"" + cs.GetWebResourceUrl(type, "Zyrenth.Web.CSS." + cssName + ".css") +
+				"\" type=\"text/css\" rel=\"stylesheet\" />";
+			cs.RegisterClientScriptBlock(type, key, css, false);
+		}
+
+		internal static void RegisterJavascript(ClientScriptManager cs, Type type, string key, string jsName)
+		{
+			string js = "<script src=\"" + cs.GetWebResourceUrl(type, "Zyrenth.Web.JS." + jsName + ".js") +
+				"\" type=\"text/javascript\"></script>";
+
+			cs.RegisterStartupScript(type, key, js, false);
+		}
 	}
 }

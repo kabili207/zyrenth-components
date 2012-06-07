@@ -117,16 +117,13 @@ namespace Zyrenth.Web
 		{
 			base.OnInit(e);
 
-			string css = "<link href=\"" + Page.ClientScript.GetWebResourceUrl(this.GetType(), "Zyrenth.Web.CSS.ColorSwatch.css") +
-				"\" type=\"text/css\" rel=\"stylesheet\" />";
-			this.Page.ClientScript.RegisterClientScriptBlock(typeof(ColorSwatch), "SwatchCssFile", css, false);
-
 			ScriptHelper.RegisterJQuery(this.Page.ClientScript);
+			ScriptHelper.RegisterCss(this.Page.ClientScript, typeof(ColorSwatch), "SwatchCssFile", "ColorSwatch");
+			ScriptHelper.RegisterJavascript(this.Page.ClientScript, typeof(ColorSwatch), "SwatchJsFile", "ColorSwatch");
 
-			string js = "<script src=\"" + Page.ClientScript.GetWebResourceUrl(this.GetType(), "Zyrenth.Web.JS.ColorSwatch.js") +
-				"\" type=\"text/javascript\"></script><script>$(document).ready(function () { SetupColorSwatch(); });</script>";
+			string js = "<script>$(document).ready(function () { SetupColorSwatch(); });</script>";
 			
-			this.Page.ClientScript.RegisterStartupScript(typeof(ColorSwatch), "SwatchJsFile", js, false);
+			this.Page.ClientScript.RegisterStartupScript(typeof(ColorSwatch), "SwatchJsStartup", js, false);
 
 
 		}
