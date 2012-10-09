@@ -11,7 +11,7 @@ namespace WebTest
 	{
 		protected void Page_Load(object sender, EventArgs e)
 		{
-			ColorSwatch3.SecondaryColors.AddRange(new string [] {"ff00ff", "0f382a" });
+			/*ColorSwatch3.SecondaryColors.AddRange(new string [] {"ff00ff", "0f382a" });*/
 		}
 	}
 }
