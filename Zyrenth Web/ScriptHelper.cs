@@ -5,6 +5,7 @@ using System.Text;
 using System.Web.UI;
 
 [assembly: WebResource("Zyrenth.Web.JS.jquery-1.4.1.min.js", "text/javascript")]
+[assembly: WebResource("Zyrenth.Web.JS.jquery-1.7.2.min.js", "text/javascript")]
 
 namespace Zyrenth.Web
 {
@@ -17,7 +18,7 @@ namespace Zyrenth.Web
 		/// <param name="cs">The ClientScriptManager to assign the script to.</param>
 		internal static void RegisterJQuery(ClientScriptManager cs)
 		{
-			cs.RegisterClientScriptResource(typeof(ScriptHelper), "Zyrenth.Web.JS.jquery-1.4.1.min.js");
+			cs.RegisterClientScriptResource(typeof(ScriptHelper), "Zyrenth.Web.JS.jquery-1.7.2.min.js");
 		}
 
 		internal static void RegisterCss(ClientScriptManager cs, Type type, string key, string cssName)

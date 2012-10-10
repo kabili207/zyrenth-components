@@ -91,15 +91,10 @@ namespace Zyrenth.Web
 					ViewState["SecondaryColors"] = t = new List<string>();
 				return t;
 			}
-			set
-			{
-				ViewState["SecondaryColors"] = value;
-			}
 		}
 
 		public ColorSwatch()
 		{
-			SecondaryColors = new List<string>();
 		}
 
 		public ColorSwatch(string colorName, string hexValue)

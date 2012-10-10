@@ -30,7 +30,7 @@ namespace Zyrenth.Web
 		{
 			get
 			{
-				string s = (string)ViewState["Text"];
+				string s = ViewState["Text"] as string;
 				return s ?? "";
 			}
 			set
@@ -49,7 +49,7 @@ namespace Zyrenth.Web
 		{
 			get
 			{
-				string s = (string)ViewState["CommandName"];
+				string s = ViewState["CommandName"] as string;
 				return s ?? "";
 			}
 			set
@@ -68,12 +68,33 @@ namespace Zyrenth.Web
 		{
 			get
 			{
-				string s = (string)ViewState["CssClass"];
+				string s = ViewState["CssClass"] as string;
 				return s ?? "";
 			}
 			set
 			{
 				ViewState["CssClass"] = value;
+			}
+		}
+
+		[
+		Category("Appearance"),
+		DefaultValue(JQueryIcon.None),
+		Description("Sets an optional icon to display on the button"),
+		NotifyParentProperty(true)
+		]
+		public virtual JQueryIcon ButtonIcon
+		{
+			get
+			{
+				object s = ViewState["ButtonIcon"];
+				if (s == null || !(s is JQueryIcon))
+					return JQueryIcon.None;
+				return (JQueryIcon)s;
+			}
+			set
+			{
+				ViewState["ButtonIcon"] = value;
 			}
 		}
 

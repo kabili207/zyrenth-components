@@ -1,6 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="WebTest.Default" %>
 
-<%@ Register Assembly="Zyrenth Web" Namespace="Zyrenth.Web" TagPrefix="zyrenth" %>
+<%@ Register assembly="Zyrenth.Web" namespace="Zyrenth.Web" tagprefix="zyrenth" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
@@ -33,7 +33,7 @@
 				</asp:Panel>
             </Template>
 			<Buttons>
-				<zyrenth:ModalPopupButton Text="Delete" CommandName="Delete" CssClass="modalButtonLeft" />
+				<zyrenth:ModalPopupButton Text="Delete" CommandName="Delete" CssClass="modalButtonLeft" ButtonIcon="trash" />
 				<zyrenth:ModalPopupButton Text="Cancel" CommandName="Cancel"  />
 				<zyrenth:ModalPopupButton Text="OK" CommandName="OK"  />
 			</Buttons>

@@ -13,14 +13,12 @@ using System.Drawing;
 
 namespace Zyrenth.Web
 {
-
-
 	
 	[
 	DefaultProperty("Title"),
-	ToolboxData("<{0}:ModalPopup runat=\"server\"> </{0}:ModalPopup>"),
+	ToolboxData("<{0}:ModalPopup Title=\"\" runat=\"server\"><Template></Template><Buttons></Buttons></{0}:ModalPopup>"),
 	Designer(typeof(ModalPopupDesigner)),
-	ToolboxBitmap(typeof(ColorSwatch), "Zyrenth.Web.Icons.ModalPopup.bmp"),
+	ToolboxBitmap(typeof(ModalPopup), "Zyrenth.Web.Icons.ModalPopup.bmp"),
 	]
 	public class ModalPopup : CompositeControl, IPostBackEventHandler
 	{
@@ -241,12 +239,16 @@ namespace Zyrenth.Web
 						string postBack = Page.ClientScript.GetPostBackEventReference(this, "Button+" + x.CommandName);
 						
 						StringBuilder sbOpenJs = new StringBuilder();
+						if (x.ButtonIcon != JQueryIcon.None)
+						{
+							sbOpenJs.AppendFormat("$(this).button({{ icons: {{ primary: 'ui-icon-{0}' }} }});",
+								x.ButtonIcon.ToString().Replace('_', '-'));
+       					}
 
 						if(!string.IsNullOrWhiteSpace(x.CssClass))
-							sbOpenJs.AppendFormat(" $(this).addClass('{0}'); ", x.CssClass);
-
-						string buttonJs = @"{{ text: ""{0}"",  click: function() {{ {1} }}, open: function() {{ {2} }} }}";
-
+							sbOpenJs.AppendFormat("$(this).addClass('{0}');", x.CssClass);
+						
+						string buttonJs = @"{{ text: ""{0}"",  click: function() {{ {1} }}, create: function(ev, ui) {{ {2} }} }}";
 
 						return string.Format(buttonJs, x.Text, postBack, sbOpenJs.ToString());
 					});
