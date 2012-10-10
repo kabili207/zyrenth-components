@@ -20,8 +20,10 @@ namespace Zyrenth.Web
 			((IStateManager)this).TrackViewState();
 		}
 
+		#region Properties
+
 		[
-		Category("Behavior"),
+		Category("Appearance"),
 		DefaultValue(""),
 		Description("The text to display on the button"),
 		NotifyParentProperty(true)
@@ -83,18 +85,39 @@ namespace Zyrenth.Web
 		Description("Sets an optional icon to display on the button"),
 		NotifyParentProperty(true)
 		]
-		public virtual JQueryIcon ButtonIcon
+		public virtual JQueryIcon Icon
 		{
 			get
 			{
-				object s = ViewState["ButtonIcon"];
+				object s = ViewState["Icon"];
 				if (s == null || !(s is JQueryIcon))
 					return JQueryIcon.None;
 				return (JQueryIcon)s;
 			}
 			set
 			{
-				ViewState["ButtonIcon"] = value;
+				ViewState["Icon"] = value;
+			}
+		}
+
+		[
+		Bindable(true),
+		Category("Appearance"),
+		DefaultValue(false),
+		Description("Determines whether or not to show text when the button contains an icon"),
+		]
+		public virtual bool IconOnly
+		{
+			get
+			{
+				object t = ViewState["ShowCloseButton"];
+				if (t == null)
+					return false;
+				return (bool)t;
+			}
+			set
+			{
+				ViewState["ShowCloseButton"] = value;
 			}
 		}
 
@@ -114,10 +137,12 @@ namespace Zyrenth.Web
 				return _viewState;
 			}
 		}
-		
+
+		#endregion // Properties
+
 		#region IStateManager implementation
 
-        bool IStateManager.IsTrackingViewState
+		bool IStateManager.IsTrackingViewState
         {
             get
             {

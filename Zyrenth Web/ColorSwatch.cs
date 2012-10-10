@@ -62,7 +62,8 @@ namespace Zyrenth.Web
 		Bindable(false),
 		Category("Appearance"),
 		Description("The color of the swatch."),
-		Browsable(true)
+		Browsable(true),
+		Editor(typeof(System.Drawing.Design.ColorEditor), typeof(System.Drawing.Design.UITypeEditor)),
 		]
 		public virtual System.Drawing.Color Color
 		{
@@ -78,6 +79,7 @@ namespace Zyrenth.Web
 					HexValue = "FFFFFF";
 			}
 		}
+
 
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
 		[Editor("System.Windows.Forms.Design.StringCollectionEditor, System.Design",
@@ -106,6 +108,10 @@ namespace Zyrenth.Web
 		protected override void Render(HtmlTextWriter writer)
 		{
 			writer.Write(BuildColorSwatchText(Text, HexValue, SecondaryColors));
+			if (this.DesignMode)
+			{
+
+			}
 		}
 
 		protected override void OnInit(EventArgs e)

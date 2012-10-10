@@ -19,11 +19,10 @@ namespace Zyrenth.Web
 	ToolboxData("<{0}:ModalPopup Title=\"\" runat=\"server\"><Template></Template><Buttons></Buttons></{0}:ModalPopup>"),
 	Designer(typeof(ModalPopupDesigner)),
 	ToolboxBitmap(typeof(ModalPopup), "Zyrenth.Web.Icons.ModalPopup.bmp"),
+	ParseChildren(true, "Content"),
 	]
 	public class ModalPopup : CompositeControl, IPostBackEventHandler
 	{
-		private ITemplate templateValue;
-		private TemplateOwner ownerValue;
 
 		#region Properties
 
@@ -45,7 +44,69 @@ namespace Zyrenth.Web
 				ViewState["Title"] = value;
 			}
 		}
-		//PopupButtonCollection _buttons = new PopupButtonCollection();
+
+		[
+		Bindable(true),
+		Category("Appearance"),
+		DefaultValue(true),
+		Description("Determines whether or not to show the close button"),
+		]
+		public virtual bool ShowCloseButton
+		{
+			get
+			{
+				object t = ViewState["ShowCloseButton"];
+				if (t == null)
+					return true;
+				return (bool)t;
+			}
+			set
+			{
+				ViewState["ShowCloseButton"] = value;
+			}
+		}
+
+		[
+		Bindable(true),
+		Category("Behavior"),
+		DefaultValue(false),
+		Description("A value allowing the dialog to be resized by the user"),
+		]
+		public virtual bool Resizable
+		{
+			get
+			{
+				object t = ViewState["Resizable"];
+				if (t == null)
+					return false;
+				return (bool)t;
+			}
+			set
+			{
+				ViewState["Resizable"] = value;
+			}
+		}
+
+		[
+		Bindable(true),
+		Category("Behavior"),
+		DefaultValue(true),
+		Description("A value indicating if the popup can be moved around the screen by the user"),
+		]
+		public virtual bool Draggable
+		{
+			get
+			{
+				object t = ViewState["Draggable"];
+				if (t == null)
+					return true;
+				return (bool)t;
+			}
+			set
+			{
+				ViewState["Draggable"] = value;
+			}
+		}
 
 		[
 		PersistenceMode(PersistenceMode.InnerProperty),
@@ -68,39 +129,23 @@ namespace Zyrenth.Web
 			//}
 		}
 
+		private List<Control> _content;
 		[
-		Browsable(false),
+		Category("Behavior"),
+		Description("The content collection"),
 		DesignerSerializationVisibility(
-			DesignerSerializationVisibility.Hidden)
+			DesignerSerializationVisibility.Content),
+		PersistenceMode(PersistenceMode.InnerDefaultProperty)
 		]
-		public TemplateOwner Owner
+		public List<Control> Content
 		{
 			get
 			{
-				return ownerValue;
+				if (_content == null)
+					_content = new List<Control>();
+				return _content;
 			}
 		}
-
-		[
-		Browsable(false),
-		PersistenceMode(PersistenceMode.InnerProperty),
-		DefaultValue(typeof(ITemplate), ""),
-		Description("Control template"),
-		TemplateContainer(typeof(ModalPopup))
-		]
-		public virtual ITemplate Template
-		{
-			get
-			{
-				return templateValue;
-			}
-			set
-			{
-				templateValue = value;
-			}
-		}
-
-
 
 		public override ControlCollection Controls
 		{
@@ -167,13 +212,14 @@ namespace Zyrenth.Web
 				}
 			";
 
-			Page.ClientScript.RegisterClientScriptBlock(typeof(ModalPopup), "ModalFunctionPopupJs", popupJs, true);
+			//Page.ClientScript.RegisterClientScriptBlock(typeof(ModalPopup), "ModalFunctionPopupJs", popupJs, true);
 
+			ScriptHelper.RegisterJQuery(this.Page.ClientScript);
 
 		}
 
 
-		protected override void CreateChildControls()
+		/*protected override void CreateChildControls()
 		{
 			Controls.Clear();
 			ownerValue = new TemplateOwner();
@@ -189,13 +235,14 @@ namespace Zyrenth.Web
 			DesignerRegion.DesignerRegionAttributeName, "Content");
 
 			this.Controls.Add(ownerValue);
-		}
-		public override void DataBind()
+		}*/
+
+		/*public override void DataBind()
 		{
 			CreateChildControls();
 			ChildControlsCreated = true;
 			base.DataBind();
-		}
+		}*/
 
 		internal void RenderContentWindow(HtmlTextWriter writer)
 		{
@@ -207,6 +254,17 @@ namespace Zyrenth.Web
 
 		}
 
+		/*protected override void RenderContents(HtmlTextWriter writer)
+		{
+			Panel p = new Panel();
+			foreach (Control c in Content)
+				p.Controls.Add(p);
+			if (p != null)
+			{
+				p.RenderControl(writer);
+			}
+		}*/
+
 		protected override void Render(HtmlTextWriter writer)
 		{
 			writer.Write("<div id=\"{0}\" style=\"\" title=\"{1}\">", ClientID, Title);
@@ -214,7 +272,11 @@ namespace Zyrenth.Web
 			{
 				writer.Write("<div>{0}</div>", Title);
 			}
-			RenderChildren(writer);
+			//RenderContents(writer);
+
+			foreach (Control c in Content)
+				this.RenderControl(writer);
+
 			if (this.DesignMode)
 			{
 				writer.Write("<hr />");
@@ -236,27 +298,46 @@ namespace Zyrenth.Web
 
 				var buttons = Buttons.Select(x =>
 					{
-						string postBack = Page.ClientScript.GetPostBackEventReference(this, "Button+" + x.CommandName);
+						string buttonPostBack = Page.ClientScript.GetPostBackEventReference(this, "Button+" + x.CommandName);
 						
 						StringBuilder sbOpenJs = new StringBuilder();
-						if (x.ButtonIcon != JQueryIcon.None)
+						if (x.Icon != JQueryIcon.None)
 						{
-							sbOpenJs.AppendFormat("$(this).button({{ icons: {{ primary: 'ui-icon-{0}' }} }});",
-								x.ButtonIcon.ToString().Replace('_', '-'));
+							//TODO: Extend this to allow secondary buttons or button only icons.
+							sbOpenJs.AppendFormat("$(this).button({{ icons: {{ primary: 'ui-icon-{0}' }}, text: {1} }});",
+								x.Icon.ToString().Replace('_', '-'), x.IconOnly ? "false" : "true");
        					}
 
 						if(!string.IsNullOrWhiteSpace(x.CssClass))
 							sbOpenJs.AppendFormat("$(this).addClass('{0}');", x.CssClass);
 						
-						string buttonJs = @"{{ text: ""{0}"",  click: function() {{ {1} }}, create: function(ev, ui) {{ {2} }} }}";
+						string buttonJs = @"{{ text: ""{0}"", click: function() {{ {1} }}, create: function(ev, ui) {{ {2} }} }}";
 
-						return string.Format(buttonJs, x.Text, postBack, sbOpenJs.ToString());
+						return string.Format(buttonJs, x.Text, buttonPostBack, sbOpenJs.ToString());
 					});
 
-				string openJs = string.Format("openModalDiv('{0}', function() {{ {1}; }}, {2} );",
-					ClientID, Page.ClientScript.GetPostBackEventReference(this, "close"), "[" + string.Join(", ", buttons) + "]");
+				StringBuilder sbCloseJs = new StringBuilder();
 
-				Page.ClientScript.RegisterStartupScript(typeof(ModalPopup), ClientID + "Open", openJs, true);
+				if (!ShowCloseButton)
+				{
+					sbCloseJs.Append("$('.ui-dialog-titlebar-close', this.parentNode).hide();");
+				}
+
+				// TODO: Allow other options?
+				string dialogJs = "$('#{0}').dialog({{ autoOpen: true, bgiframe: true, modal: true, " +
+						"resizable: {4}, width: 'auto', autoResize: true, buttons: {2}, draggable: {5}, " +
+						"close: function(ev, ui) {{ {1}; }}, open: function(ev, ui) {{ {3}; }}}})" +
+						//$('#' + divname).dialog('open');
+						".parent().appendTo($('form:first'));";
+
+				//string openJs = string.Format("openModalDiv('{0}', function() {{ {1}; }}, {2} );",
+				string closePostBack = Page.ClientScript.GetPostBackEventReference(this, "close");
+				dialogJs = string.Format(dialogJs, ClientID, closePostBack,
+					"[" + string.Join(", ", buttons) + "]", sbCloseJs.ToString(), Resizable ? "true" : "false",
+					Draggable ? "true" : "false");
+
+				writer.Write("<script type='text/javascript'>" + dialogJs + "</script>");
+				//Page.ClientScript.RegisterStartupScript(typeof(ModalPopup), ClientID + "Open", dialogJs, true);
 			}
 		}
 
@@ -366,7 +447,7 @@ namespace Zyrenth.Web
 				// Use the base class to render the markup 
 				return base.GetDesignTimeHtml();
 			}
-
+/*
 			// Get the content string for the selected region. Called by the designer host? 
 			// TODO: This never seems to get called..
 			public override string GetEditableDesignerRegionContent(EditableDesignerRegion region)
@@ -402,7 +483,7 @@ namespace Zyrenth.Web
 					myControl.Template = template;
 				}
 			}
-
+			*/
 			public override TemplateGroupCollection TemplateGroups
 			{
 				get

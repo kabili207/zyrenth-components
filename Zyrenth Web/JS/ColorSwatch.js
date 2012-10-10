@@ -3,13 +3,13 @@
 function SetupColorSwatch() {
 
 	// Fix for IE 7's z-index bug
-	$(function () {
+	/*$(function () {
 		var zIndexNumber = 10000;
 		$('span.color_swatch').each(function () {
 			$(this).css('zIndex', zIndexNumber);
 			zIndexNumber -= 1;
 		});
-	});
+	});*/
 
 	$(".color_swatch").each(function () {
 		//$(".swatch_hover", this).css('backgroundColor', $(this).css('backgroundColor'));

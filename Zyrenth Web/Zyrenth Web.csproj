@@ -35,6 +35,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Design" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -49,6 +50,7 @@
     <Compile Include="ModalPopupButton.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScriptHelper.cs" />
+    <Compile Include="WebMsgBox.cs" />
     <Compile Include="WelcomeLabel.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Zyrenth.Web;
 
 namespace WebTest
 {
@@ -18,7 +19,8 @@ namespace WebTest
 		{
 			switch (e.CommandName)
 			{
-				case "Derp":
+				case "Delete":
+					WebMsgBox.Show("You pressed the Delete button!", "Button Pressed");
 					break;
 				case "Deee":
 					break;

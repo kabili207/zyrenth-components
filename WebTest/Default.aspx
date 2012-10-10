@@ -13,7 +13,7 @@
 <body>
     <form id="form1" runat="server">
     <div>
-       <%-- <zyrenth:ColorSwatch ID="ColorSwatch1" runat="server" Color="#FF66FF" Text="Blue">
+       <zyrenth:ColorSwatch ID="ColorSwatch1" runat="server" Color="#FF66FF" Text="Blue">
         </zyrenth:ColorSwatch>
         <zyrenth:ColorSwatch ID="ColorSwatch2" runat="server" Color="#99FF66" Text="Green">
         </zyrenth:ColorSwatch>
@@ -21,20 +21,22 @@
             SecondaryColors-Capacity="4">
         </zyrenth:ColorSwatch>
         <zyrenth:ColorSwatch ID="ColorSwatch4" runat="server" Color="#00CCFF" Text="Red">
-        </zyrenth:ColorSwatch>--%> 
+        </zyrenth:ColorSwatch>
         <zyrenth:ModalPopup ID="ModalPopup1" runat="server" Title="Modal Test" 
-			onbuttonclicked="ModalPopup1_ButtonClicked">
-            <Template>
+			onbuttonclicked="ModalPopup1_ButtonClicked" Resizable="true" ShowCloseButton="false">
+            <Content>
                 <asp:TextBox runat="server"></asp:TextBox>
 				<asp:Button ID="Button1" runat="server" Text="Button" />
 				<asp:CheckBox ID="CheckBox1" runat="server" /> 
 				<asp:Panel ID="Panel1" runat="server" Width="400px">
 					<asp:Image ID="Image1" runat="server" />
 				</asp:Panel>
-            </Template>
+			<asp:LinkButton ID="LinkButton1" runat="server">LinkButton</asp:LinkButton>
+			</Content>
 			<Buttons>
-				<zyrenth:ModalPopupButton Text="Delete" CommandName="Delete" CssClass="modalButtonLeft" ButtonIcon="trash" />
+				<zyrenth:ModalPopupButton Text="Delete" CommandName="Delete" CssClass="modalButtonLeft" Icon="trash" />
 				<zyrenth:ModalPopupButton Text="Cancel" CommandName="Cancel"  />
+				<zyrenth:ModalPopupButton Text="Hidden" CommandName="hdn" Icon="comment" IconOnly="true" />
 				<zyrenth:ModalPopupButton Text="OK" CommandName="OK"  />
 			</Buttons>
         </zyrenth:ModalPopup>
