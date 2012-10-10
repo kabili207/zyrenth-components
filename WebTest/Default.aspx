@@ -6,6 +6,7 @@
 <head runat="server">
     <title></title>
     <link href="Styles/custom-theme/jquery-ui-1.8.23.custom.css" rel="stylesheet" type="text/css" />
+	<link href="Styles/Site.css" rel="stylesheet" type="text/css" />
     <script src="Scripts/jquery-1.7.2.min.js" type="text/javascript"></script>
     <script src="Scripts/jquery-ui-1.8.23.custom.min.js" type="text/javascript"></script>
 </head>
@@ -21,11 +22,21 @@
         </zyrenth:ColorSwatch>
         <zyrenth:ColorSwatch ID="ColorSwatch4" runat="server" Color="#00CCFF" Text="Red">
         </zyrenth:ColorSwatch>--%> 
-        <zyrenth:ModalPopup ID="ModalPopup1" runat="server">
+        <zyrenth:ModalPopup ID="ModalPopup1" runat="server" Title="Modal Test" 
+			onbuttonclicked="ModalPopup1_ButtonClicked">
             <Template>
-                <asp:TextBox runat="server"></asp:TextBox><asp:Button ID="Button1" runat="server"
-                    Text="Button" /><asp:CheckBox ID="CheckBox1" runat="server" />
+                <asp:TextBox runat="server"></asp:TextBox>
+				<asp:Button ID="Button1" runat="server" Text="Button" />
+				<asp:CheckBox ID="CheckBox1" runat="server" /> 
+				<asp:Panel ID="Panel1" runat="server" Width="400px">
+					<asp:Image ID="Image1" runat="server" />
+				</asp:Panel>
             </Template>
+			<Buttons>
+				<zyrenth:ModalPopupButton Text="Delete" CommandName="Delete" CssClass="modalButtonLeft" />
+				<zyrenth:ModalPopupButton Text="Cancel" CommandName="Cancel"  />
+				<zyrenth:ModalPopupButton Text="OK" CommandName="OK"  />
+			</Buttons>
         </zyrenth:ModalPopup>
     </div>
     </form>

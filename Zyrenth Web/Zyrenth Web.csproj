@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="ColorSwatch.cs" />
     <Compile Include="ModalPopup.cs" />
+    <Compile Include="ModalPopupButton.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScriptHelper.cs" />
     <Compile Include="WelcomeLabel.cs" />
@@ -63,8 +64,10 @@
     <EmbeddedResource Include="JS\jquery-1.4.1.min.js" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Icons\" />
     <Folder Include="Web\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Icons\ModalPopup.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -13,5 +13,16 @@ namespace WebTest
 		{
 			/*ColorSwatch3.SecondaryColors.AddRange(new string [] {"ff00ff", "0f382a" });*/
 		}
+
+		protected void ModalPopup1_ButtonClicked(object sender, Zyrenth.Web.ModalPopup.ModalButtonEventArgs e)
+		{
+			switch (e.CommandName)
+			{
+				case "Derp":
+					break;
+				case "Deee":
+					break;
+			}
+		}
 	}
 }
