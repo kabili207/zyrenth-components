@@ -13,6 +13,7 @@ namespace WebTest
 		protected void Page_Load(object sender, EventArgs e)
 		{
 			/*ColorSwatch3.SecondaryColors.AddRange(new string [] {"ff00ff", "0f382a" });*/
+			
 		}
 
 		protected void ModalPopup1_ButtonClicked(object sender, Zyrenth.Web.ModalPopup.ModalButtonEventArgs e)
@@ -25,6 +26,11 @@ namespace WebTest
 				case "Deee":
 					break;
 			}
+		}
+
+		protected void Button1_Click(object sender, EventArgs e)
+		{
+			
 		}
 	}
 }

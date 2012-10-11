@@ -10,6 +10,7 @@ using System.Web.UI.Design;
 using System.IO;
 using System.ComponentModel.Design;
 using System.Drawing;
+using System.Web.UI.Design.WebControls;
 
 namespace Zyrenth.Web
 {
@@ -19,10 +20,12 @@ namespace Zyrenth.Web
 	ToolboxData("<{0}:ModalPopup Title=\"\" runat=\"server\"><Template></Template><Buttons></Buttons></{0}:ModalPopup>"),
 	Designer(typeof(ModalPopupDesigner)),
 	ToolboxBitmap(typeof(ModalPopup), "Zyrenth.Web.Icons.ModalPopup.bmp"),
-	ParseChildren(true, "Content"),
+	ParseChildren(true, "Content")
 	]
-	public class ModalPopup : CompositeControl, IPostBackEventHandler
+	public class ModalPopup : CompositeControl, IPostBackEventHandler, INamingContainer
 	{
+		private ITemplate templateValue;
+		private TemplateOwner ownerValue;
 
 		#region Properties
 
@@ -129,21 +132,36 @@ namespace Zyrenth.Web
 			//}
 		}
 
-		private List<Control> _content;
+
 		[
-		Category("Behavior"),
-		Description("The content collection"),
-		DesignerSerializationVisibility(
-			DesignerSerializationVisibility.Content),
-		PersistenceMode(PersistenceMode.InnerDefaultProperty)
+		Browsable(false),
+		DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+		PersistenceMode(PersistenceMode.InnerProperty)
 		]
-		public List<Control> Content
+		public TemplateOwner Owner
 		{
 			get
 			{
-				if (_content == null)
-					_content = new List<Control>();
-				return _content;
+				return ownerValue;
+			}
+		}
+
+		[
+		Browsable(false),
+		PersistenceMode(PersistenceMode.InnerProperty),
+		DefaultValue(typeof(ITemplate), ""),
+		Description("Control template"),
+		TemplateContainer(typeof(ModalPopup))
+		]
+		public virtual ITemplate Content
+		{
+			get
+			{
+				return templateValue;
+			}
+			set
+			{
+				templateValue = value;
 			}
 		}
 
@@ -196,30 +214,12 @@ namespace Zyrenth.Web
 		{
 			base.OnInit(e);
 
-			string popupJs = @"
-				function openModalDiv(divname, closeFnc, btnArray) {
-					var width = $('#' + divname).width();
-					var height = $('#' + divname).height();
-					$('#' + divname).dialog({ autoOpen: false, bgiframe: true, modal: true,
-						resizable: false, width: 'auto', close: function(ev, ui) { closeFnc(); },
-						autoResize: true /*height: height, width: width*/, buttons: btnArray });
-					$('#' + divname).dialog('open');
-					$('#' + divname).parent().appendTo($('form:first'));
-				}
-
-				function closeModalDiv(divname) {
-					$('#' + divname).dialog('close');
-				}
-			";
-
-			//Page.ClientScript.RegisterClientScriptBlock(typeof(ModalPopup), "ModalFunctionPopupJs", popupJs, true);
-
 			ScriptHelper.RegisterJQuery(this.Page.ClientScript);
 
 		}
 
 
-		/*protected override void CreateChildControls()
+		protected override void CreateChildControls()
 		{
 			Controls.Clear();
 			ownerValue = new TemplateOwner();
@@ -231,18 +231,18 @@ namespace Zyrenth.Web
 			}
 
 			temp.InstantiateIn(ownerValue);
-			ownerValue.Attributes.Add(
-			DesignerRegion.DesignerRegionAttributeName, "Content");
+			//ownerValue.Attributes.Add(
+			//DesignerRegion.DesignerRegionAttributeName, "Content");
 
 			this.Controls.Add(ownerValue);
-		}*/
+		}
 
-		/*public override void DataBind()
+		public override void DataBind()
 		{
 			CreateChildControls();
 			ChildControlsCreated = true;
 			base.DataBind();
-		}*/
+		}
 
 		internal void RenderContentWindow(HtmlTextWriter writer)
 		{
@@ -267,15 +267,16 @@ namespace Zyrenth.Web
 
 		protected override void Render(HtmlTextWriter writer)
 		{
+			EnsureChildControls();
 			writer.Write("<div id=\"{0}\" style=\"\" title=\"{1}\">", ClientID, Title);
 			if (this.DesignMode)
 			{
 				writer.Write("<div>{0}</div>", Title);
 			}
-			//RenderContents(writer);
+			RenderContents(writer);
 
-			foreach (Control c in Content)
-				this.RenderControl(writer);
+			//foreach (Control c in Content)
+			//	this.RenderControl(writer);
 
 			if (this.DesignMode)
 			{
@@ -367,19 +368,23 @@ namespace Zyrenth.Web
 		public delegate void ModalButtonEventHandler(object sender, ModalButtonEventArgs e);
 
 		[
-		ToolboxItem(false)
+		ToolboxItem(false),
+		ParseChildren(false), PersistChildren(true)
 		]
 		public class TemplateOwner : WebControl
 		{
+
 			public override void RenderBeginTag(HtmlTextWriter writer)
 			{
+				if (this.DesignMode)
+					base.RenderBeginTag(writer);
 			}
 
 			public override void RenderEndTag(HtmlTextWriter writer)
 			{
+				if (this.DesignMode)
+					base.RenderEndTag(writer);
 			}
-
-
 		}
 
 		sealed class DefaultTemplate : ITemplate
@@ -404,9 +409,15 @@ namespace Zyrenth.Web
 			}
 		}
 
-		public class ModalPopupDesigner : ControlDesigner
+		public class ModalPopupDesigner : CompositeControlDesigner
 		{
+			
 			private ModalPopup myControl;
+
+			public override bool AllowResize
+			{
+				get { return false; }
+			}
 
 			public override void Initialize(IComponent Component)
 			{
@@ -415,22 +426,36 @@ namespace Zyrenth.Web
 				SetViewFlags(ViewFlags.TemplateEditing, true);
 			}
 
+			protected override void CreateChildControls()
+			{
+				base.CreateChildControls();
+				myControl.DataBind();
+				// Get a reference to the table, which is the first child control
+				//Table t = (Table)myControl.Controls[0];
+				myControl.Owner.Attributes.Add(DesignerRegion.DesignerRegionAttributeName, "Content");
+				//// Add design time markers for each of the three regions 
+				//if (t != null)
+				//{
+				//    // View1
+				//    t.Rows[0].Cells[0].Attributes[DesignerRegion.DesignerRegionAttributeName] = "0";
+				//    // View2
+				//    t.Rows[0].Cells[1].Attributes[DesignerRegion.DesignerRegionAttributeName] = "1";
+				//    // Editable region
+				//    t.Rows[1].Cells[0].Attributes[DesignerRegion.DesignerRegionAttributeName] = "2";
+				//}
+			}
 			// Handler for the Click event, which provides the region in the arguments. 
-			protected override void OnClick(DesignerRegionMouseEventArgs e)
+			/*protected override void OnClick(DesignerRegionMouseEventArgs e)
 			{
 				if (e.Region == null)
 					return;
-
-				// If the clicked region is not a header, return 
-				if (e.Region.Name.IndexOf("Header") != 0)
-					return;
-
+				
 				// Switch the current view if required 
 				if (e.Region.Name == "Content")
 				{
 					base.UpdateDesignTimeHtml();
 				}
-			}
+			}*/
 
 			public override String GetDesignTimeHtml(DesignerRegionCollection regions)
 			{
@@ -447,16 +472,15 @@ namespace Zyrenth.Web
 				// Use the base class to render the markup 
 				return base.GetDesignTimeHtml();
 			}
-/*
+
 			// Get the content string for the selected region. Called by the designer host? 
-			// TODO: This never seems to get called..
 			public override string GetEditableDesignerRegionContent(EditableDesignerRegion region)
 			{
 				// Get a reference to the designer host
 				IDesignerHost host = (IDesignerHost)Component.Site.GetService(typeof(IDesignerHost));
 				if (host != null)
 				{
-					ITemplate template = myControl.Template;
+					ITemplate template = myControl.Content;
 
 					// Persist the template in the design host 
 					if (template != null)
@@ -467,7 +491,6 @@ namespace Zyrenth.Web
 			}
 
 			// Create a template from the content string and put it in the selected view. 
-			// TODO: This never seems to get called..
 			public override void SetEditableDesignerRegionContent(EditableDesignerRegion region, string content)
 			{
 				if (content == null)
@@ -480,11 +503,11 @@ namespace Zyrenth.Web
 					// Create a template from the content string
 					ITemplate template = ControlParser.ParseTemplate(host, content);
 
-					myControl.Template = template;
+					myControl.Content = template;
 				}
 			}
-			*/
-			public override TemplateGroupCollection TemplateGroups
+			
+			/*public override TemplateGroupCollection TemplateGroups
 			{
 				get
 				{
@@ -494,13 +517,13 @@ namespace Zyrenth.Web
 					ModalPopup control;
 
 					control = (ModalPopup)Component;
-					group = new TemplateGroup("Template");
-					template = new TemplateDefinition(this, "Template", control, "Template", true);
+					group = new TemplateGroup("Content");
+					template = new TemplateDefinition(this, "Content", control, "Content", true);
 					group.AddTemplateDefinition(template);
 					collection.Add(group);
 					return collection;
 				}
-			}
+			}*/
 		}
 
 		#endregion

@@ -49,6 +49,7 @@
     <Compile Include="ModalPopup.cs" />
     <Compile Include="ModalPopupButton.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegionTest.cs" />
     <Compile Include="ScriptHelper.cs" />
     <Compile Include="WebMsgBox.cs" />
     <Compile Include="WelcomeLabel.cs" />
