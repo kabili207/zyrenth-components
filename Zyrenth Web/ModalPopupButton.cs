@@ -188,8 +188,9 @@ namespace Zyrenth.Web
         }
 	}
 
+	[ParseChildren(false)]
 	public class PopupButtonCollection : List<ModalPopupButton>
 	{
-
+		//internal PopupButtonCollection(Control c) : base(c) { }
 	}
 }

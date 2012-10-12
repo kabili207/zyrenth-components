@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 
 namespace Zyrenth
 {
-	public static partial class Zyrenth
+	public static partial class Extentions
 	{
 		
 		private static Random random = new Random((int)DateTime.Now.Ticks);

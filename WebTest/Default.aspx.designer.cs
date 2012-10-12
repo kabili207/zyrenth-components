@@ -22,42 +22,6 @@ namespace WebTest {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// ColorSwatch1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Zyrenth.Web.ColorSwatch ColorSwatch1;
-        
-        /// <summary>
-        /// ColorSwatch2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Zyrenth.Web.ColorSwatch ColorSwatch2;
-        
-        /// <summary>
-        /// ColorSwatch3 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Zyrenth.Web.ColorSwatch ColorSwatch3;
-        
-        /// <summary>
-        /// ColorSwatch4 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Zyrenth.Web.ColorSwatch ColorSwatch4;
-        
-        /// <summary>
         /// ModalPopup1 control.
         /// </summary>
         /// <remarks>
@@ -65,5 +29,32 @@ namespace WebTest {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Zyrenth.Web.ModalPopup ModalPopup1;
+        
+        /// <summary>
+        /// HyperLink1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink HyperLink1;
+        
+        /// <summary>
+        /// Image1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image Image1;
+        
+        /// <summary>
+        /// Calendar1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Calendar Calendar1;
     }
 }

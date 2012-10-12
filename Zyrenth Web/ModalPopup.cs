@@ -14,21 +14,23 @@ using System.Web.UI.Design.WebControls;
 
 namespace Zyrenth.Web
 {
-	
+
 	[
-	DefaultProperty("Title"),
-	ToolboxData("<{0}:ModalPopup Title=\"\" runat=\"server\"><Template></Template><Buttons></Buttons></{0}:ModalPopup>"),
-	Designer(typeof(ModalPopupDesigner)),
-	ToolboxBitmap(typeof(ModalPopup), "Zyrenth.Web.Icons.ModalPopup.bmp"),
-	ParseChildren(true, "Content")
+	DefaultProperty("Content"),
+	ToolboxData("<{0}:ModalPopup Title=\"\" runat=\"server\"></{0}:ModalPopup>"),
+		Designer(typeof(ModalPopupDesigner)),
+	ToolboxBitmap(typeof(Zyrenth.Web.Icons.IconHelper), "ModalPopup.bmp"),
+		ParseChildren(true),
+	//ParseChildren(ChildrenAsProperties = false),
+	//ControlBuilder(typeof(ModalPopupControlBuilder)),
 	]
-	public class ModalPopup : CompositeControl, IPostBackEventHandler, INamingContainer
+	public class ModalPopup : CompositeControl, IPostBackEventHandler
 	{
-		private ITemplate templateValue;
-		private TemplateOwner ownerValue;
+		private TaglessPanel _content;
+		private ControlCollection _controls;
 
 		#region Properties
-
+		
 		[
 		Bindable(true),
 		Category("Appearance"),
@@ -113,6 +115,7 @@ namespace Zyrenth.Web
 
 		[
 		PersistenceMode(PersistenceMode.InnerProperty),
+		NotifyParentProperty(true),
 		]
 		public PopupButtonCollection Buttons
 		{
@@ -126,42 +129,23 @@ namespace Zyrenth.Web
 				}
 				return (PopupButtonCollection)o;
 			}
-			//set
-			//{
-			//    ViewState["Buttons"] = value;
-			//}
 		}
 
-
 		[
-		Browsable(false),
-		DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+		DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
+		// Set this to InnerDefaultProperty if we don't want the requirement of
+		// using the <Content></Content> tags in the aspx file
 		PersistenceMode(PersistenceMode.InnerProperty)
 		]
-		public TemplateOwner Owner
+		public ControlCollection Content
 		{
 			get
 			{
-				return ownerValue;
-			}
-		}
-
-		[
-		Browsable(false),
-		PersistenceMode(PersistenceMode.InnerProperty),
-		DefaultValue(typeof(ITemplate), ""),
-		Description("Control template"),
-		TemplateContainer(typeof(ModalPopup))
-		]
-		public virtual ITemplate Content
-		{
-			get
-			{
-				return templateValue;
-			}
-			set
-			{
-				templateValue = value;
+				if (_controls == null)
+				{
+					_controls = new ControlCollection(this);
+				}
+				return _controls;
 			}
 		}
 
@@ -180,6 +164,7 @@ namespace Zyrenth.Web
 
 		#region "ButtonClicked event"
 
+		public delegate void ModalButtonEventHandler(object sender, ModalButtonEventArgs e);
 		private static readonly string EventButtonClicked = "ModalPopupButtonClick";
 
 		public event ModalButtonEventHandler ButtonClicked
@@ -222,20 +207,12 @@ namespace Zyrenth.Web
 		protected override void CreateChildControls()
 		{
 			Controls.Clear();
-			ownerValue = new TemplateOwner();
 
-			ITemplate temp = templateValue;
-			if (temp == null)
-			{
-				temp = new DefaultTemplate();
-			}
+			_content = new TaglessPanel();
 
-			temp.InstantiateIn(ownerValue);
-			//ownerValue.Attributes.Add(
-			//DesignerRegion.DesignerRegionAttributeName, "Content");
-
-			this.Controls.Add(ownerValue);
+			this.Controls.Add(_content);
 		}
+
 
 		public override void DataBind()
 		{
@@ -249,21 +226,15 @@ namespace Zyrenth.Web
 			RenderContents(writer);
 		}
 
-		internal void RenderButtons(HtmlTextWriter writer)
+		protected override void RenderContents(HtmlTextWriter writer)
 		{
-
-		}
-
-		/*protected override void RenderContents(HtmlTextWriter writer)
-		{
-			Panel p = new Panel();
-			foreach (Control c in Content)
-				p.Controls.Add(p);
-			if (p != null)
+			if (_content != null)
 			{
-				p.RenderControl(writer);
+				foreach (Control c in Content)
+					_content.Controls.Add(c);
+				_content.RenderControl(writer);
 			}
-		}*/
+		}
 
 		protected override void Render(HtmlTextWriter writer)
 		{
@@ -273,10 +244,8 @@ namespace Zyrenth.Web
 			{
 				writer.Write("<div>{0}</div>", Title);
 			}
-			RenderContents(writer);
 
-			//foreach (Control c in Content)
-			//	this.RenderControl(writer);
+			RenderContents(writer);
 
 			if (this.DesignMode)
 			{
@@ -290,28 +259,22 @@ namespace Zyrenth.Web
 
 			if (!this.DesignMode)
 			{
-				// Perhaps we can use this to add icons to the buttons?
-				//var buttons = $('.ui-dialog-buttonpane').children('button');
-				//buttons.removeClass('ui-button-text-only').addClass('ui-button-text-icon');
-       
-				//$(buttons[0]).append("<span class='ui-icon ui-icon-check'></span>");
-				//$(buttons[1]).append("<span class='ui-icon ui-icon-close'></span>");
 
-				var buttons = Buttons.Select(x =>
+				var buttons = Buttons.OfType<ModalPopupButton>().Select(x =>
 					{
 						string buttonPostBack = Page.ClientScript.GetPostBackEventReference(this, "Button+" + x.CommandName);
-						
+
 						StringBuilder sbOpenJs = new StringBuilder();
 						if (x.Icon != JQueryIcon.None)
 						{
 							//TODO: Extend this to allow secondary buttons or button only icons.
 							sbOpenJs.AppendFormat("$(this).button({{ icons: {{ primary: 'ui-icon-{0}' }}, text: {1} }});",
 								x.Icon.ToString().Replace('_', '-'), x.IconOnly ? "false" : "true");
-       					}
+						}
 
-						if(!string.IsNullOrWhiteSpace(x.CssClass))
+						if (!string.IsNullOrWhiteSpace(x.CssClass))
 							sbOpenJs.AppendFormat("$(this).addClass('{0}');", x.CssClass);
-						
+
 						string buttonJs = @"{{ text: ""{0}"", click: function() {{ {1} }}, create: function(ev, ui) {{ {2} }} }}";
 
 						return string.Format(buttonJs, x.Text, buttonPostBack, sbOpenJs.ToString());
@@ -328,7 +291,7 @@ namespace Zyrenth.Web
 				string dialogJs = "$('#{0}').dialog({{ autoOpen: true, bgiframe: true, modal: true, " +
 						"resizable: {4}, width: 'auto', autoResize: true, buttons: {2}, draggable: {5}, " +
 						"close: function(ev, ui) {{ {1}; }}, open: function(ev, ui) {{ {3}; }}}})" +
-						//$('#' + divname).dialog('open');
+					//$('#' + divname).dialog('open');
 						".parent().appendTo($('form:first'));";
 
 				//string openJs = string.Format("openModalDiv('{0}', function() {{ {1}; }}, {2} );",
@@ -338,8 +301,7 @@ namespace Zyrenth.Web
 					Draggable ? "true" : "false");
 
 				writer.Write("<script type='text/javascript'>" + dialogJs + "</script>");
-				//Page.ClientScript.RegisterStartupScript(typeof(ModalPopup), ClientID + "Open", dialogJs, true);
-			}
+				}
 		}
 
 		public void RaisePostBackEvent(string eventArgument)
@@ -365,53 +327,11 @@ namespace Zyrenth.Web
 				this.CommandName = commandName;
 			}
 		}
-		public delegate void ModalButtonEventHandler(object sender, ModalButtonEventArgs e);
 
-		[
-		ToolboxItem(false),
-		ParseChildren(false), PersistChildren(true)
-		]
-		public class TemplateOwner : WebControl
-		{
-
-			public override void RenderBeginTag(HtmlTextWriter writer)
-			{
-				if (this.DesignMode)
-					base.RenderBeginTag(writer);
-			}
-
-			public override void RenderEndTag(HtmlTextWriter writer)
-			{
-				if (this.DesignMode)
-					base.RenderEndTag(writer);
-			}
-		}
-
-		sealed class DefaultTemplate : ITemplate
-		{
-			void ITemplate.InstantiateIn(Control owner)
-			{
-				Label title = new Label();
-				title.DataBinding += new EventHandler(title_DataBinding);
-
-				LiteralControl linebreak = new LiteralControl("<br/>");
-
-				owner.Controls.Add(title);
-				owner.Controls.Add(linebreak);
-
-			}
-
-			void title_DataBinding(object sender, EventArgs e)
-			{
-				Label source = (Label)sender;
-				ModalPopup container = (ModalPopup)(source.NamingContainer);
-				source.Text = container.Title;
-			}
-		}
-
+		
 		public class ModalPopupDesigner : CompositeControlDesigner
 		{
-			
+			private const string CONTENT = "CONTENT";
 			private ModalPopup myControl;
 
 			public override bool AllowResize
@@ -429,21 +349,11 @@ namespace Zyrenth.Web
 			protected override void CreateChildControls()
 			{
 				base.CreateChildControls();
-				myControl.DataBind();
-				// Get a reference to the table, which is the first child control
-				//Table t = (Table)myControl.Controls[0];
-				myControl.Owner.Attributes.Add(DesignerRegion.DesignerRegionAttributeName, "Content");
-				//// Add design time markers for each of the three regions 
-				//if (t != null)
-				//{
-				//    // View1
-				//    t.Rows[0].Cells[0].Attributes[DesignerRegion.DesignerRegionAttributeName] = "0";
-				//    // View2
-				//    t.Rows[0].Cells[1].Attributes[DesignerRegion.DesignerRegionAttributeName] = "1";
-				//    // Editable region
-				//    t.Rows[1].Cells[0].Attributes[DesignerRegion.DesignerRegionAttributeName] = "2";
-				//}
+				// Add design time markers for each of the three regions 
+				myControl._content.Attributes.Add(DesignerRegion.DesignerRegionAttributeName, CONTENT);
+				
 			}
+
 			// Handler for the Click event, which provides the region in the arguments. 
 			/*protected override void OnClick(DesignerRegionMouseEventArgs e)
 			{
@@ -451,7 +361,7 @@ namespace Zyrenth.Web
 					return;
 				
 				// Switch the current view if required 
-				if (e.Region.Name == "Content")
+				if (e.Region.Name == CONTENT)
 				{
 					base.UpdateDesignTimeHtml();
 				}
@@ -460,10 +370,9 @@ namespace Zyrenth.Web
 			public override String GetDesignTimeHtml(DesignerRegionCollection regions)
 			{
 				ModalPopup control = (ModalPopup)Component;
-				control.DataBind();
 				// Create an editable region and add it to the regions
 				EditableDesignerRegion editableRegion =
-					new EditableDesignerRegion(this, "Content", false);
+					new EditableDesignerRegion(this, CONTENT, false);
 				regions.Add(editableRegion);
 
 				// Set the highlight for the selected region
@@ -480,11 +389,12 @@ namespace Zyrenth.Web
 				IDesignerHost host = (IDesignerHost)Component.Site.GetService(typeof(IDesignerHost));
 				if (host != null)
 				{
-					ITemplate template = myControl.Content;
-
-					// Persist the template in the design host 
-					if (template != null)
-						return ControlPersister.PersistTemplate(template, host);
+					if (region.Name == CONTENT)
+					{
+						TaglessPanel owner = myControl._content;
+						if (owner != null)
+							return ControlPersister.PersistControl(owner, host);
+					}
 				}
 
 				return String.Empty;
@@ -500,30 +410,20 @@ namespace Zyrenth.Web
 				IDesignerHost host = (IDesignerHost)Component.Site.GetService(typeof(IDesignerHost));
 				if (host != null)
 				{
-					// Create a template from the content string
-					ITemplate template = ControlParser.ParseTemplate(host, content);
+					if (region.Name == CONTENT)
+					{
+						Control c = ControlParser.ParseControl(host, content);
 
-					myControl.Content = template;
+						if (c is TaglessPanel)
+						{
+							myControl.Content.Clear();
+							foreach (Control cc in c.Controls.OfType<Control>().ToList())
+								myControl.Content.Add(cc);
+							base.UpdateDesignTimeHtml();
+						}
+					}
 				}
 			}
-			
-			/*public override TemplateGroupCollection TemplateGroups
-			{
-				get
-				{
-					TemplateGroupCollection collection = new TemplateGroupCollection();
-					TemplateGroup group;
-					TemplateDefinition template;
-					ModalPopup control;
-
-					control = (ModalPopup)Component;
-					group = new TemplateGroup("Content");
-					template = new TemplateDefinition(this, "Content", control, "Content", true);
-					group.AddTemplateDefinition(template);
-					collection.Add(group);
-					return collection;
-				}
-			}*/
 		}
 
 		#endregion

@@ -316,7 +316,7 @@ namespace Zyrenth.Winforms
 
 					string temp = a.Start.ToShortTimeString() + " - "
 						+ a.End.ToShortTimeString();
-					if (!Zyrenth.IsNullOrWhiteSpace(a.Location))
+					if (!Extentions.IsNullOrWhiteSpace(a.Location))
 						temp += Environment.NewLine + a.Location;
 
 					int detail = (int)graphics.MeasureString(temp, fontNorm, limit.Width, sf).Height;

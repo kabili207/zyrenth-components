@@ -4,6 +4,7 @@ using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using System.Reflection;
 
+
 namespace Zyrenth
 {
 	public static class Common
@@ -73,13 +74,13 @@ namespace Zyrenth
 			// Create new colors that are slightly lighter and
 			// darker than the system base color
 			Color colorL = Color.FromArgb(
-				Zyrenth.Clamp(baseColor.R + 35, 0, 255),
-				Zyrenth.Clamp(baseColor.G + 35, 0, 255),
-				Zyrenth.Clamp(baseColor.B + 35, 0, 255));
+				Extentions.Clamp(baseColor.R + 35, 0, 255),
+				Extentions.Clamp(baseColor.G + 35, 0, 255),
+				Extentions.Clamp(baseColor.B + 35, 0, 255));
 			Color colorD = Color.FromArgb(
-				Zyrenth.Clamp(baseColor.R - 35, 0, 255),
-				Zyrenth.Clamp(baseColor.G - 35, 0, 255),
-				Zyrenth.Clamp(baseColor.B - 35, 0, 255));
+				Extentions.Clamp(baseColor.R - 35, 0, 255),
+				Extentions.Clamp(baseColor.G - 35, 0, 255),
+				Extentions.Clamp(baseColor.B - 35, 0, 255));
 			return new LinearGradientBrush(box, colorL, colorD, mode);	
 		}
 	}
