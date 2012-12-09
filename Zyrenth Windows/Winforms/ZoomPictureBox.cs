@@ -15,11 +15,12 @@ namespace Zyrenth.Winforms
 	/// <remarks>
 	/// PictureBox doesn't lend itself well to overriding. Why not start with something basic and do the job properly?
 	/// </remarks>
-    [ToolboxBitmap(typeof(ZoomPictureBox))]
+	[ToolboxBitmap(typeof(ZoomPictureBox))]
 	public class ZoomPictureBox : ScrollableControl
 	{
 
 		Image _image;
+
 		[
 		Category("Appearance"),
 		Description("The image to be displayed")
@@ -36,6 +37,7 @@ namespace Zyrenth.Winforms
 		}
 
 		float _zoom = 1.0f;
+
 		[
 		Category("Appearance"),
 		Description("The zoom factor. Less than 1 to reduce. More than 1 to magnify.")
@@ -83,6 +85,7 @@ namespace Zyrenth.Winforms
 		}
 
 		InterpolationMode _interpolationMode = InterpolationMode.High;
+
 		[Category("Appearance")]
 		[Description("The interpolation mode used to smooth the drawing")]
 		public InterpolationMode InterpolationMode
@@ -90,7 +93,6 @@ namespace Zyrenth.Winforms
 			get { return _interpolationMode; }
 			set { _interpolationMode = value; }
 		}
-
 
 		protected override void OnPaintBackground(PaintEventArgs e)
 		{
@@ -106,8 +108,8 @@ namespace Zyrenth.Winforms
 				{
 					Pen sysPen = new Pen(SystemBrushes.WindowFrame);
 					Rectangle size = new Rectangle(Padding.Left, Padding.Top,
-					Bounds.Width - Padding.Horizontal-1,
-					Bounds.Height - Padding.Vertical-1);
+					Bounds.Width - Padding.Horizontal - 1,
+					Bounds.Height - Padding.Vertical - 1);
 					sysPen.DashStyle = DashStyle.Dash;
 					e.Graphics.DrawRectangle(sysPen, size);
 				}

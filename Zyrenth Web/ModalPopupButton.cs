@@ -8,7 +8,6 @@ using System.ComponentModel;
 
 namespace Zyrenth.Web
 {
-
 	public class ModalPopupButton : IStateManager
 	{
 		private bool _isTrackingViewState;
@@ -143,49 +142,49 @@ namespace Zyrenth.Web
 		#region IStateManager implementation
 
 		bool IStateManager.IsTrackingViewState
-        {
-            get
-            {
-                return _isTrackingViewState;
-            }
-        }
+		{
+			get
+			{
+				return _isTrackingViewState;
+			}
+		}
 
-        void IStateManager.LoadViewState(object savedState)
-        {
-            if (savedState != null)
-            {
-                ((IStateManager)ViewState).LoadViewState(savedState);
-            }
-        }
+		void IStateManager.LoadViewState(object savedState)
+		{
+			if (savedState != null)
+			{
+				((IStateManager)ViewState).LoadViewState(savedState);
+			}
+		}
 
-        object IStateManager.SaveViewState()
-        {
-            object savedState = null;
+		object IStateManager.SaveViewState()
+		{
+			object savedState = null;
 
-            if (_viewState != null)
-            {
-                savedState =
+			if (_viewState != null)
+			{
+				savedState =
                    ((IStateManager)_viewState).SaveViewState();
-            }
-            return savedState;
-        }
+			}
+			return savedState;
+		}
 
-        void IStateManager.TrackViewState()
-        {
-            _isTrackingViewState = true;
+		void IStateManager.TrackViewState()
+		{
+			_isTrackingViewState = true;
 
-            if (_viewState != null)
-            {
-                ((IStateManager)_viewState).TrackViewState();
-            }
-        }
+			if (_viewState != null)
+			{
+				((IStateManager)_viewState).TrackViewState();
+			}
+		}
 
         #endregion
 
-        internal void SetDirty()
-        {
-            _viewState.SetDirty(true);
-        }
+		internal void SetDirty()
+		{
+			_viewState.SetDirty(true);
+		}
 	}
 
 	[ParseChildren(false)]

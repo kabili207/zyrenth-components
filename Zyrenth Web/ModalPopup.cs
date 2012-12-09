@@ -14,15 +14,14 @@ using System.Web.UI.Design.WebControls;
 
 namespace Zyrenth.Web
 {
-
 	[
 	DefaultProperty("Content"),
 	ToolboxData("<{0}:ModalPopup Title=\"\" runat=\"server\"></{0}:ModalPopup>"),
 		Designer(typeof(ModalPopupDesigner)),
 	ToolboxBitmap(typeof(Zyrenth.Web.Icons.IconHelper), "ModalPopup.bmp"),
 		ParseChildren(true),
-	//ParseChildren(ChildrenAsProperties = false),
-	//ControlBuilder(typeof(ModalPopupControlBuilder)),
+		//ParseChildren(ChildrenAsProperties = false),
+		//ControlBuilder(typeof(ModalPopupControlBuilder)),
 	]
 	public class ModalPopup : CompositeControl, IPostBackEventHandler
 	{
@@ -165,6 +164,7 @@ namespace Zyrenth.Web
 		#region "ButtonClicked event"
 
 		public delegate void ModalButtonEventHandler(object sender, ModalButtonEventArgs e);
+
 		private static readonly string EventButtonClicked = "ModalPopupButtonClick";
 
 		public event ModalButtonEventHandler ButtonClicked
@@ -203,7 +203,6 @@ namespace Zyrenth.Web
 
 		}
 
-
 		protected override void CreateChildControls()
 		{
 			Controls.Clear();
@@ -212,7 +211,6 @@ namespace Zyrenth.Web
 
 			this.Controls.Add(_content);
 		}
-
 
 		public override void DataBind()
 		{
@@ -261,24 +259,24 @@ namespace Zyrenth.Web
 			{
 
 				var buttons = Buttons.OfType<ModalPopupButton>().Select(x =>
+				{
+					string buttonPostBack = Page.ClientScript.GetPostBackEventReference(this, "Button+" + x.CommandName);
+
+					StringBuilder sbOpenJs = new StringBuilder();
+					if (x.Icon != JQueryIcon.None)
 					{
-						string buttonPostBack = Page.ClientScript.GetPostBackEventReference(this, "Button+" + x.CommandName);
-
-						StringBuilder sbOpenJs = new StringBuilder();
-						if (x.Icon != JQueryIcon.None)
-						{
-							//TODO: Extend this to allow secondary buttons or button only icons.
-							sbOpenJs.AppendFormat("$(this).button({{ icons: {{ primary: 'ui-icon-{0}' }}, text: {1} }});",
+						//TODO: Extend this to allow secondary buttons or button only icons.
+						sbOpenJs.AppendFormat("$(this).button({{ icons: {{ primary: 'ui-icon-{0}' }}, text: {1} }});",
 								x.Icon.ToString().Replace('_', '-'), x.IconOnly ? "false" : "true");
-						}
+					}
 
-						if (!string.IsNullOrWhiteSpace(x.CssClass))
-							sbOpenJs.AppendFormat("$(this).addClass('{0}');", x.CssClass);
+					if (!string.IsNullOrWhiteSpace(x.CssClass))
+						sbOpenJs.AppendFormat("$(this).addClass('{0}');", x.CssClass);
 
-						string buttonJs = @"{{ text: ""{0}"", click: function() {{ {1} }}, create: function(ev, ui) {{ {2} }} }}";
+					string buttonJs = @"{{ text: ""{0}"", click: function() {{ {1} }}, create: function(ev, ui) {{ {2} }} }}";
 
-						return string.Format(buttonJs, x.Text, buttonPostBack, sbOpenJs.ToString());
-					});
+					return string.Format(buttonJs, x.Text, buttonPostBack, sbOpenJs.ToString());
+				});
 
 				StringBuilder sbCloseJs = new StringBuilder();
 
@@ -291,7 +289,7 @@ namespace Zyrenth.Web
 				string dialogJs = "$('#{0}').dialog({{ autoOpen: true, bgiframe: true, modal: true, " +
 						"resizable: {4}, width: 'auto', autoResize: true, buttons: {2}, draggable: {5}, " +
 						"close: function(ev, ui) {{ {1}; }}, open: function(ev, ui) {{ {3}; }}}})" +
-					//$('#' + divname).dialog('open');
+				//$('#' + divname).dialog('open');
 						".parent().appendTo($('form:first'));";
 
 				//string openJs = string.Format("openModalDiv('{0}', function() {{ {1}; }}, {2} );",
@@ -301,7 +299,7 @@ namespace Zyrenth.Web
 					Draggable ? "true" : "false");
 
 				writer.Write("<script type='text/javascript'>" + dialogJs + "</script>");
-				}
+			}
 		}
 
 		public void RaisePostBackEvent(string eventArgument)
@@ -322,12 +320,12 @@ namespace Zyrenth.Web
 		public class ModalButtonEventArgs : EventArgs
 		{
 			public string CommandName { get; set; }
+
 			public ModalButtonEventArgs(string commandName)
 			{
 				this.CommandName = commandName;
 			}
 		}
-
 		
 		public class ModalPopupDesigner : CompositeControlDesigner
 		{

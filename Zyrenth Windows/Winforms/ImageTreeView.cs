@@ -12,7 +12,6 @@ using System.Drawing.Imaging;
 
 namespace Zyrenth.Winforms
 {
-
 	[ToolboxBitmap(typeof(ImageTreeView))]
 	public partial class ImageTreeView : TreeView
 	{
@@ -50,7 +49,6 @@ namespace Zyrenth.Winforms
 			set { _doubleClickExpand = value; }
 		}
 
-
 		public ImageTreeView()
 			: base()
 		{
@@ -66,7 +64,8 @@ namespace Zyrenth.Winforms
 				return;
 
 			Font nodeFont = e.Node.NodeFont;
-			if (nodeFont == null) nodeFont = this.Font;
+			if (nodeFont == null)
+				nodeFont = this.Font;
 
 			//SizeF size = e.Graphics.MeasureString(e.Node.Text, nodeFont);
 			SizeF size = TextRenderer.MeasureText(e.Graphics, e.Node.Text, nodeFont);

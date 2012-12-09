@@ -9,7 +9,6 @@ using System.Web.UI;
 
 namespace Zyrenth.Web
 {
-
 	public class ScriptHelper
 	{
 		/// <summary>
@@ -25,7 +24,7 @@ namespace Zyrenth.Web
 		/// <param name="cs">The ClientScriptManager to assign the script to.</param>
 		internal static void RegisterJQuery(ClientScriptManager cs)
 		{
-			if(EnableBuiltinJQuery)
+			if (EnableBuiltinJQuery)
 				cs.RegisterClientScriptResource(typeof(ScriptHelper), "Zyrenth.Web.JS.jquery-1.7.2.min.js");
 		}
 

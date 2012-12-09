@@ -27,6 +27,7 @@ namespace Zyrenth.Web
 			get { return _view1; }
 			set { _view1 = value; }
 		}
+
 		[PersistenceMode(PersistenceMode.InnerProperty), DefaultValue(null)]
 		public virtual ITemplate View2
 		{
@@ -36,6 +37,7 @@ namespace Zyrenth.Web
 
 		// The current view on the control; 0 = view1, 1 = view2 
 		private int _currentView = 0;
+
 		public int CurrentView
 		{
 			get { return _currentView; }
@@ -91,14 +93,14 @@ namespace Zyrenth.Web
 				Control containerControl = new Control();
 				switch (CurrentView)
 				{
-					case 0:
-						if (View1 != null)
-							View1.InstantiateIn(containerControl);
-						break;
-					case 1:
-						if (View2 != null)
-							View2.InstantiateIn(containerControl);
-						break;
+				case 0:
+					if (View1 != null)
+						View1.InstantiateIn(containerControl);
+					break;
+				case 1:
+					if (View2 != null)
+						View2.InstantiateIn(containerControl);
+					break;
 				}
 
 				tc.Controls.Add(containerControl);

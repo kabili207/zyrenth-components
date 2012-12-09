@@ -5,7 +5,8 @@ using System.Windows.Forms;
 
 namespace Zyrenth.Winforms
 {
-	public class ZyrenthTextBoxCell : DataGridViewTextBoxCell {
+	public class ZyrenthTextBoxCell : DataGridViewTextBoxCell
+	{
 
 		/*private int maxInputLength = 32767;
 		private static DataGridViewTextBoxEditingControl editingControl;
@@ -163,20 +164,21 @@ namespace Zyrenth.Winforms
 		{
 		}
 		 */
-		protected override void Paint (Graphics graphics, Rectangle clipBounds, Rectangle cellBounds, int rowIndex, DataGridViewElementStates cellState, object value, object formattedValue, string errorText, DataGridViewCellStyle cellStyle, DataGridViewAdvancedBorderStyle advancedBorderStyle, DataGridViewPaintParts paintParts)
+		protected override void Paint(Graphics graphics, Rectangle clipBounds, Rectangle cellBounds, int rowIndex, DataGridViewElementStates cellState, object value, object formattedValue, string errorText, DataGridViewCellStyle cellStyle, DataGridViewAdvancedBorderStyle advancedBorderStyle, DataGridViewPaintParts paintParts)
 		{
 			// Prepaint
 			DataGridViewPaintParts pre = DataGridViewPaintParts.Background | DataGridViewPaintParts.SelectionBackground;
 			pre = pre & paintParts;
 
-			base.Paint (graphics, clipBounds, cellBounds, rowIndex, cellState, value, formattedValue, errorText, cellStyle, advancedBorderStyle, pre);
+			base.Paint(graphics, clipBounds, cellBounds, rowIndex, cellState, value, formattedValue, errorText, cellStyle, advancedBorderStyle, pre);
 
 			// Paint content
-			if (!IsInEditMode && (paintParts & DataGridViewPaintParts.ContentForeground) == DataGridViewPaintParts.ContentForeground) {
+			if (!IsInEditMode && (paintParts & DataGridViewPaintParts.ContentForeground) == DataGridViewPaintParts.ContentForeground)
+			{
 				Color color = Selected ? cellStyle.SelectionForeColor : cellStyle.ForeColor;
 
 				TextFormatFlags flags = TextFormatFlags.EndEllipsis | TextFormatFlags.TextBoxControl;
-				flags |= AlignmentToFlags (cellStyle.Alignment);
+				flags |= AlignmentToFlags(cellStyle.Alignment);
 
 				Rectangle contentbounds = cellBounds;
 				
@@ -186,66 +188,67 @@ namespace Zyrenth.Winforms
 
 				// If we are top aligned, give ourselves some padding from the top
 				//if (((int)cellStyle.Alignment & 7) > 0) {
-					contentbounds.Offset (cellStyle.Padding.Left, cellStyle.Padding.Top);
+				contentbounds.Offset(cellStyle.Padding.Left, cellStyle.Padding.Top);
 				//	contentbounds.Height -= 2;
 				//}
 				
 				
 				if (formattedValue != null)
-					TextRenderer.DrawText (graphics, formattedValue.ToString (), cellStyle.Font, contentbounds, color, flags);
+					TextRenderer.DrawText(graphics, formattedValue.ToString(), cellStyle.Font, contentbounds, color, flags);
 			}
 
 			// Postpaint
 			DataGridViewPaintParts post = DataGridViewPaintParts.Border | DataGridViewPaintParts.Focus | DataGridViewPaintParts.ErrorIcon;
 			post = post & paintParts;
 
-			base.Paint (graphics, clipBounds, cellBounds, rowIndex, cellState, value, formattedValue, errorText, cellStyle, advancedBorderStyle, post);
+			base.Paint(graphics, clipBounds, cellBounds, rowIndex, cellState, value, formattedValue, errorText, cellStyle, advancedBorderStyle, post);
 		}
 		
-		internal TextFormatFlags AlignmentToFlags (DataGridViewContentAlignment align)
+		internal TextFormatFlags AlignmentToFlags(DataGridViewContentAlignment align)
 		{
 			TextFormatFlags flags = TextFormatFlags.Default;
 
-			switch (align) {
-				case DataGridViewContentAlignment.BottomCenter:
-					flags |= TextFormatFlags.Bottom;
-					flags |= TextFormatFlags.HorizontalCenter;
-					break;
-				case DataGridViewContentAlignment.BottomLeft:
-					flags |= TextFormatFlags.Bottom;
-					break;
-				case DataGridViewContentAlignment.BottomRight:
-					flags |= TextFormatFlags.Bottom;
-					flags |= TextFormatFlags.Right;
-					break;
-				case DataGridViewContentAlignment.MiddleCenter:
-					flags |= TextFormatFlags.VerticalCenter;
-					flags |= TextFormatFlags.HorizontalCenter;
-					break;
-				case DataGridViewContentAlignment.MiddleLeft:
-					flags |= TextFormatFlags.VerticalCenter;
-					break;
-				case DataGridViewContentAlignment.MiddleRight:
-					flags |= TextFormatFlags.VerticalCenter;
-					flags |= TextFormatFlags.Right;
-					break;
-				case DataGridViewContentAlignment.TopLeft:
-					flags |= TextFormatFlags.Top;
-					break;
-				case DataGridViewContentAlignment.TopCenter:
-					flags |= TextFormatFlags.HorizontalCenter;
-					flags |= TextFormatFlags.Top;
-					break;
-				case DataGridViewContentAlignment.TopRight:
-					flags |= TextFormatFlags.Right;
-					flags |= TextFormatFlags.Top;
-					break;
+			switch (align)
+			{
+			case DataGridViewContentAlignment.BottomCenter:
+				flags |= TextFormatFlags.Bottom;
+				flags |= TextFormatFlags.HorizontalCenter;
+				break;
+			case DataGridViewContentAlignment.BottomLeft:
+				flags |= TextFormatFlags.Bottom;
+				break;
+			case DataGridViewContentAlignment.BottomRight:
+				flags |= TextFormatFlags.Bottom;
+				flags |= TextFormatFlags.Right;
+				break;
+			case DataGridViewContentAlignment.MiddleCenter:
+				flags |= TextFormatFlags.VerticalCenter;
+				flags |= TextFormatFlags.HorizontalCenter;
+				break;
+			case DataGridViewContentAlignment.MiddleLeft:
+				flags |= TextFormatFlags.VerticalCenter;
+				break;
+			case DataGridViewContentAlignment.MiddleRight:
+				flags |= TextFormatFlags.VerticalCenter;
+				flags |= TextFormatFlags.Right;
+				break;
+			case DataGridViewContentAlignment.TopLeft:
+				flags |= TextFormatFlags.Top;
+				break;
+			case DataGridViewContentAlignment.TopCenter:
+				flags |= TextFormatFlags.HorizontalCenter;
+				flags |= TextFormatFlags.Top;
+				break;
+			case DataGridViewContentAlignment.TopRight:
+				flags |= TextFormatFlags.Right;
+				flags |= TextFormatFlags.Top;
+				break;
 			}
 
 			return flags;
 		}
 
-		internal Rectangle AlignInRectangle (Rectangle outer, Size inner, DataGridViewContentAlignment align)
+		internal Rectangle AlignInRectangle(Rectangle outer, Size inner, DataGridViewContentAlignment align)
 		{
 			int x = 0;
 			int y = 0;
@@ -253,17 +256,17 @@ namespace Zyrenth.Winforms
 			if (align == DataGridViewContentAlignment.BottomLeft || align == DataGridViewContentAlignment.MiddleLeft || align == DataGridViewContentAlignment.TopLeft)
 				x = outer.X;
 			else if (align == DataGridViewContentAlignment.BottomCenter || align == DataGridViewContentAlignment.MiddleCenter || align == DataGridViewContentAlignment.TopCenter)
-				x = Math.Max (outer.X + ((outer.Width - inner.Width) / 2), outer.Left);
+				x = Math.Max(outer.X + ((outer.Width - inner.Width) / 2), outer.Left);
 			else if (align == DataGridViewContentAlignment.BottomRight || align == DataGridViewContentAlignment.MiddleRight || align == DataGridViewContentAlignment.TopRight)
-				x = Math.Max (outer.Right - inner.Width, outer.X);
+				x = Math.Max(outer.Right - inner.Width, outer.X);
 			if (align == DataGridViewContentAlignment.TopCenter || align == DataGridViewContentAlignment.TopLeft || align == DataGridViewContentAlignment.TopRight)
 				y = outer.Y;
 			else if (align == DataGridViewContentAlignment.MiddleCenter || align == DataGridViewContentAlignment.MiddleLeft || align == DataGridViewContentAlignment.MiddleRight)
-				y = Math.Max (outer.Y + (outer.Height - inner.Height) / 2, outer.Y);
+				y = Math.Max(outer.Y + (outer.Height - inner.Height) / 2, outer.Y);
 			else if (align == DataGridViewContentAlignment.BottomCenter || align == DataGridViewContentAlignment.BottomRight || align == DataGridViewContentAlignment.BottomLeft)
-				y = Math.Max (outer.Bottom - inner.Height, outer.Y);
+				y = Math.Max(outer.Bottom - inner.Height, outer.Y);
 
-			return new Rectangle (x, y, Math.Min (inner.Width, outer.Width), Math.Min (inner.Height, outer.Height));
+			return new Rectangle(x, y, Math.Min(inner.Width, outer.Width), Math.Min(inner.Height, outer.Height));
 		}
 
 	}

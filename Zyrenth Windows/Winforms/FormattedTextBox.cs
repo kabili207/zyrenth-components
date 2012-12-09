@@ -8,34 +8,39 @@ using System.Text.RegularExpressions;
 
 namespace Zyrenth.Winforms
 {
-
-	public enum FormattedTextBoxType { None, CreditCard, Phone, SSN, EIN };
+	public enum FormattedTextBoxType
+	{
+		None,
+		CreditCard,
+		Phone,
+		SSN,
+		EIN
+	};
 
 	/// <summary>
 	/// Represents a Windows text box control that allows for an input mask.
 	/// </summary>
-    [ToolboxBitmap(typeof(FormattedTextBox))]
+	[ToolboxBitmap(typeof(FormattedTextBox))]
 	public class FormattedTextBox : TextBox
 	{
 		private bool isFormatting;
-
-        private FormattedTextBoxType _inputMask = FormattedTextBoxType.None;
+		private FormattedTextBoxType _inputMask = FormattedTextBoxType.None;
 
 		[DefaultValue(FormattedTextBoxType.None),
 		Description("Indicates the input mask that should be used to format the text box."),
 		Category("Behavior")]
-        public FormattedTextBoxType InputMask
-        {
-            get
-            {
-                return _inputMask;
-            }
-            set
-            {
-                _inputMask = value;
-                OnTextChanged(EventArgs.Empty);
-            }
-        }
+		public FormattedTextBoxType InputMask
+		{
+			get
+			{
+				return _inputMask;
+			}
+			set
+			{
+				_inputMask = value;
+				OnTextChanged(EventArgs.Empty);
+			}
+		}
 
 		public override string Text
 		{
@@ -43,7 +48,7 @@ namespace Zyrenth.Winforms
 			{
 				string deformatted = base.Text;
 
-				if(InputMask == FormattedTextBoxType.CreditCard || InputMask == FormattedTextBoxType.EIN ||
+				if (InputMask == FormattedTextBoxType.CreditCard || InputMask == FormattedTextBoxType.EIN ||
 					InputMask == FormattedTextBoxType.Phone || InputMask == FormattedTextBoxType.SSN)
 					deformatted = Regex.Replace(deformatted, @"\D", string.Empty);
 
@@ -70,18 +75,18 @@ namespace Zyrenth.Winforms
 				isFormatting = true;
 				switch (InputMask)
 				{
-					case FormattedTextBoxType.Phone:
-						MakeDashed(new int[] { 3, 6 }, 10);
-						break;
-					case FormattedTextBoxType.SSN:
-						MakeDashed(new int[] { 3, 5 }, 9);
-						break;
-					case FormattedTextBoxType.CreditCard:
-						MakeDashed(new int[] { 4, 8, 12 }, 16);
-						break;
-					case FormattedTextBoxType.EIN:
-						MakeDashed(new int[] { 2 }, 9);
-						break;
+				case FormattedTextBoxType.Phone:
+					MakeDashed(new int[] { 3, 6 }, 10);
+					break;
+				case FormattedTextBoxType.SSN:
+					MakeDashed(new int[] { 3, 5 }, 9);
+					break;
+				case FormattedTextBoxType.CreditCard:
+					MakeDashed(new int[] { 4, 8, 12 }, 16);
+					break;
+				case FormattedTextBoxType.EIN:
+					MakeDashed(new int[] { 2 }, 9);
+					break;
 						
 				}
 				isFormatting = false;
@@ -107,9 +112,9 @@ namespace Zyrenth.Winforms
 			int count = 0;
 			foreach (int dash in dashes)
 			{
-				if (temp.Length >= dash +count + 1)
-					temp = temp.Insert(dash+count, "-");
-				if (caret == dash +count+ 1)
+				if (temp.Length >= dash + count + 1)
+					temp = temp.Insert(dash + count, "-");
+				if (caret == dash + count + 1)
 					caret++;
 				count++;
 			}

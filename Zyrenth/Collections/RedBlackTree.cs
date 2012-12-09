@@ -9,19 +9,24 @@ namespace Zyrenth.Collections
 	 * Note that all "matching" is based on the compareTo method.
 	 * @author Mark Allen Weiss
 	 */
-
 	public class RedBlackTree<T> where T : System.IComparable<T>
 	{
 
-		internal enum RedBlackNodeColor { Red, Black };
-
+		internal enum RedBlackNodeColor
+		{
+			Red,
+			Black
+		};
 
 		internal class RedBlackNode
 		{
 
 			public T Item { get; set; }
+
 			public RedBlackNode Left { get; set; }
+
 			public RedBlackNode Right { get; set; }
+
 			public RedBlackNodeColor Color { get; set; }
 
 			public RedBlackNode()
@@ -91,7 +96,9 @@ namespace Zyrenth.Collections
 
 			while (compare(item, current) != 0)
 			{
-				great = grand; grand = parent; parent = current;
+				great = grand;
+				grand = parent;
+				parent = current;
 				current = compare(item, current) < 0 ?
 					current.Left : current.Right;
 
@@ -170,7 +177,7 @@ namespace Zyrenth.Collections
 			nullNode.Item = x;
 			current = header.Right;
 
-			for (; ; )
+			for (; ;)
 			{
 				if (x.CompareTo(current.Item) < 0)
 					current = current.Left;
@@ -250,11 +257,11 @@ namespace Zyrenth.Collections
 		{
 			if (compare(item, parent) < 0)
 				return parent.Left = compare(item, parent.Left) < 0 ?
-					rotateWithLeftChild(parent.Left) :  // LL
+					rotateWithLeftChild(parent.Left) : // LL
 					rotateWithRightChild(parent.Left);  // LR
 			else
 				return parent.Right = compare(item, parent.Right) < 0 ?
-					rotateWithLeftChild(parent.Right) :  // RL
+					rotateWithLeftChild(parent.Right) : // RL
 					rotateWithRightChild(parent.Right);  // RR
 		}
 

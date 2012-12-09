@@ -73,7 +73,7 @@ namespace Zyrenth.Winforms
 
 				this.SetCheckBoxState(value);
 				this.OnCheckedChanged();
-                this.OnValueChanged();
+				this.OnValueChanged();
 			}
 		}
 
@@ -221,68 +221,68 @@ namespace Zyrenth.Winforms
 		{
 			switch (m.Msg)
 			{
-				case 0x102: // WM_CHAR
+			case 0x102: // WM_CHAR
 
-					int charAsInt32 = m.WParam.ToInt32();
-					char charAsChar = (char)charAsInt32;
-					if (charAsInt32 == (int)Keys.Space)
-					{
-						// Toggle the check box because the user pressed the
-						// space bar.
-						this.OnKeyPress(new KeyPressEventArgs(charAsChar));
-						this.Checked = !(this.Checked);
-					}
-					else
-					{
-						// Forward the message to DateTimePicker because a key
-						// other than the space bar was pressed.
-						base.WndProc(ref m);
-					}
-					break;
-				case 0x201: // WM_LBUTTONDOWN
+				int charAsInt32 = m.WParam.ToInt32();
+				char charAsChar = (char)charAsInt32;
+				if (charAsInt32 == (int)Keys.Space)
+				{
+					// Toggle the check box because the user pressed the
+					// space bar.
+					this.OnKeyPress(new KeyPressEventArgs(charAsChar));
+					this.Checked = !(this.Checked);
+				}
+				else
+				{
+					// Forward the message to DateTimePicker because a key
+					// other than the space bar was pressed.
+					base.WndProc(ref m);
+				}
+				break;
+			case 0x201: // WM_LBUTTONDOWN
 
 					// The X value of the mouse position is stored in the
 					// low-order bits of LParam, and the Y value in the
 					// high-order bits.
 
-					int x = (m.LParam.ToInt32() << 16) >> 16;
-					int y = m.LParam.ToInt32() >> 16;
-					if (x <= this.GetCheckBoxExtent())
-					{
-						// Toggle the check box because the user clicked (near)
-						// the check box.
+				int x = (m.LParam.ToInt32() << 16) >> 16;
+				int y = m.LParam.ToInt32() >> 16;
+				if (x <= this.GetCheckBoxExtent())
+				{
+					// Toggle the check box because the user clicked (near)
+					// the check box.
 
-						this.OnMouseDown(
+					this.OnMouseDown(
 						 new MouseEventArgs(MouseButtons.Left, 1, x, y, 0));
-						this.Checked = !(this.Checked);
-						// Grab focus because we are eating the message.
+					this.Checked = !(this.Checked);
+					// Grab focus because we are eating the message.
 
-						this.Focus();
-					}
-					else
+					this.Focus();
+				}
+				else
+				{
+					bool checkedChange = !(this.Checked);
+					if (checkedChange)
 					{
-						bool checkedChange = !(this.Checked);
-						if (checkedChange)
-						{
-							// Check the check box because the user clicked
-							// somewhere within the control while it was not
-							// checked.
+						// Check the check box because the user clicked
+						// somewhere within the control while it was not
+						// checked.
 
-							this.SetCheckBoxState(true);
-						}
-						// Forward the message to DateTimePicker so that mouse
-						// events will be fired, focus will be taken, etc.
-						base.WndProc(ref m);
-						if (checkedChange)
-							this.OnCheckedChanged();
+						this.SetCheckBoxState(true);
 					}
-					break;
-				default:
+					// Forward the message to DateTimePicker so that mouse
+					// events will be fired, focus will be taken, etc.
+					base.WndProc(ref m);
+					if (checkedChange)
+						this.OnCheckedChanged();
+				}
+				break;
+			default:
 					// Forward the message to DateTimePicker because it pertains
 					// to neither the left mouse button nor a pressed key.
 
-					base.WndProc(ref m);
-					break;
+				base.WndProc(ref m);
+				break;
 			}
 		}
 
@@ -294,11 +294,10 @@ namespace Zyrenth.Winforms
 			// Use the Height property because the check box is square.
 			
 			return 16;
-			 //(int)this.CreateGraphics().MeasureString("X", this.Font).Height;
+			//(int)this.CreateGraphics().MeasureString("X", this.Font).Height;
 		}
 
 		private bool showingOrHidingText;
-
 		private EventHandler checkedChanged;
 		private string originalCustFormat;
 		private DateTimePickerFormat orginalFormat;

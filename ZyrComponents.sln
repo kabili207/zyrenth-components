@@ -21,6 +21,16 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{119CCBD6-2469-4233-8555-43637978ADD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{119CCBD6-2469-4233-8555-43637978ADD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{119CCBD6-2469-4233-8555-43637978ADD8}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{119CCBD6-2469-4233-8555-43637978ADD8}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{119CCBD6-2469-4233-8555-43637978ADD8}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{119CCBD6-2469-4233-8555-43637978ADD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{119CCBD6-2469-4233-8555-43637978ADD8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{119CCBD6-2469-4233-8555-43637978ADD8}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{119CCBD6-2469-4233-8555-43637978ADD8}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{119CCBD6-2469-4233-8555-43637978ADD8}.Release|x86.ActiveCfg = Release|Any CPU
 		{2BEFED4B-7362-4073-A6E6-4637B95434C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2BEFED4B-7362-4073-A6E6-4637B95434C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2BEFED4B-7362-4073-A6E6-4637B95434C4}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -31,6 +41,16 @@ Global
 		{2BEFED4B-7362-4073-A6E6-4637B95434C4}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{2BEFED4B-7362-4073-A6E6-4637B95434C4}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{2BEFED4B-7362-4073-A6E6-4637B95434C4}.Release|x86.ActiveCfg = Release|Any CPU
+		{A57689CB-46C8-42BF-B7F9-01DB565A690A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A57689CB-46C8-42BF-B7F9-01DB565A690A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A57689CB-46C8-42BF-B7F9-01DB565A690A}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{A57689CB-46C8-42BF-B7F9-01DB565A690A}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{A57689CB-46C8-42BF-B7F9-01DB565A690A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A57689CB-46C8-42BF-B7F9-01DB565A690A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A57689CB-46C8-42BF-B7F9-01DB565A690A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A57689CB-46C8-42BF-B7F9-01DB565A690A}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{A57689CB-46C8-42BF-B7F9-01DB565A690A}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{A57689CB-46C8-42BF-B7F9-01DB565A690A}.Release|x86.ActiveCfg = Release|Any CPU
 		{BF530193-5BDE-46A5-8225-3E839430A72F}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{BF530193-5BDE-46A5-8225-3E839430A72F}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
 		{BF530193-5BDE-46A5-8225-3E839430A72F}.Debug|Mixed Platforms.Build.0 = Debug|x86
@@ -54,29 +74,6 @@ Global
 		{D7D13BCB-1316-4798-9406-5A1859E93532}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{D7D13BCB-1316-4798-9406-5A1859E93532}.Release|x86.ActiveCfg = Release|Any CPU
 		{D7D13BCB-1316-4798-9406-5A1859E93532}.Release|x86.Build.0 = Release|Any CPU
-		{119CCBD6-2469-4233-8555-43637978ADD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{119CCBD6-2469-4233-8555-43637978ADD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{119CCBD6-2469-4233-8555-43637978ADD8}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{119CCBD6-2469-4233-8555-43637978ADD8}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{119CCBD6-2469-4233-8555-43637978ADD8}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{119CCBD6-2469-4233-8555-43637978ADD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{119CCBD6-2469-4233-8555-43637978ADD8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{119CCBD6-2469-4233-8555-43637978ADD8}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{119CCBD6-2469-4233-8555-43637978ADD8}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{119CCBD6-2469-4233-8555-43637978ADD8}.Release|x86.ActiveCfg = Release|Any CPU
-		{A57689CB-46C8-42BF-B7F9-01DB565A690A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A57689CB-46C8-42BF-B7F9-01DB565A690A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A57689CB-46C8-42BF-B7F9-01DB565A690A}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{A57689CB-46C8-42BF-B7F9-01DB565A690A}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{A57689CB-46C8-42BF-B7F9-01DB565A690A}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{A57689CB-46C8-42BF-B7F9-01DB565A690A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A57689CB-46C8-42BF-B7F9-01DB565A690A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A57689CB-46C8-42BF-B7F9-01DB565A690A}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{A57689CB-46C8-42BF-B7F9-01DB565A690A}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{A57689CB-46C8-42BF-B7F9-01DB565A690A}.Release|x86.ActiveCfg = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = ZyrTest\ZyrTest.csproj
@@ -85,6 +82,25 @@ Global
 		$1.inheritsSet = null
 		$1.scope = text/x-csharp
 		$0.CSharpFormattingPolicy = $2
+		$2.AnonymousMethodBraceStyle = NextLine
+		$2.PropertyBraceStyle = NextLine
+		$2.PropertyGetBraceStyle = NextLine
+		$2.PropertySetBraceStyle = NextLine
+		$2.EventBraceStyle = NextLine
+		$2.EventAddBraceStyle = NextLine
+		$2.EventRemoveBraceStyle = NextLine
+		$2.StatementBraceStyle = NextLine
+		$2.PlaceElseOnNewLine = True
+		$2.PlaceCatchOnNewLine = True
+		$2.PlaceFinallyOnNewLine = True
+		$2.BeforeMethodDeclarationParentheses = False
+		$2.BeforeMethodCallParentheses = False
+		$2.BeforeConstructorDeclarationParentheses = False
+		$2.BeforeIndexerDeclarationBracket = False
+		$2.BeforeDelegateDeclarationParentheses = False
+		$2.AfterDelegateDeclarationParameterComma = True
+		$2.NewParentheses = False
+		$2.SpacesBeforeBrackets = False
 		$2.inheritsSet = Mono
 		$2.inheritsScope = text/x-csharp
 		$2.scope = text/x-csharp
@@ -99,7 +115,7 @@ Global
 		$4.scope = application/x-resource
 		$0.StandardHeader = $5
 		$5.Text = 
-		$5.inheritsSet = Apache2License
+		$5.IncludeInNewFiles = True
 		$0.VersionControlPolicy = $6
 		$6.inheritsSet = Mono
 		$0.ChangeLogPolicy = $7
@@ -107,5 +123,11 @@ Global
 		$7.MessageStyle = $8
 		$8.LineAlign = 0
 		$7.inheritsSet = Mono
+		$0.TextStylePolicy = $9
+		$9.inheritsSet = null
+		$9.scope = application/x-aspx
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal

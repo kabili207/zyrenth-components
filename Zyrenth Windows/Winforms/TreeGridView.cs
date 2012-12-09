@@ -22,7 +22,7 @@ namespace Zyrenth.Winforms
 	/// <summary>
 	/// Summary description for TreeGridView.
 	/// </summary>
-    [System.ComponentModel.DesignerCategory("code"),
+	[System.ComponentModel.DesignerCategory("code"),
     Designer(typeof(System.Windows.Forms.Design.ControlDesigner)),
 	ComplexBindingProperties(),
     Docking(DockingBehavior.Ask),
@@ -35,20 +35,19 @@ namespace Zyrenth.Winforms
 		private bool _disposing = false;
 		internal ImageList _imageList;
 		private bool _inExpandCollapse = false;
-        internal bool _inExpandCollapseMouseCapture = false;
+		internal bool _inExpandCollapseMouseCapture = false;
 		private Control hideScrollBarControl;
-        private bool _showLines = true;
-        private bool _virtualNodes = false;
-
+		private bool _showLines = true;
+		private bool _virtualNodes = false;
 		internal VisualStyleRenderer rOpen;
 		internal VisualStyleRenderer rClosed;
 
         #region Constructor
-        public TreeGridView()
+		public TreeGridView()
 		{
 			// Control when edit occurs because edit mode shouldn't start when expanding/collapsing
 			this.EditMode = DataGridViewEditMode.EditProgrammatically;
-            this.RowTemplate = new TreeGridNode() as DataGridViewRow;
+			this.RowTemplate = new TreeGridNode() as DataGridViewRow;
 			// This sample does not support adding or deleting rows by the user.
 			this.AllowUserToAddRows = false;
 			this.AllowUserToDeleteRows = false;
@@ -63,18 +62,18 @@ namespace Zyrenth.Winforms
 
 			// Ensures that all rows are added unshared by listening to the CollectionChanged event.
 			base.Rows.CollectionChanged += delegate(object sender, System.ComponentModel.CollectionChangeEventArgs e){};
-        }
+		}
         #endregion
 
         #region Keyboard F2 to begin edit support
-        protected override void OnKeyDown(KeyEventArgs e)
+		protected override void OnKeyDown(KeyEventArgs e)
 		{
 			// Cause edit mode to begin since edit mode is disabled to support 
 			// expanding/collapsing 
 			base.OnKeyDown(e);
 			if (!e.Handled)
 			{
-				if (e.KeyCode == Keys.F2 && this.CurrentCellAddress.X > -1 && this.CurrentCellAddress.Y >-1)
+				if (e.KeyCode == Keys.F2 && this.CurrentCellAddress.X > -1 && this.CurrentCellAddress.Y > -1)
 				{
 					if (!this.CurrentCell.Displayed)
 					{
@@ -93,12 +92,12 @@ namespace Zyrenth.Winforms
 					this.CurrentCell.OwningRow.Selected = true;
 				}
 			}
-        }
+		}
         #endregion
 
         #region Shadow and hide DGV properties
 
-        // This sample does not support databinding
+		// This sample does not support databinding
 		[Browsable(false),
 		DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
 		EditorBrowsable(EditorBrowsableState.Never)]
@@ -117,51 +116,51 @@ namespace Zyrenth.Winforms
 			set { throw new NotSupportedException("The TreeGridView does not support databinding"); }
 		}
 
-        [Browsable(false),
+		[Browsable(false),
         DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
 		EditorBrowsable(EditorBrowsableState.Never)]
-        public new DataGridViewRowCollection Rows
-        {
-            get { return base.Rows; }
-        }
+		public new DataGridViewRowCollection Rows
+		{
+			get { return base.Rows; }
+		}
 
-        [Browsable(false),
+		[Browsable(false),
         DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
         EditorBrowsable(EditorBrowsableState.Never)]
-        public new bool VirtualMode
-        {
-            get { return false; }
-            set { throw new NotSupportedException("The TreeGridView does not support virtual mode"); }
-        }
+		public new bool VirtualMode
+		{
+			get { return false; }
+			set { throw new NotSupportedException("The TreeGridView does not support virtual mode"); }
+		}
 
-        // none of the rows/nodes created use the row template, so it is hidden.
-        [Browsable(false),
+		// none of the rows/nodes created use the row template, so it is hidden.
+		[Browsable(false),
         DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
         EditorBrowsable(EditorBrowsableState.Never)]
-        public new DataGridViewRow RowTemplate
-        {
-            get { return base.RowTemplate; }
-            set { base.RowTemplate = value; }
-        }
+		public new DataGridViewRow RowTemplate
+		{
+			get { return base.RowTemplate; }
+			set { base.RowTemplate = value; }
+		}
 
         #endregion
 
         #region Public methods
-        [Description("Returns the TreeGridNode for the given DataGridViewRow")]
-        public TreeGridNode GetNodeForRow(DataGridViewRow row)
-        {
-            return row as TreeGridNode;
-        }
+		[Description("Returns the TreeGridNode for the given DataGridViewRow")]
+		public TreeGridNode GetNodeForRow(DataGridViewRow row)
+		{
+			return row as TreeGridNode;
+		}
 
-        [Description("Returns the TreeGridNode for the given DataGridViewRow")]
-        public TreeGridNode GetNodeForRow(int index)
-        {
-            return GetNodeForRow(base.Rows[index]);
-        }
+		[Description("Returns the TreeGridNode for the given DataGridViewRow")]
+		public TreeGridNode GetNodeForRow(int index)
+		{
+			return GetNodeForRow(base.Rows[index]);
+		}
         #endregion
 
         #region Public properties
-        [Category("Data"),
+		[Category("Data"),
 		Description("The collection of root nodes in the treelist."),
 		DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
 		Editor(typeof(CollectionEditor), typeof(UITypeEditor))]
@@ -181,13 +180,13 @@ namespace Zyrenth.Winforms
 			}
 		}
 
-        [DefaultValue(false),
+		[DefaultValue(false),
         Description("Causes nodes to always show as expandable. Use the NodeExpanding event to add nodes.")]
-        public bool VirtualNodes
-        {
-            get { return _virtualNodes; }
-            set { _virtualNodes = value; }
-        }
+		public bool VirtualNodes
+		{
+			get { return _virtualNodes; }
+			set { _virtualNodes = value; }
+		}
 	
 		public TreeGridNode CurrentNode
 		{
@@ -197,57 +196,60 @@ namespace Zyrenth.Winforms
 			}
 		}
 
-        [DefaultValue(true)]
-        public bool ShowLines
-        {
-            get { return this._showLines; }
-            set { 
-                if (value != this._showLines) {
-                    this._showLines = value;
-                    this.Invalidate();
-                } 
-            }
-        }
+		[DefaultValue(true)]
+		public bool ShowLines
+		{
+			get { return this._showLines; }
+			set
+			{ 
+				if (value != this._showLines)
+				{
+					this._showLines = value;
+					this.Invalidate();
+				} 
+			}
+		}
 	
 		public ImageList ImageList
 		{
 			get { return this._imageList; }
-			set { 
+			set
+			{ 
 				this._imageList = value; 
 				//TODO: should we invalidate cell styles when setting the image list?
 			
 			}
 		}
 
-        public new int RowCount
-        {
-            get { return this.Nodes.Count; }
-            set
-            {
-                for (int i = 0; i < value; i++)
-                    this.Nodes.Add(new TreeGridNode());
+		public new int RowCount
+		{
+			get { return this.Nodes.Count; }
+			set
+			{
+				for (int i = 0; i < value; i++)
+					this.Nodes.Add(new TreeGridNode());
 
-            }
-        }
+			}
+		}
         #endregion
 
         #region Site nodes and collapse/expand support
-        protected override void OnRowsAdded(DataGridViewRowsAddedEventArgs e)
-        {
-            base.OnRowsAdded(e);
-            // Notify the row when it is added to the base grid 
-            int count = e.RowCount - 1;
-            TreeGridNode row;
-            while (count >= 0)
-            {
-                row = base.Rows[e.RowIndex + count] as TreeGridNode;
-                if (row != null)
-                {
-                    row.Sited();
-                }
-                count--;
-            }
-        }
+		protected override void OnRowsAdded(DataGridViewRowsAddedEventArgs e)
+		{
+			base.OnRowsAdded(e);
+			// Notify the row when it is added to the base grid 
+			int count = e.RowCount - 1;
+			TreeGridNode row;
+			while (count >= 0)
+			{
+				row = base.Rows[e.RowIndex + count] as TreeGridNode;
+				if (row != null)
+				{
+					row.Sited();
+				}
+				count--;
+			}
+		}
 
 		internal protected void UnSiteAll()
 		{
@@ -256,7 +258,7 @@ namespace Zyrenth.Winforms
 
 		internal protected virtual void UnSiteNode(TreeGridNode node)
 		{
-            if (node.IsSited || node.IsRoot)
+			if (node.IsSited || node.IsRoot)
 			{
 				// remove child rows first
 				foreach (TreeGridNode childNode in node.Nodes)
@@ -286,9 +288,9 @@ namespace Zyrenth.Winforms
 				if (!exp.Cancel)
 				{
 					this.LockVerticalScrollBarUpdate(true);
-                    this.SuspendLayout();
-                    _inExpandCollapse = true;
-                    node.IsExpanded = false;
+					this.SuspendLayout();
+					_inExpandCollapse = true;
+					node.IsExpanded = false;
 
 					foreach (TreeGridNode childNode in node.Nodes)
 					{
@@ -299,10 +301,10 @@ namespace Zyrenth.Winforms
 					CollapsedEventArgs exped = new CollapsedEventArgs(node);
 					this.OnNodeCollapsed(exped);
 					//TODO: Convert this to a specific NodeCell property
-                    _inExpandCollapse = false;
-                    this.LockVerticalScrollBarUpdate(false);
-                    this.ResumeLayout(true);
-                    this.InvalidateCell(node.Cells[0]);
+					_inExpandCollapse = false;
+					this.LockVerticalScrollBarUpdate(false);
+					this.ResumeLayout(true);
+					this.InvalidateCell(node.Cells[0]);
 
 				}
 
@@ -390,7 +392,6 @@ namespace Zyrenth.Winforms
 			}
 		}
 
-
 		internal protected virtual void SiteNode(TreeGridNode node, int index)
 		{
 			if (index < base.Rows.Count)
@@ -406,7 +407,7 @@ namespace Zyrenth.Winforms
 
 		internal protected virtual bool ExpandNode(TreeGridNode node)
 		{
-            if (!node.IsExpanded || this._virtualNodes)
+			if (!node.IsExpanded || this._virtualNodes)
 			{
 				ExpandingEventArgs exp = new ExpandingEventArgs(node);
 				this.OnNodeExpanding(exp);
@@ -414,9 +415,9 @@ namespace Zyrenth.Winforms
 				if (!exp.Cancel)
 				{
 					this.LockVerticalScrollBarUpdate(true);
-                    this.SuspendLayout();
-                    _inExpandCollapse = true;
-                    node.IsExpanded = true;
+					this.SuspendLayout();
+					_inExpandCollapse = true;
+					node.IsExpanded = true;
 
 					//TODO Convert this to a InsertRange
 					foreach (TreeGridNode childNode in node.Nodes)
@@ -432,10 +433,10 @@ namespace Zyrenth.Winforms
 					ExpandedEventArgs exped = new ExpandedEventArgs(node);
 					this.OnNodeExpanded(exped);
 					//TODO: Convert this to a specific NodeCell property
-                    _inExpandCollapse = false;
-                    this.LockVerticalScrollBarUpdate(false);
-                    this.ResumeLayout(true);
-                    this.InvalidateCell(node.Cells[0]);
+					_inExpandCollapse = false;
+					this.LockVerticalScrollBarUpdate(false);
+					this.ResumeLayout(true);
+					this.InvalidateCell(node.Cells[0]);
 				}
 
 				return !exp.Cancel;
@@ -445,151 +446,155 @@ namespace Zyrenth.Winforms
 				// row is already expanded, so we didn't do anything.
 				return false;
 			}
-        }
+		}
 
-        protected override void OnMouseUp(MouseEventArgs e)
-        {
-            // used to keep extra mouse moves from selecting more rows when collapsing
-            base.OnMouseUp(e);
-            this._inExpandCollapseMouseCapture = false;
-        }
-        protected override void OnMouseMove(MouseEventArgs e)
-        {
-            // while we are expanding and collapsing a node mouse moves are
-            // supressed to keep selections from being messed up.
-            if (!this._inExpandCollapseMouseCapture)
-                base.OnMouseMove(e);
+		protected override void OnMouseUp(MouseEventArgs e)
+		{
+			// used to keep extra mouse moves from selecting more rows when collapsing
+			base.OnMouseUp(e);
+			this._inExpandCollapseMouseCapture = false;
+		}
 
-        }
+		protected override void OnMouseMove(MouseEventArgs e)
+		{
+			// while we are expanding and collapsing a node mouse moves are
+			// supressed to keep selections from being messed up.
+			if (!this._inExpandCollapseMouseCapture)
+				base.OnMouseMove(e);
+
+		}
         #endregion
 
         #region Collapse/Expand events
-        public event ExpandingEventHandler NodeExpanding;
-        public event ExpandedEventHandler NodeExpanded;
-        public event CollapsingEventHandler NodeCollapsing;
-        public event CollapsedEventHandler NodeCollapsed;
+		public event ExpandingEventHandler NodeExpanding;
+		public event ExpandedEventHandler NodeExpanded;
+		public event CollapsingEventHandler NodeCollapsing;
+		public event CollapsedEventHandler NodeCollapsed;
 
-        protected virtual void OnNodeExpanding(ExpandingEventArgs e)
-        {
-            if (this.NodeExpanding != null)
-            {
-                NodeExpanding(this, e);
-            }
-        }
-        protected virtual void OnNodeExpanded(ExpandedEventArgs e)
-        {
-            if (this.NodeExpanded != null)
-            {
-                NodeExpanded(this, e);
-            }
-        }
-        protected virtual void OnNodeCollapsing(CollapsingEventArgs e)
-        {
-            if (this.NodeCollapsing != null)
-            {
-                NodeCollapsing(this, e);
-            }
+		protected virtual void OnNodeExpanding(ExpandingEventArgs e)
+		{
+			if (this.NodeExpanding != null)
+			{
+				NodeExpanding(this, e);
+			}
+		}
 
-        }
-        protected virtual void OnNodeCollapsed(CollapsedEventArgs e)
-        {
-            if (this.NodeCollapsed != null)
-            {
-                NodeCollapsed(this, e);
-            }
-        }
+		protected virtual void OnNodeExpanded(ExpandedEventArgs e)
+		{
+			if (this.NodeExpanded != null)
+			{
+				NodeExpanded(this, e);
+			}
+		}
+
+		protected virtual void OnNodeCollapsing(CollapsingEventArgs e)
+		{
+			if (this.NodeCollapsing != null)
+			{
+				NodeCollapsing(this, e);
+			}
+
+		}
+
+		protected virtual void OnNodeCollapsed(CollapsedEventArgs e)
+		{
+			if (this.NodeCollapsed != null)
+			{
+				NodeCollapsed(this, e);
+			}
+		}
         #endregion
 
         #region Helper methods
-        protected override void Dispose(bool disposing)
-        {
-            this._disposing = true;
-            base.Dispose(Disposing);
-            this.UnSiteAll();
-        }
+		protected override void Dispose(bool disposing)
+		{
+			this._disposing = true;
+			base.Dispose(Disposing);
+			this.UnSiteAll();
+		}
 
-        protected override void OnHandleCreated(EventArgs e)
-        {
-            base.OnHandleCreated(e);
+		protected override void OnHandleCreated(EventArgs e)
+		{
+			base.OnHandleCreated(e);
 
-            // this control is used to temporarly hide the vertical scroll bar
-            hideScrollBarControl = new Control();
-            hideScrollBarControl.Visible = false;
-            hideScrollBarControl.Enabled = false;
-            hideScrollBarControl.TabStop = false;
-            // control is disposed automatically when the grid is disposed
-            this.Controls.Add(hideScrollBarControl);
-        }
+			// this control is used to temporarly hide the vertical scroll bar
+			hideScrollBarControl = new Control();
+			hideScrollBarControl.Visible = false;
+			hideScrollBarControl.Enabled = false;
+			hideScrollBarControl.TabStop = false;
+			// control is disposed automatically when the grid is disposed
+			this.Controls.Add(hideScrollBarControl);
+		}
 
-        protected override void OnRowEnter(DataGridViewCellEventArgs e)
-        {
-            // ensure full row select
-            base.OnRowEnter(e);
-            if (this.SelectionMode == DataGridViewSelectionMode.CellSelect ||
+		protected override void OnRowEnter(DataGridViewCellEventArgs e)
+		{
+			// ensure full row select
+			base.OnRowEnter(e);
+			if (this.SelectionMode == DataGridViewSelectionMode.CellSelect ||
                 (this.SelectionMode == DataGridViewSelectionMode.FullRowSelect &&
                 base.Rows[e.RowIndex].Selected == false))
-            {
-                this.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-                base.Rows[e.RowIndex].Selected = true;
-            }
-        }
+			{
+				this.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+				base.Rows[e.RowIndex].Selected = true;
+			}
+		}
         
 		private void LockVerticalScrollBarUpdate(bool lockUpdate/*, bool delayed*/)
 		{
-            // Temporarly hide/show the vertical scroll bar by changing its parent
-            if (!this._inExpandCollapse)
-            {
-                if (lockUpdate)
-                {
-                    this.VerticalScrollBar.Parent = hideScrollBarControl;
-                }
-                else
-                {
-                    this.VerticalScrollBar.Parent = this;
-                }
-            }
-        }
+			// Temporarly hide/show the vertical scroll bar by changing its parent
+			if (!this._inExpandCollapse)
+			{
+				if (lockUpdate)
+				{
+					this.VerticalScrollBar.Parent = hideScrollBarControl;
+				}
+				else
+				{
+					this.VerticalScrollBar.Parent = this;
+				}
+			}
+		}
 
-        protected override void OnColumnAdded(DataGridViewColumnEventArgs e)
-        {
-            if (typeof(TreeGridColumn).IsAssignableFrom(e.Column.GetType()))
-            {
-                if (_expandableColumn == null)
-                {
-                    // identify the expanding column.			
-                    _expandableColumn = (TreeGridColumn)e.Column;
-                }
-                else
-                {
-                   // this.Columns.Remove(e.Column);
-                    //throw new InvalidOperationException("Only one TreeGridColumn per TreeGridView is supported.");
-                }
-            }
+		protected override void OnColumnAdded(DataGridViewColumnEventArgs e)
+		{
+			if (typeof(TreeGridColumn).IsAssignableFrom(e.Column.GetType()))
+			{
+				if (_expandableColumn == null)
+				{
+					// identify the expanding column.			
+					_expandableColumn = (TreeGridColumn)e.Column;
+				}
+				else
+				{
+					// this.Columns.Remove(e.Column);
+					//throw new InvalidOperationException("Only one TreeGridColumn per TreeGridView is supported.");
+				}
+			}
 
-            // Expandable Grid doesn't support sorting. This is just a limitation of the sample.
-            e.Column.SortMode = DataGridViewColumnSortMode.NotSortable;
+			// Expandable Grid doesn't support sorting. This is just a limitation of the sample.
+			e.Column.SortMode = DataGridViewColumnSortMode.NotSortable;
 
-            base.OnColumnAdded(e);
-        }
+			base.OnColumnAdded(e);
+		}
 
-        private static class Win32Helper
-        {
-            public const int WM_SYSKEYDOWN = 0x0104,
+		private static class Win32Helper
+		{
+			public const int WM_SYSKEYDOWN = 0x0104,
                              WM_KEYDOWN = 0x0100,
                              WM_SETREDRAW = 0x000B;
 
-            [System.Runtime.InteropServices.DllImport("USER32.DLL", CharSet = System.Runtime.InteropServices.CharSet.Auto)]
-            public static extern IntPtr SendMessage(System.Runtime.InteropServices.HandleRef hWnd, int msg, IntPtr wParam, IntPtr lParam);
+			[System.Runtime.InteropServices.DllImport("USER32.DLL", CharSet = System.Runtime.InteropServices.CharSet.Auto)]
+			public static extern IntPtr SendMessage(System.Runtime.InteropServices.HandleRef hWnd, int msg, IntPtr wParam, IntPtr lParam);
 
-            [System.Runtime.InteropServices.DllImport("USER32.DLL", CharSet = System.Runtime.InteropServices.CharSet.Auto)]
-            public static extern IntPtr SendMessage(System.Runtime.InteropServices.HandleRef hWnd, int msg, int wParam, int lParam);
+			[System.Runtime.InteropServices.DllImport("USER32.DLL", CharSet = System.Runtime.InteropServices.CharSet.Auto)]
+			public static extern IntPtr SendMessage(System.Runtime.InteropServices.HandleRef hWnd, int msg, int wParam, int lParam);
 
-            [System.Runtime.InteropServices.DllImport("USER32.DLL", CharSet = System.Runtime.InteropServices.CharSet.Auto)]
-            public static extern bool PostMessage(System.Runtime.InteropServices.HandleRef hwnd, int msg, IntPtr wparam, IntPtr lparam);
+			[System.Runtime.InteropServices.DllImport("USER32.DLL", CharSet = System.Runtime.InteropServices.CharSet.Auto)]
+			public static extern bool PostMessage(System.Runtime.InteropServices.HandleRef hwnd, int msg, IntPtr wparam, IntPtr lparam);
 
-        }
+		}
         #endregion
 
 
-    }
+	}
 }

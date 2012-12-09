@@ -57,8 +57,14 @@ namespace Zyrenth
 			{
 				for (int i = 0; i < text.Length; i++)
 				{
-					if (Char.IsWhiteSpace(text[i])) { continue; }
-					else { return false; }
+					if (Char.IsWhiteSpace(text[i]))
+					{
+						continue;
+					}
+					else
+					{
+						return false;
+					}
 				}
 			}
 			return false;

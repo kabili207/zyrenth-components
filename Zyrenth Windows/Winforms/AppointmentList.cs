@@ -10,18 +10,16 @@ using System.Text;
 using System.Windows.Forms;
 using Zyrenth;
 
-
 namespace Zyrenth.Winforms
 {
 	/// <summary>
 	/// Represents a Windows control that displays AppointmentItems
 	/// similar to Microsoft Outlook 2010
 	/// </summary>
-    [ToolboxBitmap(typeof(AppointmentList))]
+	[ToolboxBitmap(typeof(AppointmentList))]
 	public partial class AppointmentList : ScrollableControl
 	{
 		public const int NoMatches = -1;
-
 		private List<AppointmentItem> _appointments;
 
 		/// <summary>
@@ -150,7 +148,7 @@ namespace Zyrenth.Winforms
 		/// </summary>
 		private void InitializeComponent()
 		{
-            //System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AppointmentList));
+			//System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AppointmentList));
 			this.SuspendLayout();
 			// 
 			// AppointmentList
@@ -285,11 +283,11 @@ namespace Zyrenth.Winforms
 			if (_appointments.Count == 0)
 			{
 				if (DesignMode)
-					TextRenderer.DrawText(graphics, this.Name, fontNorm,new Point(X, Y + boxPad),brushColor);
+					TextRenderer.DrawText(graphics, this.Name, fontNorm, new Point(X, Y + boxPad), brushColor);
 					//graphics.DrawString(this.Name, fontNorm, brush, new Point(X, Y + boxPad), sf);
 				else
 					TextRenderer.DrawText(graphics, "No appointments found", fontBold, new Point(X, Y + boxPad), brushColor);
-					//graphics.DrawString("No appointments found", fontBold, brush, new Point(X, Y + boxPad), sf);
+				//graphics.DrawString("No appointments found", fontBold, brush, new Point(X, Y + boxPad), sf);
 				return;
 			}
 
@@ -352,18 +350,18 @@ namespace Zyrenth.Winforms
 					Rectangle freeRect = new Rectangle(box.X, box.Y, 8, box.Height);
 					switch (a.Status)
 					{
-						case AppointmentStatus.Free:
-							freeBrush = Common.CreateGradient(freeRect, Color.Green, LinearGradientMode.Vertical);
-							break;
-						case AppointmentStatus.Busy:
-							freeBrush = Common.CreateGradient(freeRect, Color.Blue, LinearGradientMode.Vertical);
-							break;
-						case AppointmentStatus.OutOfOffice:
-							freeBrush = Common.CreateGradient(freeRect, Color.Red, LinearGradientMode.Vertical);
-							break;
-						case AppointmentStatus.Tentative:
-							freeBrush = Common.CreateGradient(freeRect, Color.Purple, LinearGradientMode.Vertical);
-							break;
+					case AppointmentStatus.Free:
+						freeBrush = Common.CreateGradient(freeRect, Color.Green, LinearGradientMode.Vertical);
+						break;
+					case AppointmentStatus.Busy:
+						freeBrush = Common.CreateGradient(freeRect, Color.Blue, LinearGradientMode.Vertical);
+						break;
+					case AppointmentStatus.OutOfOffice:
+						freeBrush = Common.CreateGradient(freeRect, Color.Red, LinearGradientMode.Vertical);
+						break;
+					case AppointmentStatus.Tentative:
+						freeBrush = Common.CreateGradient(freeRect, Color.Purple, LinearGradientMode.Vertical);
+						break;
 					}
 					if (freeBrush != null)
 					{
@@ -371,7 +369,7 @@ namespace Zyrenth.Winforms
 						graphics.DrawRectangle(SystemPens.ControlDark, box);
 					}
 
-					Rectangle head = new Rectangle(box.Left + boxPad+ 8, box.Top + boxPad, box.Width - (boxPad * 2) - 8, box.Height - (boxPad * 2));
+					Rectangle head = new Rectangle(box.Left + boxPad + 8, box.Top + boxPad, box.Width - (boxPad * 2) - 8, box.Height - (boxPad * 2));
 					//graphics.DrawString(a.Subject, fontBold, baseFont, head, sf);
 					TextRenderer.DrawText(graphics, a.Subject, fontBold, head, baseFont, TextFormatFlags.Left | TextFormatFlags.Top);
 					head.Height -= sub;
@@ -387,7 +385,6 @@ namespace Zyrenth.Winforms
 			AutoScrollMinSize = new Size(0, Y);
 			sf.Dispose();
 		}
-
 
 		protected override void OnMouseClick(MouseEventArgs e)
 		{

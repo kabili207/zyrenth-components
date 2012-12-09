@@ -27,22 +27,28 @@ namespace Zyrenth.Winforms
 			get { return _node; }
 		}
 	}
+
 	public class CollapsingEventArgs : System.ComponentModel.CancelEventArgs
 	{
 		private TreeGridNode _node;
 
-		private CollapsingEventArgs() { }
+		private CollapsingEventArgs()
+		{
+		}
+
 		public CollapsingEventArgs(TreeGridNode node)
 			: base()
 		{
 			this._node = node;
 		}
+
 		public TreeGridNode Node
 		{
 			get { return _node; }
 		}
 
 	}
+
 	public class CollapsedEventArgs : TreeGridNodeEventBase
 	{
 		public CollapsedEventArgs(TreeGridNode node)
@@ -55,17 +61,22 @@ namespace Zyrenth.Winforms
 	{
 		private TreeGridNode _node;
 
-		private ExpandingEventArgs() { }
+		private ExpandingEventArgs()
+		{
+		}
+
 		public ExpandingEventArgs(TreeGridNode node):base()
 		{
 			this._node = node;
 		}
+
 		public TreeGridNode Node
 		{
 			get { return _node; }
 		}
 
 	}
+
 	public class ExpandedEventArgs : TreeGridNodeEventBase
 	{
 		public ExpandedEventArgs(TreeGridNode node):base(node)
@@ -74,9 +85,11 @@ namespace Zyrenth.Winforms
 	}
 
 	public delegate void ExpandingEventHandler(object sender, ExpandingEventArgs e);
+
 	public delegate void ExpandedEventHandler(object sender, ExpandedEventArgs e);
 
 	public delegate void CollapsingEventHandler(object sender, CollapsingEventArgs e);
+
 	public delegate void CollapsedEventHandler(object sender, CollapsedEventArgs e);
 
 }

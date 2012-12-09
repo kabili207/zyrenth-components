@@ -38,15 +38,15 @@ namespace Zyrenth.Winforms
 
 		}
 
-        public override object Clone()
-        {
+		public override object Clone()
+		{
 			TreeGridCell c = (TreeGridCell)base.Clone();
 			
-            c.glyphWidth = this.glyphWidth;
-            c.calculatedLeftPadding = this.calculatedLeftPadding;
+			c.glyphWidth = this.glyphWidth;
+			c.calculatedLeftPadding = this.calculatedLeftPadding;
 
-            return c;
-        }
+			return c;
+		}
 
 		internal protected virtual void UnSited()
 		{
@@ -64,19 +64,22 @@ namespace Zyrenth.Winforms
 			this._previousPadding = this.Style.Padding;
 
 			this.UpdateStyle();
-		}		
+		}
 
-		internal protected virtual void UpdateStyle(){
+		internal protected virtual void UpdateStyle()
+		{
 			// styles shouldn't be modified when we are not sited.
-			if (this.IsSited == false) return;
+			if (this.IsSited == false)
+				return;
 
 			int level = this.Level;
 
 			Padding p = this._previousPadding;
 			Size preferredSize;
 
-			using (Graphics g = this.OwningNode._grid.CreateGraphics() ) {
-				preferredSize =this.GetPreferredSize(g, this.InheritedStyle, this.RowIndex, new Size(0, 0));
+			using (Graphics g = this.OwningNode._grid.CreateGraphics())
+			{
+				preferredSize = this.GetPreferredSize(g, this.InheritedStyle, this.RowIndex, new Size(0, 0));
 			}
 
 			Image image = this.OwningNode.Image;
@@ -84,8 +87,8 @@ namespace Zyrenth.Winforms
 			if (image != null)
 			{
 				// calculate image size
-				_imageWidth = image.Width+2;
-				_imageHeight = image.Height+2;
+				_imageWidth = image.Width + 2;
+				_imageHeight = image.Height + 2;
 
 			}
 			else
@@ -105,7 +108,7 @@ namespace Zyrenth.Winforms
 			else
 			{
 				this.Style.Padding = new Padding(p.Left + (level * INDENT_WIDTH) + _imageWidth + INDENT_MARGIN,
-												 p.Top , p.Right, p.Bottom );
+												 p.Top, p.Right, p.Bottom);
 
 			}
 
@@ -145,32 +148,34 @@ namespace Zyrenth.Winforms
 		protected override void Paint(Graphics graphics, Rectangle clipBounds, Rectangle cellBounds, int rowIndex, DataGridViewElementStates cellState, object value, object formattedValue, string errorText, DataGridViewCellStyle cellStyle, DataGridViewAdvancedBorderStyle advancedBorderStyle, DataGridViewPaintParts paintParts)
 		{
 
-            TreeGridNode node = this.OwningNode;
-            if (node == null) return;
+			TreeGridNode node = this.OwningNode;
+			if (node == null)
+				return;
 
-            Image image = node.Image;
+			Image image = node.Image;
 
-            if (this._imageHeight == 0 && image != null) this.UpdateStyle();
+			if (this._imageHeight == 0 && image != null)
+				this.UpdateStyle();
 
 			// paint the cell normally
 			base.Paint(graphics, clipBounds, cellBounds, rowIndex, cellState, value, formattedValue, errorText, cellStyle, advancedBorderStyle, paintParts);
 
-            // TODO: Indent width needs to take image size into account
+			// TODO: Indent width needs to take image size into account
 			Rectangle glyphRect = new Rectangle(cellBounds.X + this.GlyphMargin, cellBounds.Y, INDENT_WIDTH, cellBounds.Height - 1);
 			int glyphHalf = glyphRect.Width / 2;
 
 			//TODO: This painting code needs to be rehashed to be cleaner
 			int level = this.Level;
 
-            //TODO: Rehash this to take different Imagelayouts into account. This will speed up drawing
+			//TODO: Rehash this to take different Imagelayouts into account. This will speed up drawing
 			//		for images of the same size (ImageLayout.None)
 			if (image != null)
 			{
 				Point pp;
 				if (_imageHeight > cellBounds.Height)
-                    pp = new Point(glyphRect.X + this.glyphWidth, cellBounds.Y + _imageHeightOffset);
+					pp = new Point(glyphRect.X + this.glyphWidth, cellBounds.Y + _imageHeightOffset);
 				else
-                    pp = new Point(glyphRect.X + this.glyphWidth, (cellBounds.Height / 2 - _imageHeight / 2) + cellBounds.Y);
+					pp = new Point(glyphRect.X + this.glyphWidth, (cellBounds.Height / 2 - _imageHeight / 2) + cellBounds.Y);
 
 				// Graphics container to push/pop changes. This enables us to set clipping when painting
 				// the cell's image -- keeps it from bleeding outsize of cells.
@@ -183,76 +188,76 @@ namespace Zyrenth.Winforms
 			}
 
 			// Paint tree lines			
-            if (node._grid.ShowLines)
-            {
-                using (Pen linePen = new Pen(SystemBrushes.ControlDark, 1.0f))
-                {
-                    linePen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
-                    bool isLastSibling = node.IsLastSibling;
-                    bool isFirstSibling = node.IsFirstSibling;
-                    if (node.Level == 1)
-                    {
-                        // the Root nodes display their lines differently
-                        if (isFirstSibling && isLastSibling)
-                        {
-                            // only node, both first and last. Just draw horizontal line
-                            graphics.DrawLine(linePen, glyphRect.X + 4, cellBounds.Top + cellBounds.Height / 2, glyphRect.Right, cellBounds.Top + cellBounds.Height / 2);
-                        }
-                        else if (isLastSibling)
-                        {
-                            // last sibling doesn't draw the line extended below. Paint horizontal then vertical
-                            graphics.DrawLine(linePen, glyphRect.X + 4, cellBounds.Top + cellBounds.Height / 2, glyphRect.Right, cellBounds.Top + cellBounds.Height / 2);
-                            graphics.DrawLine(linePen, glyphRect.X + 4, cellBounds.Top, glyphRect.X + 4, cellBounds.Top + cellBounds.Height / 2);
-                        }
-                        else if (isFirstSibling)
-                        {
-                            // first sibling doesn't draw the line extended above. Paint horizontal then vertical
-                            graphics.DrawLine(linePen, glyphRect.X + 4, cellBounds.Top + cellBounds.Height / 2, glyphRect.Right, cellBounds.Top + cellBounds.Height / 2);
-                            graphics.DrawLine(linePen, glyphRect.X + 4, cellBounds.Top + cellBounds.Height / 2, glyphRect.X + 4, cellBounds.Bottom);
-                        }
-                        else
-                        {
-                            // normal drawing draws extended from top to bottom. Paint horizontal then vertical
-                            graphics.DrawLine(linePen, glyphRect.X + 4, cellBounds.Top + cellBounds.Height / 2, glyphRect.Right, cellBounds.Top + cellBounds.Height / 2);
-                            graphics.DrawLine(linePen, glyphRect.X + 4, cellBounds.Top, glyphRect.X + 4, cellBounds.Bottom);
-                        }
-                    }
-                    else
-                    {
-                        if (isLastSibling)
-                        {
-                            // last sibling doesn't draw the line extended below. Paint horizontal then vertical
-                            graphics.DrawLine(linePen, glyphRect.X + 4, cellBounds.Top + cellBounds.Height / 2, glyphRect.Right, cellBounds.Top + cellBounds.Height / 2);
-                            graphics.DrawLine(linePen, glyphRect.X + 4, cellBounds.Top, glyphRect.X + 4, cellBounds.Top + cellBounds.Height / 2);
-                        }
-                        else
-                        {
-                            // normal drawing draws extended from top to bottom. Paint horizontal then vertical
-                            graphics.DrawLine(linePen, glyphRect.X + 4, cellBounds.Top + cellBounds.Height / 2, glyphRect.Right, cellBounds.Top + cellBounds.Height / 2);
-                            graphics.DrawLine(linePen, glyphRect.X + 4, cellBounds.Top, glyphRect.X + 4, cellBounds.Bottom);
-                        }
+			if (node._grid.ShowLines)
+			{
+				using (Pen linePen = new Pen(SystemBrushes.ControlDark, 1.0f))
+				{
+					linePen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
+					bool isLastSibling = node.IsLastSibling;
+					bool isFirstSibling = node.IsFirstSibling;
+					if (node.Level == 1)
+					{
+						// the Root nodes display their lines differently
+						if (isFirstSibling && isLastSibling)
+						{
+							// only node, both first and last. Just draw horizontal line
+							graphics.DrawLine(linePen, glyphRect.X + 4, cellBounds.Top + cellBounds.Height / 2, glyphRect.Right, cellBounds.Top + cellBounds.Height / 2);
+						}
+						else if (isLastSibling)
+						{
+							// last sibling doesn't draw the line extended below. Paint horizontal then vertical
+							graphics.DrawLine(linePen, glyphRect.X + 4, cellBounds.Top + cellBounds.Height / 2, glyphRect.Right, cellBounds.Top + cellBounds.Height / 2);
+							graphics.DrawLine(linePen, glyphRect.X + 4, cellBounds.Top, glyphRect.X + 4, cellBounds.Top + cellBounds.Height / 2);
+						}
+						else if (isFirstSibling)
+						{
+							// first sibling doesn't draw the line extended above. Paint horizontal then vertical
+							graphics.DrawLine(linePen, glyphRect.X + 4, cellBounds.Top + cellBounds.Height / 2, glyphRect.Right, cellBounds.Top + cellBounds.Height / 2);
+							graphics.DrawLine(linePen, glyphRect.X + 4, cellBounds.Top + cellBounds.Height / 2, glyphRect.X + 4, cellBounds.Bottom);
+						}
+						else
+						{
+							// normal drawing draws extended from top to bottom. Paint horizontal then vertical
+							graphics.DrawLine(linePen, glyphRect.X + 4, cellBounds.Top + cellBounds.Height / 2, glyphRect.Right, cellBounds.Top + cellBounds.Height / 2);
+							graphics.DrawLine(linePen, glyphRect.X + 4, cellBounds.Top, glyphRect.X + 4, cellBounds.Bottom);
+						}
+					}
+					else
+					{
+						if (isLastSibling)
+						{
+							// last sibling doesn't draw the line extended below. Paint horizontal then vertical
+							graphics.DrawLine(linePen, glyphRect.X + 4, cellBounds.Top + cellBounds.Height / 2, glyphRect.Right, cellBounds.Top + cellBounds.Height / 2);
+							graphics.DrawLine(linePen, glyphRect.X + 4, cellBounds.Top, glyphRect.X + 4, cellBounds.Top + cellBounds.Height / 2);
+						}
+						else
+						{
+							// normal drawing draws extended from top to bottom. Paint horizontal then vertical
+							graphics.DrawLine(linePen, glyphRect.X + 4, cellBounds.Top + cellBounds.Height / 2, glyphRect.Right, cellBounds.Top + cellBounds.Height / 2);
+							graphics.DrawLine(linePen, glyphRect.X + 4, cellBounds.Top, glyphRect.X + 4, cellBounds.Bottom);
+						}
 
-                        // paint lines of previous levels to the root
-                        TreeGridNode previousNode = node.Parent;
-                        int horizontalStop = (glyphRect.X + 4) - INDENT_WIDTH;
+						// paint lines of previous levels to the root
+						TreeGridNode previousNode = node.Parent;
+						int horizontalStop = (glyphRect.X + 4) - INDENT_WIDTH;
 
-                        while (!previousNode.IsRoot)
-                        {
-                            if (previousNode.HasChildren && !previousNode.IsLastSibling)
-                            {
-                                // paint vertical line
-                                graphics.DrawLine(linePen, horizontalStop, cellBounds.Top, horizontalStop, cellBounds.Bottom);
-                            }
-                            previousNode = previousNode.Parent;
-                            horizontalStop = horizontalStop - INDENT_WIDTH;
-                        }
-                    }
+						while (!previousNode.IsRoot)
+						{
+							if (previousNode.HasChildren && !previousNode.IsLastSibling)
+							{
+								// paint vertical line
+								graphics.DrawLine(linePen, horizontalStop, cellBounds.Top, horizontalStop, cellBounds.Bottom);
+							}
+							previousNode = previousNode.Parent;
+							horizontalStop = horizontalStop - INDENT_WIDTH;
+						}
+					}
 
-                }
-            }
+				}
+			}
 
-            if (node.HasChildren || node._grid.VirtualNodes)
-            {
+			if (node.HasChildren || node._grid.VirtualNodes)
+			{
 				if (Application.RenderWithVisualStyles)
 				{
 					// Paint node glyphs				
@@ -267,24 +272,26 @@ namespace Zyrenth.Winforms
 
 					graphics.FillRectangle(SystemBrushes.Control, nodeRect);
 					graphics.DrawRectangle(SystemPens.ControlLightLight, nodeRect);
-					graphics.DrawLine(SystemPens.ControlText, nodeRect.X + 2, nodeRect.Top + 4, nodeRect.Right -2, nodeRect.Top + 4);
+					graphics.DrawLine(SystemPens.ControlText, nodeRect.X + 2, nodeRect.Top + 4, nodeRect.Right - 2, nodeRect.Top + 4);
 
-					if(!node.IsExpanded)
+					if (!node.IsExpanded)
 						graphics.DrawLine(SystemPens.ControlText, nodeRect.X + 4, nodeRect.Top + 2, glyphRect.X + 4, nodeRect.Bottom - 2);
 					
 				}
-            }
+			}
 
 
 		}
-        protected override void OnMouseUp(DataGridViewCellMouseEventArgs e)
-        {
-            base.OnMouseUp(e);
 
-            TreeGridNode node = this.OwningNode;
-            if (node != null)
-                node._grid._inExpandCollapseMouseCapture = false;
-        }
+		protected override void OnMouseUp(DataGridViewCellMouseEventArgs e)
+		{
+			base.OnMouseUp(e);
+
+			TreeGridNode node = this.OwningNode;
+			if (node != null)
+				node._grid._inExpandCollapseMouseCapture = false;
+		}
+
 		protected override void OnMouseDown(DataGridViewCellMouseEventArgs e)
 		{
 			if (e.Location.X > this.InheritedStyle.Padding.Left)
@@ -296,16 +303,17 @@ namespace Zyrenth.Winforms
 				// Expand the node
 				//TODO: Calculate more precise location
 				TreeGridNode node = this.OwningNode;
-                if (node != null)
+				if (node != null)
 				{
-                    node._grid._inExpandCollapseMouseCapture = true;
-                    if (node.IsExpanded)
-                        node.Collapse();
+					node._grid._inExpandCollapseMouseCapture = true;
+					if (node.IsExpanded)
+						node.Collapse();
 					else
-                        node.Expand();
-                }
+						node.Expand();
+				}
 			}
 		}
+
 		public TreeGridNode OwningNode
 		{
 			get { return base.OwningRow as TreeGridNode; }

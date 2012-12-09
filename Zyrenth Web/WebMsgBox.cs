@@ -6,13 +6,12 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Collections.Generic;
 
-
 namespace Zyrenth.Web
 {
 
 	// TODO: Add support for message types (error, warning, etc.)
-    public class WebMsgBox
-    {
+	public class WebMsgBox
+	{
 		protected static Dictionary<IHttpHandler, Queue<MsgBox>> handlerPages;
 
 		static WebMsgBox()
@@ -27,8 +26,12 @@ namespace Zyrenth.Web
 		protected class MsgBox
 		{
 			public string Message { get; set; }
+
 			public string Title { get; set; }
-			public MsgBox() { }
+
+			public MsgBox()
+			{
+			}
 		}
 
 		// TODO: Add overload to accept an exception
@@ -52,7 +55,6 @@ namespace Zyrenth.Web
 				queue.Enqueue(new MsgBox() { Message = message, Title = title });
 			}
 		}
-
 
 		private static void CurrentPageUnload(object sender, EventArgs e)
 		{
@@ -104,5 +106,5 @@ namespace Zyrenth.Web
 				//HttpContext.Current.Response.Write(builder.ToString());
 			}
 		}
-    }
+	}
 }

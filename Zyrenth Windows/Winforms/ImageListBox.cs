@@ -12,8 +12,8 @@ namespace Zyrenth.Winforms
 	/// <summary>
 	/// Extends the <see cref="System.Windows.Forms.ListBox"/> control to display an image
 	/// to the left of the item.
-    /// </summary>
-    [ToolboxBitmap(typeof(ImageListBox))]
+	/// </summary>
+	[ToolboxBitmap(typeof(ImageListBox))]
 	public class ImageListBox : ListBox
 	{
 		[DefaultValue(false)]
@@ -41,7 +41,7 @@ namespace Zyrenth.Winforms
 		{
 			ImageListControlConvertEventArgs args =
 				new ImageListControlConvertEventArgs(e.Value, e.DesiredType, e.ListItem);
-			if(Format != null)
+			if (Format != null)
 				Format(this, args);
 			e.Value = args.Value;
 		}
@@ -106,7 +106,7 @@ namespace Zyrenth.Winforms
 			else
 			{
 				back = SystemBrushes.Window;
-				if(ilist != null && !ilist.Active)
+				if (ilist != null && !ilist.Active)
 					front = SystemColors.GrayText;
 				else
 					front = SystemColors.WindowText;
@@ -136,49 +136,49 @@ namespace Zyrenth.Winforms
 				Graphics gBmp = Graphics.FromImage(bmp);
 
 				gBmp.Clear(new Pen(back).Color);
-                gBmp.CompositingMode = CompositingMode.SourceOver;
+				gBmp.CompositingMode = CompositingMode.SourceOver;
 				gBmp.DrawImage(ilist.Image, 0, 0, e.Bounds.Height - 2, e.Bounds.Height - 2);
 
-				e.Graphics.DrawImage(bmp, e.Bounds.Left +1, e.Bounds.Top +1);
+				e.Graphics.DrawImage(bmp, e.Bounds.Left + 1, e.Bounds.Top + 1);
 			}
 		}
 	}
 
-    /// <summary>
-    /// Represents the method that will handle converting a System.Windows.Forms.ListControl.
-    /// </summary>
-    /// <param name="sender">Represents the method that will handle converting
-    /// a <see cref="System.Windows.Forms.ListControl."/></param>
-    /// <param name="e">A <see cref="System.Windows.Forms.ListControlConvertEventArgs"/>
-    /// that contains the event data.</param>
-    public delegate void ImageListControlConvertEventHandler(object sender, ImageListControlConvertEventArgs e);
+	/// <summary>
+	/// Represents the method that will handle converting a System.Windows.Forms.ListControl.
+	/// </summary>
+	/// <param name="sender">Represents the method that will handle converting
+	/// a <see cref="System.Windows.Forms.ListControl."/></param>
+	/// <param name="e">A <see cref="System.Windows.Forms.ListControlConvertEventArgs"/>
+	/// that contains the event data.</param>
+	public delegate void ImageListControlConvertEventHandler(object sender, ImageListControlConvertEventArgs e);
 
-    /// <summary>
-    /// Extends the System.Windows.Forms.ListControlConvertEventArgs class
-    /// to allow transparent access to an Zyrenth.Winforms.ImageListBoxItem's
-    /// Item property.
-    /// </summary>
-    public class ImageListControlConvertEventArgs : ListControlConvertEventArgs
-    {
-        /// <summary>
-        /// Gets a data source item.
-        /// </summary>
-        public new object ListItem
-        {
+	/// <summary>
+	/// Extends the System.Windows.Forms.ListControlConvertEventArgs class
+	/// to allow transparent access to an Zyrenth.Winforms.ImageListBoxItem's
+	/// Item property.
+	/// </summary>
+	public class ImageListControlConvertEventArgs : ListControlConvertEventArgs
+	{
+		/// <summary>
+		/// Gets a data source item.
+		/// </summary>
+		public new object ListItem
+		{
 
-            get
-            {
-                ImageListBoxItem i = base.ListItem as ImageListBoxItem;
-                if (i != null)
-                    return i.Item;
-                else
-                    return base.ListItem;
-            }
-        }
+			get
+			{
+				ImageListBoxItem i = base.ListItem as ImageListBoxItem;
+				if (i != null)
+					return i.Item;
+				else
+					return base.ListItem;
+			}
+		}
 
-        public ImageListControlConvertEventArgs(object value, System.Type desiredType, object listItem)
+		public ImageListControlConvertEventArgs(object value, System.Type desiredType, object listItem)
             : base(value, desiredType, listItem)
-        {
-        }
-    }
+		{
+		}
+	}
 }

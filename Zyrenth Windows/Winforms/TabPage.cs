@@ -21,7 +21,6 @@ namespace Zyrenth.Winforms
 			
 		}
 
-
 		private void FormActivated(object sender, EventArgs e)
 		{
 			TabControl tc = this.Parent as TabControl;

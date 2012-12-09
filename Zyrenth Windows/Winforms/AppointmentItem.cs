@@ -8,7 +8,8 @@ using System.ComponentModel;
 namespace Zyrenth.Winforms
 {
 	/// <summary>Specifies identifiers to represent availibity for an <see cref="AppointmentItem"/></summary>
-	public enum AppointmentStatus {
+	public enum AppointmentStatus
+	{
 		/// <summary>Represents available time</summary>
 		Free,
 		/// <summary>Represents unavailable time</summary>
@@ -16,7 +17,8 @@ namespace Zyrenth.Winforms
 		/// <summary>Represents time where availability is unknown</summary>
 		Tentative,
 		/// <summary>Represents time spent out of the office</summary>
-		OutOfOffice }
+		OutOfOffice
+	}
 
 	/// <summary>
 	/// Represents an appointment
@@ -27,10 +29,15 @@ namespace Zyrenth.Winforms
 	public class AppointmentItem
 	{
 		public String Subject { get; set; }
+
 		public String Location { get; set; }
+
 		public DateTime Start { get; set; }
+
 		public DateTime End { get; set; }
+
 		public Rectangle Bounds { get; set; }
+
 		public object Tag { get; set; }
 
 		private AppointmentStatus _status = AppointmentStatus.Free;

@@ -4,7 +4,6 @@ using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using System.Reflection;
 
-
 namespace Zyrenth
 {
 	public static class Common
@@ -69,7 +68,8 @@ namespace Zyrenth
 		/// <returns>
 		/// A <see cref="LinearGradientBrush"/>
 		/// </returns>
-		public static LinearGradientBrush CreateGradient(Rectangle box, Color baseColor, LinearGradientMode mode) {
+		public static LinearGradientBrush CreateGradient(Rectangle box, Color baseColor, LinearGradientMode mode)
+		{
 			
 			// Create new colors that are slightly lighter and
 			// darker than the system base color

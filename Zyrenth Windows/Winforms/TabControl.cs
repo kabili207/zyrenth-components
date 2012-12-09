@@ -16,7 +16,6 @@ namespace Zyrenth.Winforms
 	{
 		private Form mdiForm;
 		private MdiClient ctlClient;
-
 		ContextMenuStrip menu;
 		ToolStripMenuItem closeToolStripMenuItem;
 		ToolStripMenuItem closeAllToolStripMenuItem;
@@ -113,7 +112,6 @@ namespace Zyrenth.Winforms
 				base.OnMouseClick(e);
 			}
 		}
-
 
 		protected override void OnDrawItem(DrawItemEventArgs e)
 		{

@@ -25,23 +25,21 @@ namespace Zyrenth.Winforms
 		DesignTimeVisible(false)
 	]
     public class TreeGridNode : DataGridViewRow//, IComponent
-    {
+	{
 		internal TreeGridView _grid;
 		internal TreeGridNode _parent;
 		internal TreeGridNodeCollection _owner;
-        internal bool IsExpanded;
+		internal bool IsExpanded;
 		internal bool IsRoot;
 		internal bool _isSited;
 		internal bool _isFirstSibling;
 		internal bool _isLastSibling;
 		internal Image _image;
 		internal int _imageIndex;
-
 		private Random rndSeed = new Random();
 		public int UniqueValue = -1;
-        TreeGridCell _treeCell;
-        TreeGridNodeCollection childrenNodes;
-
+		TreeGridCell _treeCell;
+		TreeGridNodeCollection childrenNodes;
 		private int _index;
 		private int _level;
 		private bool childCellsCreated = false;
@@ -57,11 +55,11 @@ namespace Zyrenth.Winforms
 			this.IsExpanded = true;
 		}
 
-        public TreeGridNode()
-        {            
+		public TreeGridNode()
+		{            
 			_index = -1;
 			_level = -1;            
-            IsExpanded = false;
+			IsExpanded = false;
 			UniqueValue = this.rndSeed.Next();
 			_isSited = false;
 			_isFirstSibling = false;
@@ -126,8 +124,10 @@ namespace Zyrenth.Winforms
 		System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced),
 		 Browsable(false),
 		 DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-		public int RowIndex{
-			get{
+		public int RowIndex
+		{
+			get
+			{
 				return base.Index;
 			}
 		}
@@ -153,26 +153,26 @@ namespace Zyrenth.Winforms
 			}
 		}
 
-        [Browsable(false),
+		[Browsable(false),
         EditorBrowsable( EditorBrowsableState.Never), 
         DesignerSerializationVisibility( DesignerSerializationVisibility.Hidden)]
-        public ImageList ImageList
-        {
-            get
-            {
-                if (this._grid != null)
-                    return this._grid.ImageList;
-                else
-                    return null;
-            }
-        }
+		public ImageList ImageList
+		{
+			get
+			{
+				if (this._grid != null)
+					return this._grid.ImageList;
+				else
+					return null;
+			}
+		}
 
 		private bool ShouldSerializeImageIndex()
 		{
 			return (this._imageIndex != -1 && this._image == null);
 		}
 
-        [Category("Appearance"),
+		[Category("Appearance"),
         Description("..."), DefaultValue(-1),
         TypeConverter(typeof(ImageIndexConverter)),
         Editor("System.Windows.Forms.Design.ImageIndexEditor", typeof(UITypeEditor))]
@@ -204,7 +204,8 @@ namespace Zyrenth.Winforms
 
 		public Image Image
 		{
-			get {
+			get
+			{
 				if (_image == null && _imageIndex != -1)
 				{
 					if (this.ImageList != null && this._imageIndex < this.ImageList.Images.Count)
@@ -219,7 +220,8 @@ namespace Zyrenth.Winforms
 				{
 					// image from image property
 					return this._image;
-				};
+				}
+				;
 			}
 			set
 			{
@@ -249,7 +251,8 @@ namespace Zyrenth.Winforms
 		void cells_CollectionChanged(object sender, System.ComponentModel.CollectionChangeEventArgs e)
 		{
 			// Exit if there already is a tree cell for this row
-			if (_treeCell != null) return;
+			if (_treeCell != null)
+				return;
 
 			if (e.Action == System.ComponentModel.CollectionChangeAction.Add || e.Action == System.ComponentModel.CollectionChangeAction.Refresh)
 			{
@@ -273,7 +276,7 @@ namespace Zyrenth.Winforms
 				}
 
 				if (treeCell != null) 
-				  _treeCell = treeCell;
+					_treeCell = treeCell;
 			}
 		}
 
@@ -281,30 +284,31 @@ namespace Zyrenth.Winforms
 		 Description("The collection of root nodes in the treelist."),
 		 DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
 		 Editor(typeof(CollectionEditor), typeof(UITypeEditor))]
-        public TreeGridNodeCollection Nodes
-        {
-            get
-            {
-                if (childrenNodes == null)
-                {
-                    childrenNodes = new TreeGridNodeCollection(this);
-                }
-                return childrenNodes;
-            }
-            set { ;}
-        }
+		public TreeGridNodeCollection Nodes
+		{
+			get
+			{
+				if (childrenNodes == null)
+				{
+					childrenNodes = new TreeGridNodeCollection(this);
+				}
+				return childrenNodes;
+			}
+			set { ;}
+		}
 
 		// Create a new Cell property because by default a row is not in the grid and won't
 		// have any cells. We have to fabricate the cell collection ourself.
-        [Browsable(false),
+		[Browsable(false),
          DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new DataGridViewCellCollection Cells
+		public new DataGridViewCellCollection Cells
 		{
 			get
 			{
 				if (!childCellsCreated && this.DataGridView == null)
 				{
-                    if (this._grid == null) return null;
+					if (this._grid == null)
+						return null;
 
 					this.CreateCells(this._grid);
 					childCellsCreated = true;
@@ -317,7 +321,8 @@ namespace Zyrenth.Winforms
 		 DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
 		public int Level
 		{
-			get {
+			get
+			{
 				if (this._level == -1)
 				{
 					// calculate level
@@ -330,7 +335,8 @@ namespace Zyrenth.Winforms
 					}
 					this._level = walk;
 				}
-				return this._level; }
+				return this._level;
+			}
 		}
 
 		[Browsable(false),
@@ -353,14 +359,15 @@ namespace Zyrenth.Winforms
 			}
 		}
 
-        [Browsable(false)]
-        public bool IsSited
-        {
-            get
-            {
-                return this._isSited;
-            }
-        }
+		[Browsable(false)]
+		public bool IsSited
+		{
+			get
+			{
+				return this._isSited;
+			}
+		}
+
 		[Browsable(false)]
 		public bool IsFirstSibling
 		{
@@ -406,9 +413,9 @@ namespace Zyrenth.Winforms
 			node._parent = this;
 			node._grid = this._grid;
 
-            // ensure that all children of this node has their grid set
-            if (this._grid != null)
-                UpdateChildNodes(node);
+			// ensure that all children of this node has their grid set
+			if (this._grid != null)
+				UpdateChildNodes(node);
 
 			//TODO: do we need to use index parameter?
 			if ((this._isSited || this.IsRoot) && this.IsExpanded)
@@ -430,15 +437,16 @@ namespace Zyrenth.Winforms
 			node._parent = this;
 			node._grid = this._grid;
 
-            // ensure that all children of this node has their grid set
-            if (this._grid != null)
-                UpdateChildNodes(node);
+			// ensure that all children of this node has their grid set
+			if (this._grid != null)
+				UpdateChildNodes(node);
 
 			if ((this._isSited || this.IsRoot) && this.IsExpanded && !node._isSited)
 				this._grid.SiteNode(node);
 
 			return true;
 		}
+
 		internal protected virtual bool AddChildNodes(params TreeGridNode[] nodes)
 		{
 			//TODO: Convert the final call into an SiteNodes??
@@ -452,13 +460,13 @@ namespace Zyrenth.Winforms
 
 		internal protected virtual bool RemoveChildNode(TreeGridNode node)
 		{
-			if ((this.IsRoot || this._isSited) && this.IsExpanded )
+			if ((this.IsRoot || this._isSited) && this.IsExpanded)
 			{
 				//We only unsite out child node if we are sited and expanded.
 				this._grid.UnSiteNode(node);
 			
 			}
-            node._grid = null;	
+			node._grid = null;	
 			node._parent = null;
 			return true;
 
@@ -466,31 +474,31 @@ namespace Zyrenth.Winforms
 
 		internal protected virtual bool ClearNodes()
 		{
-            if (this.HasChildren)
-            {
-                for (int i = this.Nodes.Count - 1; i >= 0; i--)
-                {
-                    this.Nodes.RemoveAt(i);
-                }
-            }
+			if (this.HasChildren)
+			{
+				for (int i = this.Nodes.Count - 1; i >= 0; i--)
+				{
+					this.Nodes.RemoveAt(i);
+				}
+			}
 			return true;
 		}
 
-        [
+		[
             Browsable(false),
             EditorBrowsable(EditorBrowsableState.Advanced)
         ]
-        public event EventHandler Disposed
-        {
-            add
-            {
-                this.disposed += value;
-            }
-            remove
-            {
-                this.disposed -= value;
-            }
-        }
+		public event EventHandler Disposed
+		{
+			add
+			{
+				this.disposed += value;
+			}
+			remove
+			{
+				this.disposed -= value;
+			}
+		}
 
 		[
 			Browsable(false),
@@ -508,26 +516,26 @@ namespace Zyrenth.Winforms
 			}
 		}
 
-        private void UpdateChildNodes(TreeGridNode node)
-        {
-            if (node.HasChildren)
-            {
-                foreach (TreeGridNode childNode in node.Nodes)
-                {
-                    childNode._grid = node._grid;
-                    this.UpdateChildNodes(childNode);
-                }
-            }
-        }
+		private void UpdateChildNodes(TreeGridNode node)
+		{
+			if (node.HasChildren)
+			{
+				foreach (TreeGridNode childNode in node.Nodes)
+				{
+					childNode._grid = node._grid;
+					this.UpdateChildNodes(childNode);
+				}
+			}
+		}
 
-        public override string ToString()
-        {
-            StringBuilder sb = new StringBuilder(36);
-            sb.Append("TreeGridNode { Index=");
-            sb.Append(this.RowIndex.ToString(System.Globalization.CultureInfo.CurrentCulture));
-            sb.Append(" }");
-            return sb.ToString();
-        }
+		public override string ToString()
+		{
+			StringBuilder sb = new StringBuilder(36);
+			sb.Append("TreeGridNode { Index=");
+			sb.Append(this.RowIndex.ToString(System.Globalization.CultureInfo.CurrentCulture));
+			sb.Append(" }");
+			return sb.ToString();
+		}
 
 		//protected override void Dispose(bool disposing) {
 		//    if (disposing)

@@ -48,7 +48,6 @@ namespace Zyrenth.Winforms
 				this.ControlAdded += this.Control_Added;
 		}
 
-
 		private void Control_Added(object sender, System.Windows.Forms.ControlEventArgs e)
 		{
 			if (e.Control is CheckBox)
