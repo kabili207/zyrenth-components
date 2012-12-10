@@ -5,6 +5,7 @@ using System.Web.UI.WebControls;
 using System.Web.UI;
 using System.ComponentModel;
 using System.Drawing;
+using Zyrenth.Web.Icons;
 
 [assembly: WebResource("Zyrenth.Web.CSS.ColorSwatch.css", "text/css")]
 [assembly: WebResource("Zyrenth.Web.JS.ColorSwatch.js", "text/javascript")]
@@ -14,7 +15,7 @@ namespace Zyrenth.Web
 	/// <summary>
 	/// Summary description for ColorSwatch
 	/// </summary>
-	[ToolboxBitmap(typeof(ColorSwatch),"Zyrenth.Web.Icons.ColorSwatch.bmp")]
+	[ToolboxBitmap(typeof(IconHelper), "ColorSwatch.bmp")]
 	public class ColorSwatch : Control
 	{
 
@@ -80,6 +81,7 @@ namespace Zyrenth.Web
 			}
 		}
 
+
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
 		[Editor("System.Windows.Forms.Design.StringCollectionEditor, System.Design",
 			"System.Drawing.Design.UITypeEditor, System.Drawing")]
@@ -107,10 +109,6 @@ namespace Zyrenth.Web
 		protected override void Render(HtmlTextWriter writer)
 		{
 			writer.Write(BuildColorSwatchText(Text, HexValue, SecondaryColors));
-			if (this.DesignMode)
-			{
-
-			}
 		}
 
 		protected override void OnInit(EventArgs e)
@@ -132,7 +130,6 @@ namespace Zyrenth.Web
 		{
 			return BuildColorSwatchText(ColorText, HexValue, null);
 		}
-
 		public static string BuildColorSwatchText(string ColorText, string HexValue, List<string> secondaryColors)
 		{
 			System.Drawing.Color fore;
@@ -152,9 +149,7 @@ namespace Zyrenth.Web
 						string sColor = string.Format("{0:X2}{1:X2}{2:X2}", c.R, c.G, c.B);
 						colors += string.Format(@"<span class=""color_secondary"" style=""background-color: #{0};""></span>", sColor);
 					}
-					catch
-					{
-					}
+					catch { }
 				}
 			}
 			return string.Format(s, sFore, sBack, ColorText, colors);
@@ -179,9 +174,7 @@ namespace Zyrenth.Web
 					return;
 				}
 			}
-			catch
-			{
-			}
+			catch { }
 			fore = System.Drawing.Color.Black;
 			back = System.Drawing.Color.White;
 		}

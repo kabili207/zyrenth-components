@@ -6,12 +6,13 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Collections.Generic;
 
+
 namespace Zyrenth.Web
 {
 
 	// TODO: Add support for message types (error, warning, etc.)
-	public class WebMsgBox
-	{
+    public class WebMsgBox
+    {
 		protected static Dictionary<IHttpHandler, Queue<MsgBox>> handlerPages;
 
 		static WebMsgBox()
@@ -26,12 +27,8 @@ namespace Zyrenth.Web
 		protected class MsgBox
 		{
 			public string Message { get; set; }
-
 			public string Title { get; set; }
-
-			public MsgBox()
-			{
-			}
+			public MsgBox() { }
 		}
 
 		// TODO: Add overload to accept an exception
@@ -55,6 +52,7 @@ namespace Zyrenth.Web
 				queue.Enqueue(new MsgBox() { Message = message, Title = title });
 			}
 		}
+
 
 		private static void CurrentPageUnload(object sender, EventArgs e)
 		{
@@ -100,11 +98,42 @@ namespace Zyrenth.Web
 				}
 				//builder.AppendLine("});");
 				builder.AppendLine("</script>");
-				handlerPages.Remove(HttpContext.Current.Handler);
+				handlerPages.Remove(HttpContext.Current.Handler); var sm = ScriptManager.GetCurrent(p);
+				if (sm == null || !sm.IsInAsyncPostBack)
+				{
 				p.Form.Controls.Add(new LiteralControl(divs.ToString() + builder.ToString()));
+				}
+				else
+				{
+					UpdatePanel up = FindRefreshedUpdatePanelRecursive(p.Form, sm);
+					if (up != null)
+					{
+						up.ContentTemplateContainer.Controls.Add(new LiteralControl(divs.ToString()));
+						ScriptManager.RegisterClientScriptBlock(up, typeof(WebMsgBox), "AsyncScriptBlock", builder.ToString(), false);
+					}
+				}
 				//p.Header.Controls.Add(new LiteralControl("<link href='" + p.ResolveUrl("~/Styles/jquery-ui-1.8.22.custom.css") + "' rel='stylesheet' type='text/css' />"));
 				//HttpContext.Current.Response.Write(builder.ToString());
 			}
 		}
-	}
+
+		private static UpdatePanel FindRefreshedUpdatePanelRecursive(Control parent, ScriptManager sc)
+		{
+			foreach (Control child in parent.Controls)
+			{
+				if (child is UpdatePanel)
+				{
+					if (((UpdatePanel)child).IsUpdating())
+						return (UpdatePanel)child;
+
+				}
+				UpdatePanel c = FindRefreshedUpdatePanelRecursive(child, sc);
+				if (c != null)
+				{
+					return c;
+				}
+			}
+			return null;
+		}
+    }
 }

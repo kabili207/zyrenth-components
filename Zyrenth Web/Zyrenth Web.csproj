@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -36,6 +36,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Drawing.Design" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -45,6 +46,7 @@
   <ItemGroup>
     <Compile Include="ColorSwatch.cs" />
     <Compile Include="Enums.cs" />
+    <Compile Include="Extensions.cs" />
     <Compile Include="Icons\IconHelper.cs" />
     <Compile Include="ModalPopup.cs" />
     <Compile Include="ModalPopupButton.cs" />
@@ -62,6 +64,7 @@
     <EmbeddedResource Include="JS\jquery-1.4.1.min.js" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Icons\ColorSwatch.bmp" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="JS\jquery-1.7.2.min.js" />
