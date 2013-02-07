@@ -37,6 +37,13 @@
 				<asp:HyperLink ID="HyperLink1" runat="server">HyperLink</asp:HyperLink>
 				<asp:Image ID="Image1" runat="server" />
 				<asp:Calendar ID="Calendar1" runat="server"></asp:Calendar>
+				<asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+				<asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+				<asp:Literal ID="Literal1" runat="server"></asp:Literal>
+				<asp:ListBox ID="ListBox1" runat="server"></asp:ListBox>
+				<asp:Literal ID="Literal2" runat="server"></asp:Literal>
+				<asp:RadioButton ID="RadioButton1" runat="server" /><asp:RadioButton ID="RadioButton2"
+					runat="server" />
 			</Content>
 		</zyrenth:ModalPopup>
     </div>

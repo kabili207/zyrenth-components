@@ -20,11 +20,12 @@ namespace Zyrenth.Web
 	ToolboxData("<{0}:ModalPopup Title=\"\" runat=\"server\"></{0}:ModalPopup>"),
 	Designer(typeof(ModalPopupDesigner)),
 	ToolboxBitmap(typeof(Zyrenth.Web.Icons.IconHelper), "ModalPopup.bmp"),
-	ParseChildren(true),
+	ParseChildren(true, "Content"),
 	]
 	public class ModalPopup : CompositeControl, IPostBackEventHandler
 	{
 		private TaglessPanel _content;
+		private ITemplate _templateContent;
 		private ControlCollection _controls;
 
 		#region Properties
@@ -133,17 +134,20 @@ namespace Zyrenth.Web
 		DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
 		// Set this to InnerDefaultProperty if we don't want the requirement of
 		// using the <Content></Content> tags in the aspx file
-		PersistenceMode(PersistenceMode.InnerProperty)
+		PersistenceMode(PersistenceMode.InnerProperty),
+		// This is EXTREMELY important! This tells VS to generate objects in the
+		// *.Designer.cs code-behind file!
+		TemplateInstance(TemplateInstance.Single)
 		]
-		public ControlCollection Content
+		public ITemplate Content
 		{
 			get
 			{
-				if (_controls == null)
-				{
-					_controls = new ControlCollection(this);
-				}
-				return _controls;
+				return _templateContent;
+			}
+			set
+			{
+				_templateContent = value;
 			}
 		}
 
@@ -196,7 +200,7 @@ namespace Zyrenth.Web
 		protected override void OnInit(EventArgs e)
 		{
 			base.OnInit(e);
-
+			this.EnsureChildControls();
 			ScriptHelper.RegisterJQuery(this.Page.ClientScript);
 
 		}
@@ -208,9 +212,38 @@ namespace Zyrenth.Web
 
 			_content = new TaglessPanel();
 
+			ITemplate temp = _templateContent;
+			if (temp == null)
+			{
+				temp = new DefaultTemplate();
+			}
+
+			temp.InstantiateIn(_content);
+
 			this.Controls.Add(_content);
 		}
 
+		sealed class DefaultTemplate : ITemplate
+		{
+			void ITemplate.InstantiateIn(Control owner)
+			{
+				Label title = new Label();
+				title.DataBinding += new EventHandler(title_DataBinding);
+
+				LiteralControl linebreak = new LiteralControl("<br/>");
+
+				owner.Controls.Add(title);
+				owner.Controls.Add(linebreak);
+
+			}
+
+			void title_DataBinding(object sender, EventArgs e)
+			{
+				Label source = (Label)sender;
+				ModalPopup container = (ModalPopup)(source.NamingContainer);
+				source.Text = container.Title;
+			}
+		}
 
 		public override void DataBind()
 		{
@@ -222,16 +255,6 @@ namespace Zyrenth.Web
 		internal void RenderContentWindow(HtmlTextWriter writer)
 		{
 			RenderContents(writer);
-		}
-
-		protected override void RenderContents(HtmlTextWriter writer)
-		{
-			if (_content != null)
-			{
-				foreach (Control c in Content)
-					_content.Controls.Add(c);
-				_content.RenderControl(writer);
-			}
 		}
 
 		protected override void Render(HtmlTextWriter writer)
@@ -358,19 +381,6 @@ namespace Zyrenth.Web
 				
 			}
 
-			// Handler for the Click event, which provides the region in the arguments. 
-			/*protected override void OnClick(DesignerRegionMouseEventArgs e)
-			{
-				if (e.Region == null)
-					return;
-				
-				// Switch the current view if required 
-				if (e.Region.Name == CONTENT)
-				{
-					base.UpdateDesignTimeHtml();
-				}
-			}*/
-
 			public override String GetDesignTimeHtml(DesignerRegionCollection regions)
 			{
 				ModalPopup control = (ModalPopup)Component;
@@ -395,9 +405,10 @@ namespace Zyrenth.Web
 				{
 					if (region.Name == CONTENT)
 					{
-						TaglessPanel owner = myControl._content;
-						if (owner != null)
-							return ControlPersister.PersistControl(owner, host);
+
+						ITemplate template = myControl.Content; 
+						if (template != null)
+							return ControlPersister.PersistTemplate(template, host);
 					}
 				}
 
@@ -416,15 +427,9 @@ namespace Zyrenth.Web
 				{
 					if (region.Name == CONTENT)
 					{
-						Control c = ControlParser.ParseControl(host, content);
+						ITemplate template = ControlParser.ParseTemplate(host, content);
 
-						if (c is TaglessPanel)
-						{
-							myControl.Content.Clear();
-							foreach (Control cc in c.Controls.OfType<Control>().ToList())
-								myControl.Content.Add(cc);
-							base.UpdateDesignTimeHtml();
-						}
+						myControl.Content = template;
 					}
 				}
 			}
