@@ -16,7 +16,7 @@ namespace WebTest
 			
 		}
 
-		protected void ModalPopup1_ButtonClicked(object sender, Zyrenth.Web.ModalPopup.ModalButtonEventArgs e)
+		protected void ModalPopup1_ButtonClicked(object sender, Zyrenth.Web.JQueryDialog.ModalButtonEventArgs e)
 		{
 			switch (e.CommandName)
 			{

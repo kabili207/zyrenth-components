@@ -24,28 +24,26 @@
         <zyrenth:ColorSwatch ID="ColorSwatch4" runat="server" Color="#00CCFF" Text="Red">
         </zyrenth:ColorSwatch>--%>
 
-        <zyrenth:ModalPopup ID="ModalPopup1" runat="server" Title="Modal Test" 
-			onbuttonclicked="ModalPopup1_ButtonClicked" Resizable="true" ShowCloseButton="false">
+        <zyrenth:JQueryDialog ID="ModalPopup1" runat="server" Title="Modal Test" 
+			onbuttonclicked="ModalPopup1_ButtonClicked" Resizable="true" ShowCloseButton="True">
 					
 			<Buttons>
-				<zyrenth:ModalPopupButton Text="Delete" CommandName="Delete" CssClass="modalButtonLeft" Icon="trash" />
-				<zyrenth:ModalPopupButton Text="Cancel" CommandName="Cancel"  />
-				<zyrenth:ModalPopupButton Text="Hidden" CommandName="hdn" Icon="comment" IconOnly="true" />
-				<zyrenth:ModalPopupButton Text="OK" CommandName="OK"  />
+				<zyrenth:JQueryDialogButton Text="Delete" CommandName="Delete" CssClass="modalButtonLeft" Icon="trash" />
+				<zyrenth:JQueryDialogButton Text="Cancel" CommandName="Cancel"  Icon="None" />
+				<zyrenth:JQueryDialogButton Text="Hidden" CommandName="hdn" Icon="comment" IconOnly="true" />
+				<zyrenth:JQueryDialogButton Text="OK" CommandName="OK"  />
 			</Buttons>
 			<Content>
 				<asp:HyperLink ID="HyperLink1" runat="server">HyperLink</asp:HyperLink>
 				<asp:Image ID="Image1" runat="server" />
-				<asp:Calendar ID="Calendar1" runat="server"></asp:Calendar>
 				<asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
 				<asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
 				<asp:Literal ID="Literal1" runat="server"></asp:Literal>
-				<asp:ListBox ID="ListBox1" runat="server"></asp:ListBox>
 				<asp:Literal ID="Literal2" runat="server"></asp:Literal>
 				<asp:RadioButton ID="RadioButton1" runat="server" /><asp:RadioButton ID="RadioButton2"
 					runat="server" />
 			</Content>
-		</zyrenth:ModalPopup>
+		</zyrenth:JQueryDialog>
     </div>
     </form>
 </body>

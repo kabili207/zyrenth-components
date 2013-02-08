@@ -17,16 +17,15 @@ namespace Zyrenth.Web
 
 	[
 	DefaultProperty("Content"),
-	ToolboxData("<{0}:ModalPopup Title=\"\" runat=\"server\"></{0}:ModalPopup>"),
-	Designer(typeof(ModalPopupDesigner)),
-	ToolboxBitmap(typeof(Zyrenth.Web.Icons.IconHelper), "ModalPopup.bmp"),
+	ToolboxData("<{0}:JQueryDialog Title=\"\" runat=\"server\"></{0}:JQueryDialog>"),
+	Designer(typeof(JQueryDialogDesigner)),
+	ToolboxBitmap(typeof(Zyrenth.Web.Icons.IconHelper), "JQueryDialog.bmp"),
 	ParseChildren(true, "Content"),
 	]
-	public class ModalPopup : CompositeControl, IPostBackEventHandler
+	public class JQueryDialog : CompositeControl, IPostBackEventHandler
 	{
 		private TaglessPanel _content;
 		private ITemplate _templateContent;
-		private ControlCollection _controls;
 
 		#region Properties
 		
@@ -34,7 +33,7 @@ namespace Zyrenth.Web
 		Bindable(true),
 		Category("Appearance"),
 		DefaultValue(""),
-		Description("The title of the modal dialog"),
+		Description("The title of the dialog"),
 		]
 		public virtual string Title
 		{
@@ -109,6 +108,27 @@ namespace Zyrenth.Web
 			set
 			{
 				ViewState["Draggable"] = value;
+			}
+		}
+
+		[
+		Bindable(true),
+		Category("Behavior"),
+		DefaultValue(true),
+		Description("A value indicating if is a modal popup or not"),
+		]
+		public virtual bool IsModal
+		{
+			get
+			{
+				object t = ViewState["IsModal"];
+				if (t == null)
+					return true;
+				return (bool)t;
+			}
+			set
+			{
+				ViewState["IsModal"] = value;
 			}
 		}
 
@@ -192,7 +212,7 @@ namespace Zyrenth.Web
 
 		#endregion // Events
 
-		public ModalPopup()
+		public JQueryDialog()
 		{
 
 		}
@@ -240,7 +260,7 @@ namespace Zyrenth.Web
 			void title_DataBinding(object sender, EventArgs e)
 			{
 				Label source = (Label)sender;
-				ModalPopup container = (ModalPopup)(source.NamingContainer);
+				JQueryDialog container = (JQueryDialog)(source.NamingContainer);
 				source.Text = container.Title;
 			}
 		}
@@ -260,10 +280,20 @@ namespace Zyrenth.Web
 		protected override void Render(HtmlTextWriter writer)
 		{
 			EnsureChildControls();
-			writer.Write("<div id=\"{0}\" style=\"\" title=\"{1}\">", ClientID, Title);
+			string designerExtra = "";
+			if (this.DesignMode)
+				designerExtra = "class='ui-dialog-content ui-widget-content'";
+			writer.Write("<div id=\"{0}\" style=\"\" title=\"{1}\" {2} >", ClientID, Title, designerExtra);
 			if (this.DesignMode)
 			{
-				writer.Write("<div>{0}</div>", Title);
+				string sCloseIcon = "";
+				if (ShowCloseButton)
+				{
+					sCloseIcon = "<a href='#' class='ui-dialog-titlebar-close' style='position: absolute; right: 0px'>" +
+						"<span class=\"ui-icon ui-icon-closethick\">close</span></a>";
+				}
+				writer.Write("<div class=\"ui-dialog-titlebar ui-widget-header\">" +
+				"<span class=\"ui-dialog-title\">{0}</span>{1}</div>", Title, sCloseIcon);
 			}
 
 			RenderContents(writer);
@@ -271,9 +301,18 @@ namespace Zyrenth.Web
 			if (this.DesignMode)
 			{
 				writer.Write("<hr />");
-				foreach (ModalPopupButton button in Buttons)
+				foreach (JQueryDialogButton button in Buttons)
 				{
-					writer.Write("<button type='button'>{0}</button>", button.Text);
+					string sButtonIcon = button.Icon == JQueryIcon.None ? "" : 
+						string.Format("ui-icon-{0}", button.Icon.ToString().Replace('_', '-'));
+					if (!string.IsNullOrWhiteSpace(sButtonIcon))
+					{
+						sButtonIcon = string.Format("<span class=\"ui-button-icon-primary ui-icon {0}\" style='position: absolute; top: 15px'></span>", sButtonIcon); 
+					}
+					string sClass = button.Icon == JQueryIcon.None ? "ui-button-text-only" :
+						button.IconOnly ? "ui-button-icon-only" : "ui-button-text-icon-primary";
+					writer.Write("<a href='#' class=\"ui-button ui-widget ui-state-default {0}\" style='position: relative;'>" +
+					"{1}<span class=\"ui-button-text\">{2}</span></a>", sClass, sButtonIcon, button.Text);
 				}
 			}
 			writer.Write("</div>");
@@ -281,14 +320,14 @@ namespace Zyrenth.Web
 			if (!this.DesignMode)
 			{
 
-				var buttons = Buttons.OfType<ModalPopupButton>().Select(x =>
+				var buttons = Buttons.OfType<JQueryDialogButton>().Select(x =>
 					{
 						string buttonPostBack = Page.ClientScript.GetPostBackEventReference(this, "Button+" + x.CommandName);
 
 						StringBuilder sbOpenJs = new StringBuilder();
 						if (x.Icon != JQueryIcon.None)
 						{
-							//TODO: Extend this to allow secondary buttons or button only icons.
+							//TODO: Extend this to allow secondary buttons.
 							sbOpenJs.AppendFormat("$(this).button({{ icons: {{ primary: 'ui-icon-{0}' }}, text: {1} }});",
 								x.Icon.ToString().Replace('_', '-'), x.IconOnly ? "false" : "true");
 						}
@@ -344,6 +383,16 @@ namespace Zyrenth.Web
 			}
 		}
 
+		public void Show()
+		{
+			this.Visible = true;
+		}
+
+		public void Hide()
+		{
+			this.Visible = false;
+		}
+
 		#region Nested Classes
 
 		public class ModalButtonEventArgs : EventArgs
@@ -355,11 +404,11 @@ namespace Zyrenth.Web
 			}
 		}
 
-		
-		public class ModalPopupDesigner : CompositeControlDesigner
+
+		public class JQueryDialogDesigner : CompositeControlDesigner
 		{
 			private const string CONTENT = "CONTENT";
-			private ModalPopup myControl;
+			private JQueryDialog myControl;
 
 			public override bool AllowResize
 			{
@@ -369,7 +418,7 @@ namespace Zyrenth.Web
 			public override void Initialize(IComponent Component)
 			{
 				base.Initialize(Component);
-				myControl = (ModalPopup)Component;
+				myControl = (JQueryDialog)Component;
 				SetViewFlags(ViewFlags.TemplateEditing, true);
 			}
 
@@ -383,7 +432,7 @@ namespace Zyrenth.Web
 
 			public override String GetDesignTimeHtml(DesignerRegionCollection regions)
 			{
-				ModalPopup control = (ModalPopup)Component;
+				JQueryDialog control = (JQueryDialog)Component;
 				// Create an editable region and add it to the regions
 				EditableDesignerRegion editableRegion =
 					new EditableDesignerRegion(this, CONTENT, false);
