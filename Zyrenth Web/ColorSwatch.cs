@@ -15,7 +15,7 @@ namespace Zyrenth.Web
 	/// <summary>
 	/// Summary description for ColorSwatch
 	/// </summary>
-	[ToolboxBitmap(typeof(IconHelper), "ColorSwatch.bmp")]
+	[ToolboxBitmap(typeof(ColorSwatch), "Icons.ColorSwatch.ico")]
 	public class ColorSwatch : Control
 	{
 

@@ -16,12 +16,12 @@ namespace WebTest
 			
 		}
 
-		protected void ModalPopup1_ButtonClicked(object sender, Zyrenth.Web.JQueryDialog.ModalButtonEventArgs e)
+		protected void ModalPopup1_ButtonClicked(object sender, Dialog.DialogButtonEventArgs e)
 		{
 			switch (e.CommandName)
 			{
 				case "Delete":
-					WebMsgBox.Show("You pressed the Delete button!", "Button Pressed");
+					MessageBox.Show("You pressed the Delete button!", "Button Pressed");
 					break;
 				case "Deee":
 					break;

@@ -5,15 +5,15 @@ using System.Text;
 using System.Web.UI;
 using System.ComponentModel;
 using System.Web.UI.WebControls;
+using System.Drawing;
 
 namespace Zyrenth.Web
 {
 	[
-		//ToolboxItem(false),
-		ParseChildren(false), //, PersistChildren(true)
-		//Designer(typeof(TemplateOwnerDesigner))
+	ToolboxBitmap(typeof(TaglessPanel), "Icons.TaglessPanel.ico"),
+	ParseChildren(false),
 	ToolboxData("<{0}:TagglessPanel runat=\"server\"></{0}:TagglessPanel>")
-		]
+	]
 	public class TaglessPanel : Panel
 	{
 

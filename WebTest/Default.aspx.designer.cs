@@ -28,7 +28,7 @@ namespace WebTest {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Zyrenth.Web.JQueryDialog ModalPopup1;
+        protected global::Zyrenth.Web.Dialog ModalPopup1;
         
         /// <summary>
         /// HyperLink1 control.

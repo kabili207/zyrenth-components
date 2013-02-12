@@ -8,12 +8,12 @@ using System.ComponentModel;
 
 namespace Zyrenth.Web
 {
-	public class JQueryDialogButton : IStateManager
+	public class DialogButton : IStateManager
 	{
 		private bool _isTrackingViewState;
 		private StateBag _viewState;
 
-		public JQueryDialogButton()
+		public DialogButton()
 		{
 			// TODO: Have the ModalPopup class manage this
 			((IStateManager)this).TrackViewState();
@@ -188,7 +188,7 @@ namespace Zyrenth.Web
 	}
 
 	[ParseChildren(false)]
-	public class PopupButtonCollection : List<JQueryDialogButton>
+	public class DialogButtonCollection : List<DialogButton>
 	{
 		//internal PopupButtonCollection(Control c) : base(c) { }
 	}

@@ -24,14 +24,14 @@
         <zyrenth:ColorSwatch ID="ColorSwatch4" runat="server" Color="#00CCFF" Text="Red">
         </zyrenth:ColorSwatch>--%>
 
-        <zyrenth:JQueryDialog ID="ModalPopup1" runat="server" Title="Modal Test" 
+        <zyrenth:Dialog ID="ModalPopup1" runat="server" Title="Modal Test" 
 			onbuttonclicked="ModalPopup1_ButtonClicked" Resizable="true" ShowCloseButton="True">
 					
 			<Buttons>
-				<zyrenth:JQueryDialogButton Text="Delete" CommandName="Delete" CssClass="modalButtonLeft" Icon="trash" />
-				<zyrenth:JQueryDialogButton Text="Cancel" CommandName="Cancel"  Icon="None" />
-				<zyrenth:JQueryDialogButton Text="Hidden" CommandName="hdn" Icon="comment" IconOnly="true" />
-				<zyrenth:JQueryDialogButton Text="OK" CommandName="OK"  />
+				<zyrenth:DialogButton Text="Delete" CommandName="Delete" CssClass="modalButtonLeft" Icon="trash" />
+				<zyrenth:DialogButton Text="Cancel" CommandName="Cancel"  Icon="None" />
+				<zyrenth:DialogButton Text="Hidden" CommandName="hdn" Icon="comment" IconOnly="true" />
+				<zyrenth:DialogButton Text="OK" CommandName="OK"  />
 			</Buttons>
 			<Content>
 				<asp:HyperLink ID="HyperLink1" runat="server">HyperLink</asp:HyperLink>
@@ -43,7 +43,7 @@
 				<asp:RadioButton ID="RadioButton1" runat="server" /><asp:RadioButton ID="RadioButton2"
 					runat="server" />
 			</Content>
-		</zyrenth:JQueryDialog>
+		</zyrenth:Dialog>
     </div>
     </form>
 </body>

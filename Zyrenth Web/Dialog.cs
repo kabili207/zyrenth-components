@@ -17,18 +17,18 @@ namespace Zyrenth.Web
 
 	[
 	DefaultProperty("Content"),
-	ToolboxData("<{0}:JQueryDialog Title=\"\" runat=\"server\"></{0}:JQueryDialog>"),
-	Designer(typeof(JQueryDialogDesigner)),
-	ToolboxBitmap(typeof(Zyrenth.Web.Icons.IconHelper), "JQueryDialog.bmp"),
+	ToolboxData("<{0}:Dialog Title=\"\" runat=\"server\"></{0}:Dialog>"),
+	Designer(typeof(DialogDesigner)),
+	ToolboxBitmap(typeof(Dialog), "Icons.Dialog.ico"),
 	ParseChildren(true, "Content"),
 	]
-	public class JQueryDialog : CompositeControl, IPostBackEventHandler
+	public class Dialog : CompositeControl, IPostBackEventHandler
 	{
 		private TaglessPanel _content;
 		private ITemplate _templateContent;
 
 		#region Properties
-		
+
 		[
 		Bindable(true),
 		Category("Appearance"),
@@ -136,17 +136,17 @@ namespace Zyrenth.Web
 		PersistenceMode(PersistenceMode.InnerProperty),
 		NotifyParentProperty(true),
 		]
-		public PopupButtonCollection Buttons
+		public DialogButtonCollection Buttons
 		{
 			get
 			{
 				object o = ViewState["Buttons"];
 				if (o == null)
 				{
-					o = new PopupButtonCollection();
+					o = new DialogButtonCollection();
 					ViewState["Buttons"] = o;
 				}
-				return (PopupButtonCollection)o;
+				return (DialogButtonCollection)o;
 			}
 		}
 
@@ -184,12 +184,12 @@ namespace Zyrenth.Web
 
 		#region Events
 
-		#region "ButtonClicked event"
+		#region ButtonClicked event
 
-		public delegate void ModalButtonEventHandler(object sender, ModalButtonEventArgs e);
-		private static readonly string EventButtonClicked = "ModalPopupButtonClick";
+		public delegate void DialogButtonEventHandler(object sender, DialogButtonEventArgs e);
+		private static readonly string EventButtonClicked = "DialogButtonClick";
 
-		public event ModalButtonEventHandler ButtonClicked
+		public event DialogButtonEventHandler ButtonClicked
 		{
 			add
 			{
@@ -201,9 +201,9 @@ namespace Zyrenth.Web
 			}
 		}
 
-		protected virtual void OnButtonClicked(ModalButtonEventArgs e)
+		protected virtual void OnButtonClicked(DialogButtonEventArgs e)
 		{
-			ModalButtonEventHandler ev = Events[EventButtonClicked] as ModalButtonEventHandler;
+			DialogButtonEventHandler ev = Events[EventButtonClicked] as DialogButtonEventHandler;
 			if (ev != null)
 				ev(this, e);
 		}
@@ -212,7 +212,7 @@ namespace Zyrenth.Web
 
 		#endregion // Events
 
-		public JQueryDialog()
+		public Dialog()
 		{
 
 		}
@@ -260,7 +260,7 @@ namespace Zyrenth.Web
 			void title_DataBinding(object sender, EventArgs e)
 			{
 				Label source = (Label)sender;
-				JQueryDialog container = (JQueryDialog)(source.NamingContainer);
+				Dialog container = (Dialog)(source.NamingContainer);
 				source.Text = container.Title;
 			}
 		}
@@ -301,13 +301,13 @@ namespace Zyrenth.Web
 			if (this.DesignMode)
 			{
 				writer.Write("<hr />");
-				foreach (JQueryDialogButton button in Buttons)
+				foreach (DialogButton button in Buttons)
 				{
-					string sButtonIcon = button.Icon == JQueryIcon.None ? "" : 
+					string sButtonIcon = button.Icon == JQueryIcon.None ? "" :
 						string.Format("ui-icon-{0}", button.Icon.ToString().Replace('_', '-'));
 					if (!string.IsNullOrWhiteSpace(sButtonIcon))
 					{
-						sButtonIcon = string.Format("<span class=\"ui-button-icon-primary ui-icon {0}\" style='position: absolute; top: 15px'></span>", sButtonIcon); 
+						sButtonIcon = string.Format("<span class=\"ui-button-icon-primary ui-icon {0}\" style='position: absolute; top: 15px'></span>", sButtonIcon);
 					}
 					string sClass = button.Icon == JQueryIcon.None ? "ui-button-text-only" :
 						button.IconOnly ? "ui-button-icon-only" : "ui-button-text-icon-primary";
@@ -320,7 +320,7 @@ namespace Zyrenth.Web
 			if (!this.DesignMode)
 			{
 
-				var buttons = Buttons.OfType<JQueryDialogButton>().Select(x =>
+				var buttons = Buttons.OfType<DialogButton>().Select(x =>
 					{
 						string buttonPostBack = Page.ClientScript.GetPostBackEventReference(this, "Button+" + x.CommandName);
 
@@ -367,7 +367,7 @@ namespace Zyrenth.Web
 					Draggable ? "true" : "false");
 
 				writer.Write("<script type='text/javascript'>" + dialogJs + "</script>");
-				}
+			}
 		}
 
 		public void RaisePostBackEvent(string eventArgument)
@@ -379,7 +379,7 @@ namespace Zyrenth.Web
 			else if (eventArgument.StartsWith("Button+"))
 			{
 				string btnId = eventArgument.Substring(7);
-				OnButtonClicked(new ModalButtonEventArgs(btnId));
+				OnButtonClicked(new DialogButtonEventArgs(btnId));
 			}
 		}
 
@@ -395,20 +395,21 @@ namespace Zyrenth.Web
 
 		#region Nested Classes
 
-		public class ModalButtonEventArgs : EventArgs
+		public class DialogButtonEventArgs : EventArgs
 		{
 			public string CommandName { get; set; }
-			public ModalButtonEventArgs(string commandName)
+			public DialogButtonEventArgs(string commandName)
 			{
 				this.CommandName = commandName;
 			}
 		}
 
 
-		public class JQueryDialogDesigner : CompositeControlDesigner
+		public class DialogDesigner : CompositeControlDesigner
 		{
 			private const string CONTENT = "CONTENT";
-			private JQueryDialog myControl;
+			private const string TITLE = "TITLE";
+			private Dialog myControl;
 
 			public override bool AllowResize
 			{
@@ -418,7 +419,7 @@ namespace Zyrenth.Web
 			public override void Initialize(IComponent Component)
 			{
 				base.Initialize(Component);
-				myControl = (JQueryDialog)Component;
+				myControl = (Dialog)Component;
 				SetViewFlags(ViewFlags.TemplateEditing, true);
 			}
 
@@ -427,12 +428,12 @@ namespace Zyrenth.Web
 				base.CreateChildControls();
 				// Add design time markers for each of the three regions 
 				myControl._content.Attributes.Add(DesignerRegion.DesignerRegionAttributeName, CONTENT);
-				
+
 			}
 
 			public override String GetDesignTimeHtml(DesignerRegionCollection regions)
 			{
-				JQueryDialog control = (JQueryDialog)Component;
+				Dialog control = (Dialog)Component;
 				// Create an editable region and add it to the regions
 				EditableDesignerRegion editableRegion =
 					new EditableDesignerRegion(this, CONTENT, false);
@@ -455,7 +456,7 @@ namespace Zyrenth.Web
 					if (region.Name == CONTENT)
 					{
 
-						ITemplate template = myControl.Content; 
+						ITemplate template = myControl.Content;
 						if (template != null)
 							return ControlPersister.PersistTemplate(template, host);
 					}

@@ -5,22 +5,22 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Collections.Generic;
-
+using Zyrenth.Web.Extensions;
 
 namespace Zyrenth.Web
 {
 
 	// TODO: Add support for message types (error, warning, etc.)
-    public class WebMsgBox
+    public class MessageBox
     {
 		protected static Dictionary<IHttpHandler, Queue<MsgBox>> handlerPages;
 
-		static WebMsgBox()
+		static MessageBox()
 		{
 			handlerPages = new Dictionary<IHttpHandler, Queue<MsgBox>>();
 		}
 
-		private WebMsgBox()
+		private MessageBox()
 		{
 		}
 
@@ -109,7 +109,7 @@ namespace Zyrenth.Web
 					if (up != null)
 					{
 						up.ContentTemplateContainer.Controls.Add(new LiteralControl(divs.ToString()));
-						ScriptManager.RegisterClientScriptBlock(up, typeof(WebMsgBox), "AsyncScriptBlock", builder.ToString(), false);
+						ScriptManager.RegisterClientScriptBlock(up, typeof(MessageBox), "AsyncScriptBlock", builder.ToString(), false);
 					}
 				}
 				//p.Header.Controls.Add(new LiteralControl("<link href='" + p.ResolveUrl("~/Styles/jquery-ui-1.8.22.custom.css") + "' rel='stylesheet' type='text/css' />"));

@@ -45,16 +45,27 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ColorSwatch.cs" />
+    <Compile Include="DatePicker.cs" />
     <Compile Include="Enums.cs" />
-    <Compile Include="Extensions.cs" />
+    <Compile Include="Extensions\ControlCollectionExtensions.cs" />
+    <Compile Include="Extensions\ControlExtensions.cs" />
+    <Compile Include="Extensions\JQuery\ControlExtensions.cs" />
+    <Compile Include="Extensions\JQuery\HtmlGenericControlExtensions.cs" />
+    <Compile Include="Extensions\JQuery\PageExtensions.cs" />
+    <Compile Include="Extensions\JQuery\PanelExtensions.cs" />
+    <Compile Include="Extensions\PageExtensions.cs" />
+    <Compile Include="Extensions\UpdatePanelExtensions.cs" />
     <Compile Include="Icons\IconHelper.cs" />
-    <Compile Include="JQueryDialog.cs" />
-    <Compile Include="JQueryDialogButton.cs" />
+    <Compile Include="Dialog.cs" />
+    <Compile Include="DialogButton.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegionTest.cs" />
     <Compile Include="ScriptHelper.cs" />
+    <Compile Include="Tab.cs" />
+    <Compile Include="TabCollection.cs" />
+    <Compile Include="TabControl.cs" />
     <Compile Include="TaglessPanel.cs" />
-    <Compile Include="WebMsgBox.cs" />
+    <Compile Include="MessageBox.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="CSS\ColorSwatch.css" />
@@ -64,13 +75,19 @@
     <EmbeddedResource Include="JS\jquery-1.4.1.min.js" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Icons\ColorSwatch.bmp" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="JS\jquery-1.7.2.min.js" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Icons\JQueryDialog.bmp" />
+    <EmbeddedResource Include="Icons\ColorSwatch.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Icons\DatePicker.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Icons\Dialog.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Icons\TaglessPanel.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
